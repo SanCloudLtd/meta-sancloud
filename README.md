@@ -31,8 +31,7 @@ This layer depends on:
   * branch: master
   * revision: HEAD
 
-* URI: git://git.openembedded.org/meta-openembedded
-  * layers: meta-oe, meta-multimedia, meta-networking, meta-python
+* URI: git://git.yoctoproject.org/meta-ti
   * branch: master
   * revision: HEAD
 
