@@ -1,0 +1,37 @@
+From 8d5cf47659e7ca07ff14b700eee6eb60624499be Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul@betafive.co.uk>
+Date: Sun, 16 Sep 2018 18:48:00 +0000
+Subject: [PATCH] Fix default environment for Sancloud BBE
+
+* The boot files are located in the first partition on the SD card created by
+  our wic script.
+
+* The dtb file name is prepended with the kernel image name when built by
+  bitbake.
+---
+ include/configs/am335x_evm.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
+index 1bf5e29..11dedab 100644
+--- a/include/configs/am335x_evm.h
++++ b/include/configs/am335x_evm.h
+@@ -98,11 +98,11 @@
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	DEFAULT_LINUX_BOOT_ENV \
+ 	DEFAULT_MMC_TI_ARGS \
+-	"bootpart=0:2\0" \
+-	"bootdir=/boot\0" \
++	"bootpart=0:1\0" \
++	"bootdir=/\0" \
+ 	"bootfile=zImage\0" \
+-	"fdtdir=/boot\0" \
+-	"fdtfile=am335x-sancloud-bbe.dtb\0" \
++	"fdtdir=/\0" \
++	"fdtfile=zImage-am335x-sancloud-bbe.dtb\0" \
+ 	"console=ttyS0,115200n8\0" \
+ 	"partitions=" \
+ 		"uuid_disk=${uuid_gpt_disk};" \
+-- 
+2.7.4
+

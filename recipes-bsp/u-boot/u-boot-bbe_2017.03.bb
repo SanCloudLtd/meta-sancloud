@@ -8,4 +8,7 @@ TAG = "v2017.03"
 # repo during parse
 SRCREV = "8537ddd769f460d7fb7a62a3dcc9669049702e51"
 
-SRC_URI += "file://0001-sancloud-bbe.patch"
+SRC_URI += " \
+    file://0001-sancloud-bbe.patch \
+    file://0002-Fix-default-environment-for-Sancloud-BBE.patch \
+    "
