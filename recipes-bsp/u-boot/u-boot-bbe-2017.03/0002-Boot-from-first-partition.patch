@@ -1,0 +1,41 @@
+From 6ce77399ed4539e779f176ea556f7c56865e0e6f Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul@betafive.co.uk>
+Date: Tue, 25 Sep 2018 15:40:21 +0000
+Subject: [PATCH] Boot from first partition
+
+We're now using a single partition layout with MLO and u-boot written directly
+to the first blocks of the SD card.
+---
+ include/configs/am335x_evm.h      | 2 +-
+ include/configs/ti_armv7_common.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
+index 1bf5e29..5ebbdc3 100644
+--- a/include/configs/am335x_evm.h
++++ b/include/configs/am335x_evm.h
+@@ -98,7 +98,7 @@
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	DEFAULT_LINUX_BOOT_ENV \
+ 	DEFAULT_MMC_TI_ARGS \
+-	"bootpart=0:2\0" \
++	"bootpart=0:1\0" \
+ 	"bootdir=/boot\0" \
+ 	"bootfile=zImage\0" \
+ 	"fdtdir=/boot\0" \
+diff --git a/include/configs/ti_armv7_common.h b/include/configs/ti_armv7_common.h
+index fe556d4..968cf3b 100644
+--- a/include/configs/ti_armv7_common.h
++++ b/include/configs/ti_armv7_common.h
+@@ -60,7 +60,7 @@
+ 	"loadfdt=echo loading ${fdtdir}/${fdtfile} ...; load ${devtype} ${bootpart} ${fdtaddr} ${fdtdir}/${fdtfile}\0" \
+ 	"mmcargs=setenv bootargs console=${console} " \
+ 		"${optargs} nohz=off " \
+-		"root=/dev/mmcblk0p2 " \
++		"root=/dev/mmcblk0p1 " \
+ 		"rootfstype=${mmcrootfstype} rw " \
+ 		"${cmdline}\0" \
+ 	"mmcboot=mmc dev ${mmcdev}; " \
+-- 
+2.7.4
+
