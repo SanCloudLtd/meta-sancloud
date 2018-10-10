@@ -8,13 +8,13 @@ require recipes-kernel/linux/linux-dtb.inc
 
 COMPATIBLE_MACHINE = "bbe"
 
-LINUX_VERSION ?= "4.14.62"
+LINUX_VERSION ?= "4.14.71"
+SRCREV = "bd5de28772967a3f8a8ec29c0a636cd5d5cd057d"
 
-SRC_URI[md5sum] = "1df23335700046cc1a0d643e4fb2b0ad"
 SRC_URI = " \
-    https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.14.62.tar.gz \
+    git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;branch=ti-lsk-linux-4.14.y \
     file://0001-add-am335x-sancloud-bbe.patch \
     file://ARM-Fix-Thumb-2-syscall-return-for-binutils-2.29.patch \
     file://defconfig \
     "
-S = "${WORKDIR}/linux-4.14.62"
+S = "${WORKDIR}/git"
