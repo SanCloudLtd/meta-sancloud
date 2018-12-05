@@ -9,3 +9,5 @@ LICENSE = "GPLv2+"
 
 SRC_URI = "git://git.denx.de/u-boot.git"
 S = "${WORKDIR}/git"
+
+PROVIDES += "u-boot"
