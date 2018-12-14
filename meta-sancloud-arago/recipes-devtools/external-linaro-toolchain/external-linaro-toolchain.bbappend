@@ -8,3 +8,4 @@
 # for now we're just going to carry it here.
 
 RPROVIDES_${PN} += "rtld(GNU_HASH)"
+ALLOW_EMPTY_libatomic-dev = "1"
