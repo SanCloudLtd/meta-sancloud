@@ -22,7 +22,7 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 S = "${WORKDIR}/git"
 
 BRANCH = "linux-sancloud-4.9.y"
-SRCREV = "f984bab4bcaa761c0855a87c2a4f817efc878a85"
+SRCREV = "9002752baa10e9f2609b6dc3db4e71ecf3e77b39"
 PV = "4.9.69+git${SRCPV}"
 
 KERNEL_GIT_URI = "git://bitbucket.sancloud.co.uk/scm/lin/linux.git"
