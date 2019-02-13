@@ -3,6 +3,8 @@
 
 AGL_DEFAULT_IMAGE_FSTYPES = "tar.xz wic.xz wic.bmap"
 
+CORE_IMAGE_EXTRA_INSTALL += "packagegroup-machine-base"
+
 #-------------------------------------------------
 ## Graphics section ##
 #-------------------------------------------------
