@@ -5,11 +5,7 @@ Yocto BSP layer for the SanCloud boards - <http://www.sancloud.co.uk/>.
 ## Quick links
 
 * Git repository web frontend:
-  <https://github.com/sancloud/meta-sancloud>
-* Mailing list (yocto mailing list): <yocto@sancloud.co.uk>
-* Issues management (Github Issues):
-  <https://github.com/sancloud/meta-sancloud/issues>
-* Documentation: <http://meta-sancloud.readthedocs.io/en/latest/>
+  <https://bitbucket.sancloud.co.uk/projects/YB/repos/meta-sancloud>
 
 ## Description
 
@@ -20,18 +16,24 @@ More information can be found at: <http://www.sancloud.co.uk/> (Official Site)
 The core BSP part of meta-sancloud should work with different
 OpenEmbedded/Yocto distributions and layer stacks, such as:
 
+* Automotive Grade Linux (AGL).
+* Arago.
 * Distro-less (only with OE-Core).
-* Yocto/Poky (main focus of testing).
+* Yocto/Poky.
 
 ## Dependencies
 
 This layer depends on:
 
-* URI: git://git.yoctoproject.org/poky
+* URI: https://git.yoctoproject.org/git/poky
   * branch: master
   * revision: HEAD
 
-* URI: git://git.yoctoproject.org/meta-ti
+* URI: https://git.yoctoproject.org/git/meta-ti
+  * branch: master
+  * revision: HEAD
+
+* URI: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
   * branch: master
   * revision: HEAD
 
