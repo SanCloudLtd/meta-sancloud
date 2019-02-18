@@ -26,15 +26,15 @@ OpenEmbedded/Yocto distributions and layer stacks, such as:
 This layer depends on:
 
 * URI: https://git.yoctoproject.org/git/poky
-  * branch: master
+  * branch: rocko
   * revision: HEAD
 
 * URI: https://git.yoctoproject.org/git/meta-ti
-  * branch: master
+  * branch: rocko
   * revision: HEAD
 
 * URI: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
-  * branch: master
+  * branch: rocko
   * revision: HEAD
 
 ## Quick Start
