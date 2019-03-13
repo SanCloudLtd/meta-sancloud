@@ -11,24 +11,18 @@ require recipes-kernel/linux/ti-uio.inc
 # Look in the generic major.minor directory for files
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.9:"
 
+SRC_URI = "git://bitbucket.sancloud.co.uk/scm/yb/linux.git;protocol=https;branch=linux-sancloud-4.9.y"
+SRCREV = "62e6e012ab1b70164b7d12cb966af0113f527fb8"
+PV = "4.9.147+git${SRCPV}"
+
+S = "${WORKDIR}/git"
+
+do_configure_append() {
+    oe_runmake -C ${S} O=${B} sancloud_bbe_defconfig
+}
+
 # Pull in the devicetree files into the rootfs
 RDEPENDS_kernel-base += "kernel-devicetree"
 
 # Add run-time dependency for PM firmware to the rootfs
 RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
-
-KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-
-S = "${WORKDIR}/git"
-
-BRANCH = "linux-sancloud-4.9.y"
-SRCREV = "619532d57aa3f3397caa2c1749ea3b413e822f66"
-PV = "4.9.69+git${SRCPV}"
-
-KERNEL_GIT_URI = "git://bitbucket.sancloud.co.uk/scm/lin/linux.git"
-KERNEL_GIT_PROTOCOL = "https"
-SRC_URI = "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH}"
-
-do_configure_append() {
-    oe_runmake -C ${S} O=${B} sancloud_bbe_defconfig
-}
