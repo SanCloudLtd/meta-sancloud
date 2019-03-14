@@ -11,8 +11,4 @@ PV = "2017.03+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-SPL_BINARY = "MLO"
-UBOOT_SUFFIX = "img"
-UBOOT_MACHINE ?= "am335x_boneblack_config"
-
 PROVIDES += "u-boot"
