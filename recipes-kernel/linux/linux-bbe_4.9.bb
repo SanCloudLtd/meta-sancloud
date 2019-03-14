@@ -21,8 +21,6 @@ do_configure_append() {
     oe_runmake -C ${S} O=${B} sancloud_bbe_defconfig
 }
 
-# Pull in the devicetree files into the rootfs
-RDEPENDS_kernel-base += "kernel-devicetree"
-
-# Add run-time dependency for PM firmware to the rootfs
-RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
+# Pull in the devicetree files into the rootfs & add run-time dependency for PM
+# firmware to the rootfs
+RDEPENDS_kernel-base += "kernel-devicetree amx3-cm3"
