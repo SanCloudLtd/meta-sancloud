@@ -23,4 +23,4 @@ do_configure_append() {
 
 # Pull in the devicetree files into the rootfs & add run-time dependency for PM
 # firmware to the rootfs
-RDEPENDS_kernel-base += "kernel-devicetree amx3-cm3"
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base += "${KERNEL_PACKAGE_NAME}-devicetree amx3-cm3"
