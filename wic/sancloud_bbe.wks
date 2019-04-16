@@ -1,6 +1,6 @@
 # short-description: Create SD card image for Beaglebone
 # long-description: Creates a partitioned SD card image for Beaglebone.
-# Boot files are located in the first vfat partition.
+# Boot files are placed in unpartitioned space before the first ext4 partition.
 
 part mlo --source rawcopy --sourceparams="file=MLO" --ondisk mmcblk --no-table --align 128
 part uboot --source rawcopy --sourceparams="file=u-boot.img" --ondisk mmcblk --no-table --align 384
