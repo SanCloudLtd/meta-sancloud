@@ -1,51 +1,59 @@
-# meta-sancloud
+[<img align=right src="https://www.sancloud.co.uk/wp-content/uploads/2016/09/sancloud_and_address_web.png">](https://www.sancloud.co.uk/)
 
-Yocto BSP layer for the SanCloud boards - <http://www.sancloud.co.uk/>.
+Yocto BSP layer for the SanCloud boards
+=======================================
 
-## Quick links
+Quick links
+-----------
 
-* Git repository web frontend:
-  <https://bitbucket.sancloud.co.uk/projects/YB/repos/meta-sancloud>
+* [SanCloud website](https://www.sancloud.co.uk/)
 
-## Description
+* [BeagleBone Enhanced Description](https://www.sancloud.co.uk/?page_id=254)
 
-This is the general hardware specific BSP overlay for the SanCloud BeagleBoneEnhanced device.
+* [Sancloud repositories on GitHub](https://github.com/SanCloudLtd)
 
-More information can be found at: <http://www.sancloud.co.uk/> (Official Site)
+Description
+-----------
 
-The core BSP part of meta-sancloud should work with different
-OpenEmbedded/Yocto distributions and layer stacks, such as:
+This is the Yocto Project Board Support Package (BSP) layer for SanCloud devices.
 
-* Automotive Grade Linux (AGL).
-* Arago.
-* Distro-less (only with OE-Core).
-* Yocto/Poky.
+Currently supported hardware with corresponding Yocto Project MACHINE names:
 
-## Dependencies
+* `bbe`: Sancloud BeagleBone Enhanced (BBE)
 
-This layer depends on:
+This BSP is layer is tested in two primary configurations:
 
-* URI: https://git.yoctoproject.org/git/poky
-  * branch: rocko
-  * revision: HEAD
+* Automotive Grade Linux (AGL)
+* Arago Distribution
 
-* URI: https://git.yoctoproject.org/git/meta-ti
-  * branch: rocko
-  * revision: HEAD
+Additionally, this BSP layer should work with the distro-less configuration
+included in openembedded-core as well as the Poky distribution.
 
-* URI: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
-  * branch: rocko
-  * revision: HEAD
+Getting Started with AGL
+------------------------
 
-## Quick Start
+This BSP layer is included in the most recent stable branch of AGL, code-named
+Grumpy Guppy. AGL sources can be downloaded by following the
+[upstream instructions](https://wiki.automotivelinux.org/agl-distro/source-code).
+Once the AGL sources have been downloaded and you're in the top-level AGL
+directory, run the following commands to build the AGL Demo image for the
+Sancloud BBE:
 
-1. source poky/oe-init-build-env
-2. Add this layer to bblayers.conf and the dependencies above
-3. Set MACHINE in local.conf to one of the supported boards
-4. bitbake core-image-base
-5. dd to a SD card the generated wic file
-6. Boot your BeagleBoneEnhanced.
+    source meta-agl/scripts/aglsetup.sh -m bbe agl-demo agl-devel
+    bitbake agl-demo-platform
 
-## Maintainers
+Getting started with Arago
+--------------------------
 
-* Marc Murphy `<yocto at sancloud.co.uk>`
+A pre-integrated Arago Distribution repository is available at
+https://github.com/SanCloudLtd/sancloud-arago. Please follow the instructions
+in the README.md file in that repository to get started.
+
+Support
+-------
+
+Issues and Pull Requests for this BSP layer may be opened on our primary
+GitHub repository at https://github.com/SanCloudLtd/meta-sancloud.
+
+For further support enquiries please contact us via email to
+yocto@sancloud.co.uk.
