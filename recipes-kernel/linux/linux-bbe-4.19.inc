@@ -11,7 +11,7 @@ require recipes-kernel/linux/ti-uio.inc
 # Look in the generic major.minor directory for files
 FILESEXTRAPATHS_prepend = "${THISDIR}/linux-bbe-4.19:"
 
-SRC_URI = "git://bitbucket.sancloud.co.uk/scm/yb/linux.git;protocol=https;branch=${BRANCH}"
+SRC_URI = "git://github.com/SanCloudLtd/linux.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
