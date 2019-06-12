@@ -13,6 +13,9 @@ FILESEXTRAPATHS_prepend = "${THISDIR}/linux-bbe-4.19:"
 
 SRC_URI = "git://github.com/SanCloudLtd/linux.git;protocol=https;branch=${BRANCH}"
 
+# Apply DTS changes to support Automotive Cape if requested
+SRC_URI += '${@oe.utils.conditional("BBE_ENABLE_AUTOMOTIVE_CAPE", "1", "file://0001-Update-DTS-for-Automotive-Cape-ICU.patch", "", d)}'
+
 S = "${WORKDIR}/git"
 
 do_configure_append() {
