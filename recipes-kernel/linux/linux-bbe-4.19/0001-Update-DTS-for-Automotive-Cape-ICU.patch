@@ -1,0 +1,313 @@
+From 0d69c022de8298ac4c0ec1e3795c04fe78c9416e Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul.barker@sancloud.co.uk>
+Date: Mon, 20 May 2019 15:57:15 +0000
+Subject: [PATCH] Update DTS for Automotive Cape (ICU)
+
+Signed-off-by: Paul Barker <paul.barker@sancloud.co.uk>
+---
+ arch/arm/boot/dts/am335x-sancloud-bbe.dts     | 162 ++++++++++++++++++
+ .../dt-bindings/board/am335x-bbw-bbb-base.h   | 108 ++++++++++++
+ 2 files changed, 270 insertions(+)
+ create mode 100644 include/dt-bindings/board/am335x-bbw-bbb-base.h
+
+diff --git a/arch/arm/boot/dts/am335x-sancloud-bbe.dts b/arch/arm/boot/dts/am335x-sancloud-bbe.dts
+index f2ec84683109..03a9f17660e9 100644
+--- a/arch/arm/boot/dts/am335x-sancloud-bbe.dts
++++ b/arch/arm/boot/dts/am335x-sancloud-bbe.dts
+@@ -10,6 +10,7 @@
+ #include "am33xx.dtsi"
+ #include "am335x-bone-common.dtsi"
+ #include "am335x-boneblack-common.dtsi"
++#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+ #include <dt-bindings/interrupt-controller/irq.h>
+ 
+ / {
+@@ -97,6 +98,54 @@
+ 			AM33XX_IOPAD(0x868, PIN_INPUT | MUX_MODE7)     /* gpmc_a10.gpio1_26 */
+ 		>;
+ 	};
++
++	icu_led_pins: pinmux_icu_led_pins {
++		pinctrl-single,pins = <
++			BONE_P9_27 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)				/* LED_1 */
++			BONE_P9_25 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)				/* LED_2 */
++			BONE_P9_23 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)				/* LED_3 */
++			BONE_P9_42 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)				/* LED_4 */
++			BONE_P9_15 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)				/* LED_5 */
++			BONE_P9_24 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)				/* LED_6 */
++		>;
++	};
++
++	icu_i2c1_pins: pinmux_icu_i2c1_pins {
++		pinctrl-single,pins = <
++			BONE_P9_18 (PIN_INPUT_PULLUP | SLEWCTRL_SLOW | MUX_MODE2)	/* I2C1_SDA */
++			BONE_P9_17 (PIN_INPUT_PULLUP | SLEWCTRL_SLOW | MUX_MODE2)	/* I2C1_SCL */
++		>;
++	};
++
++	icu_can0_pins: pinmux_icu_can0_pins {
++		pinctrl-single,pins = <
++			BONE_P9_19 (PIN_INPUT_PULLUP | MUX_MODE2)					/* CAN0_RXD */
++			BONE_P9_20 (PIN_OUTPUT_PULLUP | MUX_MODE2)					/* CAN0_TXD */
++		>;
++	};
++
++	icu_vda_pins: pinmux_icu_vda_pins {
++		pinctrl-single,pins = <
++			BONE_P8_07 (PIN_INPUT | MUX_MODE7)							/* CAN_STBY */
++			BONE_P8_09 (PIN_INPUT | MUX_MODE7)							/* BEACON_H */
++			BONE_P8_10 (PIN_INPUT | MUX_MODE7)							/* CALL_REQ */
++			BONE_P8_11 (PIN_INPUT | MUX_MODE7)							/* RADIO */
++			BONE_P8_12 (PIN_INPUT | MUX_MODE7)							/* BEACON_L */
++			BONE_P8_13 (PIN_INPUT | MUX_MODE7)							/* SIREN */
++			BONE_P8_14 (PIN_INPUT | MUX_MODE7)							/* MUTE */
++			BONE_P8_15 (PIN_INPUT | MUX_MODE7)							/* BEAM */
++			BONE_P8_16 (PIN_INPUT | MUX_MODE7)							/* SPEED */
++			BONE_P8_17 (PIN_INPUT | MUX_MODE7)							/* M_RADIO */
++			BONE_P8_18 (PIN_INPUT | WAKEUP_EN | MUX_MODE7)				/* IGNITION */
++		>;
++	};
++
++	icu_wireless_pins: pinmux_icu_wireless_pins {
++		pinctrl-single,pins = <
++			BONE_P8_27 (PIN_OUTPUT_PULLUP | MUX_MODE7)					/* WIRELESS_OFF_N */
++			BONE_P9_26 (PIN_OUTPUT_PULLUP | MUX_MODE7)					/* WIRELESS_RST_N */
++		>;
++	};
+ };
+ 
+ &mac {
+@@ -142,3 +191,116 @@
+ 		/* wifi on port 4 */
+ 	};
+ };
++
++&i2c1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&icu_i2c1_pins>;
++	status = "okay";
++	clock-frequency = <400000>;
++
++	rtc1@68 {
++		compatible = "dallas,ds1337";
++		reg = <0x68>;
++		status = "okay";
++	};
++};
++
++&i2c2 {
++	/* Disable I2C2 as it shares pins with CAN0 */
++	pinctrl-0 = "";
++	status = "disabled";
++};
++
++&dcan0 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&icu_can0_pins>;
++	status = "okay";
++};
++
++/ {
++	icu_leds {
++		compatible = "gpio-leds";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&icu_led_pins>;
++		status = "okay";
++
++		icu_led@2 {
++			label = "beaglebone:red:led1";
++			gpios = <&gpio3 21 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "mmc0";
++			default-state = "off";
++		};
++
++		icu_led@3 {
++			label = "beaglebone:green:led2";
++			gpios = <&gpio1 17 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
++			default-state = "off";
++		};
++
++		icu_led@1 {
++			label = "beaglebone:red:led3";
++			gpios = <&gpio3 19 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "none";
++			default-state = "off";
++		};
++
++		icu_led@6 {
++			label = "beaglebone:green:led4";
++			gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "none";
++			default-state = "off";
++		};
++
++		icu_led@5 {
++			label = "beaglebone:red:led5";
++			gpios = <&gpio1 16 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "none";
++			default-state = "off";
++		};
++
++		icu_led@4 {
++			label = "beaglebone:green:led6";
++			gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "none";
++			default-state = "off";
++		};
++	};
++
++	icu_vda {
++		compatible = "gpio-keys";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&icu_vda_pins>;
++		status = "okay";
++
++		radio_pin {
++			label = "radio";
++			linux,code = <0x3b>;	/* KEY_F1 */
++			gpios = <&gpio2 1 GPIO_ACTIVE_HIGH>;
++			gpio-key;
++			debounce-interval = <10>;
++		};
++
++		ignition_pin {
++			label = "ignition";
++			linux,code = <0x8f>;	/* KEY_WAKEUP */
++			gpios = <&gpio0 27 GPIO_ACTIVE_LOW>;
++			wakeup-source;
++			debounce-interval = <10>;
++		};
++
++		beam_pin {
++			label = "beam";
++			linux,code = <0x3c>;	/* KEY_F2 */
++			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
++			gpio-key;
++			debounce-interval = <10>;
++		};
++	};
++};
+diff --git a/include/dt-bindings/board/am335x-bbw-bbb-base.h b/include/dt-bindings/board/am335x-bbw-bbb-base.h
+new file mode 100644
+index 000000000000..ad745f042c70
+--- /dev/null
++++ b/include/dt-bindings/board/am335x-bbw-bbb-base.h
+@@ -0,0 +1,108 @@
++/*
++ * This header provides constants for bbw/bbb pinctrl bindings.
++ *
++ * Copyright (C) 2014 Robert Nelson <robertcnelson@gmail.com>
++ *
++ * Numbers Based on: https://github.com/derekmolloy/boneDeviceTree/tree/master/docs
++ */
++
++#ifndef _DT_BINDINGS_BOARD_AM335X_BBW_BBB_BASE_H
++#define _DT_BINDINGS_BOARD_AM335X_BBW_BBB_BASE_H
++
++#define BONE_P8_03 0x018
++#define BONE_P8_04 0x01C
++
++#define BONE_P8_05 0x008
++#define BONE_P8_06 0x00C
++#define BONE_P8_07 0x090
++#define BONE_P8_08 0x094
++
++#define BONE_P8_09 0x09C
++#define BONE_P8_10 0x098
++#define BONE_P8_11 0x034
++#define BONE_P8_12 0x030
++
++#define BONE_P8_13 0x024
++#define BONE_P8_14 0x028
++#define BONE_P8_15 0x03C
++#define BONE_P8_16 0x038
++
++#define BONE_P8_17 0x02C
++#define BONE_P8_18 0x08C
++#define BONE_P8_19 0x020
++#define BONE_P8_20 0x084
++
++#define BONE_P8_21 0x080
++#define BONE_P8_22 0x014
++#define BONE_P8_23 0x010
++#define BONE_P8_24 0x004
++
++#define BONE_P8_25 0x000
++#define BONE_P8_26 0x07C
++#define BONE_P8_27 0x0E0
++#define BONE_P8_28 0x0E8
++
++#define BONE_P8_29 0x0E4
++#define BONE_P8_30 0x0EC
++#define BONE_P8_31 0x0D8
++#define BONE_P8_32 0x0DC
++
++#define BONE_P8_33 0x0D4
++#define BONE_P8_34 0x0CC
++#define BONE_P8_35 0x0D0
++#define BONE_P8_36 0x0C8
++
++#define BONE_P8_37 0x0C0
++#define BONE_P8_38 0x0C4
++#define BONE_P8_39 0x0B8
++#define BONE_P8_40 0x0BC
++
++#define BONE_P8_41 0x0B0
++#define BONE_P8_42 0x0B4
++#define BONE_P8_43 0x0A8
++#define BONE_P8_44 0x0AC
++
++#define BONE_P8_45 0x0A0
++#define BONE_P8_46 0x0A4
++
++#define BONE_P9_11 0x070
++#define BONE_P9_12 0x078
++
++#define BONE_P9_13 0x074
++#define BONE_P9_14 0x048
++#define BONE_P9_15 0x040
++#define BONE_P9_16 0x04C
++
++#define BONE_P9_17 0x15C
++#define BONE_P9_18 0x158
++#define BONE_P9_19 0x17C
++#define BONE_P9_20 0x178
++
++#define BONE_P9_21 0x154
++#define BONE_P9_22 0x150
++#define BONE_P9_23 0x044
++#define BONE_P9_24 0x184
++
++#define BONE_P9_25 0x1AC
++#define BONE_P9_26 0x180
++#define BONE_P9_27 0x1A4
++#define BONE_P9_28 0x19C
++
++#define BONE_P9_29 0x194
++#define BONE_P9_30 0x198
++#define BONE_P9_31 0x190
++
++/* Shared P21 of P11 */
++#define BONE_P9_41 0x1B4
++#define BONE_P9_41A 0x1B4
++#define BONE_P9_41B 0x1A8
++#define BONE_P9_91 0x1A8
++
++/* Shared P22 of P11 */
++#define BONE_P9_42 0x164
++#define BONE_P9_42A 0x164
++#define BONE_P9_42B 0x1A0
++#define BONE_P9_92 0x1A0
++
++#endif
++
+-- 
+2.17.1
+
