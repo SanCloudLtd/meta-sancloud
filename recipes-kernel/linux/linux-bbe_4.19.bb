@@ -1,5 +1,5 @@
 BRANCH = "linux-sancloud-4.19.y"
-SRCREV = "564c1060c89e901ef0c81edb90878b7f420443fe"
+SRCREV = "ab88530dfb6f41f8e3fd7e4a1615d89f5265168e"
 PV = "4.19.25+git${SRCPV}"
 
 require linux-bbe-4.19.inc

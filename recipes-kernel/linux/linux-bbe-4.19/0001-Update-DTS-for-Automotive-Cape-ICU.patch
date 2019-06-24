@@ -1,17 +1,17 @@
-From 0d69c022de8298ac4c0ec1e3795c04fe78c9416e Mon Sep 17 00:00:00 2001
+From 86446c29c1818abdff438440b70b34a9390eb4b3 Mon Sep 17 00:00:00 2001
 From: Paul Barker <paul.barker@sancloud.co.uk>
 Date: Mon, 20 May 2019 15:57:15 +0000
 Subject: [PATCH] Update DTS for Automotive Cape (ICU)
 
 Signed-off-by: Paul Barker <paul.barker@sancloud.co.uk>
 ---
- arch/arm/boot/dts/am335x-sancloud-bbe.dts     | 162 ++++++++++++++++++
+ arch/arm/boot/dts/am335x-sancloud-bbe.dts     | 154 ++++++++++++++++++
  .../dt-bindings/board/am335x-bbw-bbb-base.h   | 108 ++++++++++++
- 2 files changed, 270 insertions(+)
+ 2 files changed, 262 insertions(+)
  create mode 100644 include/dt-bindings/board/am335x-bbw-bbb-base.h
 
 diff --git a/arch/arm/boot/dts/am335x-sancloud-bbe.dts b/arch/arm/boot/dts/am335x-sancloud-bbe.dts
-index f2ec84683109..03a9f17660e9 100644
+index f2ec84683109..cb35368c975b 100644
 --- a/arch/arm/boot/dts/am335x-sancloud-bbe.dts
 +++ b/arch/arm/boot/dts/am335x-sancloud-bbe.dts
 @@ -10,6 +10,7 @@
@@ -22,7 +22,7 @@ index f2ec84683109..03a9f17660e9 100644
  #include <dt-bindings/interrupt-controller/irq.h>
  
  / {
-@@ -97,6 +98,54 @@
+@@ -97,6 +98,46 @@
  			AM33XX_IOPAD(0x868, PIN_INPUT | MUX_MODE7)     /* gpmc_a10.gpio1_26 */
  		>;
  	};
@@ -40,44 +40,36 @@ index f2ec84683109..03a9f17660e9 100644
 +
 +	icu_i2c1_pins: pinmux_icu_i2c1_pins {
 +		pinctrl-single,pins = <
-+			BONE_P9_18 (PIN_INPUT_PULLUP | SLEWCTRL_SLOW | MUX_MODE2)	/* I2C1_SDA */
-+			BONE_P9_17 (PIN_INPUT_PULLUP | SLEWCTRL_SLOW | MUX_MODE2)	/* I2C1_SCL */
++			BONE_P9_18 (PIN_INPUT_PULLUP | SLEWCTRL_SLOW | MUX_MODE2)		/* I2C1_SDA */
++			BONE_P9_17 (PIN_INPUT_PULLUP | SLEWCTRL_SLOW | MUX_MODE2)		/* I2C1_SCL */
 +		>;
 +	};
 +
 +	icu_can0_pins: pinmux_icu_can0_pins {
 +		pinctrl-single,pins = <
-+			BONE_P9_19 (PIN_INPUT_PULLUP | MUX_MODE2)					/* CAN0_RXD */
-+			BONE_P9_20 (PIN_OUTPUT_PULLUP | MUX_MODE2)					/* CAN0_TXD */
++			BONE_P9_19 (PIN_INPUT_PULLUP | MUX_MODE2)				/* CAN0_RXD */
++			BONE_P9_20 (PIN_OUTPUT_PULLUP | MUX_MODE2)				/* CAN0_TXD */
 +		>;
 +	};
 +
 +	icu_vda_pins: pinmux_icu_vda_pins {
 +		pinctrl-single,pins = <
-+			BONE_P8_07 (PIN_INPUT | MUX_MODE7)							/* CAN_STBY */
-+			BONE_P8_09 (PIN_INPUT | MUX_MODE7)							/* BEACON_H */
-+			BONE_P8_10 (PIN_INPUT | MUX_MODE7)							/* CALL_REQ */
-+			BONE_P8_11 (PIN_INPUT | MUX_MODE7)							/* RADIO */
-+			BONE_P8_12 (PIN_INPUT | MUX_MODE7)							/* BEACON_L */
-+			BONE_P8_13 (PIN_INPUT | MUX_MODE7)							/* SIREN */
-+			BONE_P8_14 (PIN_INPUT | MUX_MODE7)							/* MUTE */
-+			BONE_P8_15 (PIN_INPUT | MUX_MODE7)							/* BEAM */
-+			BONE_P8_16 (PIN_INPUT | MUX_MODE7)							/* SPEED */
-+			BONE_P8_17 (PIN_INPUT | MUX_MODE7)							/* M_RADIO */
-+			BONE_P8_18 (PIN_INPUT | WAKEUP_EN | MUX_MODE7)				/* IGNITION */
++			BONE_P8_18 (PIN_INPUT | MUX_MODE7)					/* RADIO */
++			BONE_P8_15 (PIN_INPUT | MUX_MODE7)					/* BEAM */
++			BONE_P8_17 (PIN_INPUT | WAKEUP_EN | MUX_MODE7)				/* IGNITION */
 +		>;
 +	};
 +
 +	icu_wireless_pins: pinmux_icu_wireless_pins {
 +		pinctrl-single,pins = <
-+			BONE_P8_27 (PIN_OUTPUT_PULLUP | MUX_MODE7)					/* WIRELESS_OFF_N */
-+			BONE_P9_26 (PIN_OUTPUT_PULLUP | MUX_MODE7)					/* WIRELESS_RST_N */
++			BONE_P8_27 (PIN_OUTPUT_PULLUP | MUX_MODE7)				/* WIRELESS_OFF_N */
++			BONE_P9_26 (PIN_OUTPUT_PULLUP | MUX_MODE7)				/* WIRELESS_RST_N */
 +		>;
 +	};
  };
  
  &mac {
-@@ -142,3 +191,116 @@
+@@ -142,3 +183,116 @@
  		/* wifi on port 4 */
  	};
  };
