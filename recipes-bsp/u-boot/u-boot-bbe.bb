@@ -7,9 +7,9 @@ DEPENDS += "flex-native bison-native"
 
 require recipes-bsp/u-boot/u-boot.inc
 
-SRC_URI = "git://github.com/SanCloudLtd/u-boot.git;protocol=https;branch=uboot-bbe-2019.10"
-SRCREV = "81a1432e5c4514cc3ca1fec78023afbee638c4f0"
-PV = "2019.10+git${SRCPV}"
+SRC_URI = "git://github.com/SanCloudLtd/u-boot.git;protocol=https;branch=uboot-bbe-2020.04"
+SRCREV = "59f3a318bd424ad88cb0a457382ea7ab19414356"
+PV = "2020.04+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
