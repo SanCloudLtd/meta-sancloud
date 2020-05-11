@@ -27,7 +27,7 @@ repos:
       meta-arm:
   meta-ti:
     url: https://git.yoctoproject.org/git/meta-ti
-    refspec: master
+    refspec: dunfell
   meta-rtlwifi:
     url: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
     refspec: master
