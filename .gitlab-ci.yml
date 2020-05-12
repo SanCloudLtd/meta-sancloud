@@ -30,7 +30,7 @@ bbe-poky:
   script:
     - ./scripts/ci-build.sh $CI_JOB_NAME core-image-base
     - |
-      if [[ "$CI_COMMIT_REF_NAME" == "master" ]]; then
+      if [[ -n "$B2_KEY_ID" ]]; then
         rclone config create b2 b2 account $B2_KEY_ID key $B2_APP_KEY > /dev/null
         rclone copy --ignore-existing build/sstate-cache/ b2:sc-yocto/poky/sstate/
         rclone copy --ignore-existing build/tmp/deploy/sources/mirror/ b2:sc-yocto/mirror/
@@ -42,7 +42,7 @@ bbe-arago:
   script:
     - ./scripts/ci-build.sh $CI_JOB_NAME tisdk-base-image tisdk-default-image
     - |
-      if [[ "$CI_COMMIT_REF_NAME" == "master" ]]; then
+      if [[ -n "$B2_KEY_ID" ]]; then
         rclone config create b2 b2 account $B2_KEY_ID key $B2_APP_KEY > /dev/null
         rclone copy --ignore-existing build/sstate-cache/ b2:sc-yocto/arago/sstate/
         rclone copy --ignore-existing build/tmp/deploy/sources/mirror/ b2:sc-yocto/mirror/
