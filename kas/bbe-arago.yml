@@ -11,12 +11,14 @@ target:
 repos:
   meta-arago:
     url: http://arago-project.org/git/meta-arago.git
+    path: layers/meta-arago
     refspec: dunfell
     layers:
       meta-arago-distro:
       meta-arago-extras:
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
+    path: layers/meta-qt5
     refspec: dunfell
   meta-openembedded:
     layers:
