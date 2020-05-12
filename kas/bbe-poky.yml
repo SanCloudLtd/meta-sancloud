@@ -60,3 +60,7 @@ local_conf_header:
         ABORT,${SSTATE_DIR},100M,1K \
         ABORT,/tmp,10M,1K"
     CONF_VERSION = "1"
+    TCLIBCAPPEND = ""
+    require conf/include/sancloud-mirrors.inc
+  sstate: |
+    require conf/include/sancloud-sstate-poky.inc
