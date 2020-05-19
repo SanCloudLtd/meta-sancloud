@@ -16,10 +16,6 @@ repos:
     layers:
       meta-arago-distro:
       meta-arago-extras:
-    patches:
-      0001:
-        repo: meta-sancloud
-        path: kas/patches/meta-arago/0001-arago.conf-Allow-TMPDIR-path-modification-to-be-disa.patch
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
@@ -34,6 +30,5 @@ repos:
 local_conf_header:
   arago: |
     PACKAGE_CLASSES = "package_ipk"
-    TCMODEAPPEND = ""
   sstate: |
     require conf/include/sancloud-sstate-arago.inc
