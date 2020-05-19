@@ -30,5 +30,6 @@ repos:
 local_conf_header:
   arago: |
     PACKAGE_CLASSES = "package_ipk"
+    TCMODEAPPEND = ""
   sstate: |
     require conf/include/sancloud-sstate-arago.inc
