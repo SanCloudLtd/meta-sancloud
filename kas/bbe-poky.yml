@@ -25,7 +25,7 @@ repos:
   meta-arm:
     url: https://git.yoctoproject.org/git/meta-arm
     path: layers/meta-arm
-    refspec: master
+    refspec: dunfell
     layers:
       meta-arm:
   meta-ti:
