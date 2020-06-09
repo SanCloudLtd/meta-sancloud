@@ -1,0 +1,35 @@
+header:
+  version: 8
+  includes:
+    - bbe-poky.yml
+
+distro: arago
+target:
+  - tisdk-default-image
+  - tisdk-base-image
+
+repos:
+  meta-arago:
+    url: http://arago-project.org/git/meta-arago.git
+    path: layers/meta-arago
+    refspec: dunfell
+    layers:
+      meta-arago-distro:
+      meta-arago-extras:
+  meta-qt5:
+    url: https://github.com/meta-qt5/meta-qt5.git
+    path: layers/meta-qt5
+    refspec: dunfell
+  meta-openembedded:
+    layers:
+      meta-networking:
+  meta-arm:
+    layers:
+      meta-arm-toolchain:
+
+local_conf_header:
+  arago: |
+    PACKAGE_CLASSES = "package_ipk"
+    TCMODEAPPEND = ""
+  sstate: |
+    require conf/include/sancloud-sstate-arago.inc

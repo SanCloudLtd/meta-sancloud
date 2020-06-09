@@ -1,14 +1,9 @@
 header:
   version: 8
   includes:
+    - dev/bbe-poky-kernel-stable.yml
     - bbe-poky.yml
 
 repos:
   meta-kernel:
-    url: https://gitlab.com/openembedded/community/meta-kernel.git
-    path: layers/meta-kernel
-    refspec: master
-
-local_conf_header:
-  linux_kernel: |
-    BBE_KERNEL_PROVIDER = "stable"
+    refspec: fce07241c7c1bdc4304176e1efeb267e7a52dae7

@@ -1,66 +1,16 @@
 header:
   version: 8
-
-machine: bbe
-distro: poky
-target:
-  - core-image-base
+  includes:
+    - dev/bbe-poky.yml
 
 repos:
-  meta-sancloud:
   poky:
-    url: https://git.yoctoproject.org/git/poky
-    path: layers/poky
-    refspec: dunfell
-    layers:
-      meta:
-      meta-poky:
+    refspec: febbe2944c0c4a04b85fa98fdc261186115954d8
   meta-openembedded:
-    url: https://github.com/openembedded/meta-openembedded.git
-    path: layers/meta-openembedded
-    refspec: dunfell
-    layers:
-      meta-oe:
-      meta-python:
+    refspec: e413c1ef621688e69bb7830bb3151ed23b30b73e
   meta-arm:
-    url: https://git.yoctoproject.org/git/meta-arm
-    path: layers/meta-arm
-    refspec: dunfell
-    layers:
-      meta-arm:
+    refspec: 0bd9c740267c0926e89bcfdb489790b7bf1fbd4b
   meta-ti:
-    url: https://git.yoctoproject.org/git/meta-ti
-    path: layers/meta-ti
-    refspec: dunfell
+    refspec: f2b2b2095f1a9d3ef705f7518d9db1e3141da2fb
   meta-rtlwifi:
-    url: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
-    path: layers/meta-rtlwifi
-    refspec: master
-
-bblayers_conf_header:
-  base: |
-    POKY_BBLAYERS_CONF_VERSION = "2"
-    BBPATH = "${TOPDIR}"
-    BBFILES ?= ""
-
-local_conf_header:
-  base: |
-    PACKAGE_CLASSES ?= "package_rpm"
-    SDKMACHINE ?= "x86_64"
-    EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
-    USER_CLASSES ?= "buildstats image-mklibs image-prelink"
-    PATCHRESOLVE = "noop"
-    BB_DISKMON_DIRS ?= "\
-        STOPTASKS,${TMPDIR},1G,100K \
-        STOPTASKS,${DL_DIR},1G,100K \
-        STOPTASKS,${SSTATE_DIR},1G,100K \
-        STOPTASKS,/tmp,100M,100K \
-        ABORT,${TMPDIR},100M,1K \
-        ABORT,${DL_DIR},100M,1K \
-        ABORT,${SSTATE_DIR},100M,1K \
-        ABORT,/tmp,10M,1K"
-    CONF_VERSION = "1"
-    TCLIBCAPPEND = ""
-    require conf/include/sancloud-mirrors.inc
-  sstate: |
-    require conf/include/sancloud-sstate-poky.inc
+    refspec: 91dd94630dad98389bfe4e15207e771754bde75c
