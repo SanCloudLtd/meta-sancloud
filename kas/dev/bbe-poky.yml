@@ -64,3 +64,12 @@ local_conf_header:
     require conf/include/sancloud-mirrors.inc
   sstate: |
     require conf/include/sancloud-sstate-poky.inc
+  archiver: |
+    INHERIT += "archiver"
+    BB_GENERATE_MIRROR_TARBALLS = "1"
+    BB_GENERATE_SHALLOW_TARBALLS = "1"
+    BB_GIT_SHALLOW = "1"
+    ARCHIVER_MODE[src] = "mirror"
+    ARCHIVER_MODE[mirror] = "combined"
+    ARCHIVER_MIRROR_EXCLUDE = "file://"
+    COPYLEFT_LICENSE_INCLUDE = "*"
