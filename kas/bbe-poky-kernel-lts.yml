@@ -1,5 +1,0 @@
-header:
-  version: 8
-  includes:
-    - bbe-poky-kernel-stable.yml
-    - dev/bbe-poky-kernel-lts.yml

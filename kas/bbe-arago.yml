@@ -1,10 +1,19 @@
 header:
   version: 8
   includes:
-    - bbe-poky.yml
     - dev/bbe-arago.yml
 
 repos:
+  poky:
+    refspec: febbe2944c0c4a04b85fa98fdc261186115954d8
+  meta-openembedded:
+    refspec: e413c1ef621688e69bb7830bb3151ed23b30b73e
+  meta-arm:
+    refspec: 0bd9c740267c0926e89bcfdb489790b7bf1fbd4b
+  meta-ti:
+    refspec: f2b2b2095f1a9d3ef705f7518d9db1e3141da2fb
+  meta-rtlwifi:
+    refspec: 91dd94630dad98389bfe4e15207e771754bde75c
   meta-arago:
     refspec: 41cfd83e13955178bffae84ebbe5a915b79181fd
   meta-qt5:
