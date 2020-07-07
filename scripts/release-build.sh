@@ -25,9 +25,9 @@ mv build/tmp/deploy/images release/arago-images
 mv build/tmp/deploy/sources/mirror/* release/sources/
 rm -rf build/tmp
 
-# Automatically generate release notes from ChangeLog
+# Automatically generate release notes from tag message
 cat > release/ReleaseNotes.txt << EOF
 Release Notes
 =============
 EOF
-markdown-extract -fr "^${VERSION}" ChangeLog.md >> release/ReleaseNotes.md
+git tag -l --format='%(contents)' ${VERSION} | sed 1d >> release/ReleaseNotes.txt
