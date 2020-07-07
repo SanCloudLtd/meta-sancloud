@@ -27,6 +27,31 @@ This BSP is layer supports the following configurations:
 * Arago Distribution
 * Poky Reference Distribution
 
+Getting started with Poky
+-------------------------
+
+This BSP layer is listed in the
+[OpenEmbedded Layer Index](http://layers.openembedded.org/)
+which makes getting started very easy. Once your OpenEmbedded/Yocto Project
+build environment is set up you can use the `bitbake-layers layerindex-fetch`
+command to download this layer with all its dependencies and add these layers
+to your bblayers.conf file automatically.
+
+If you do not have a Yocto Project build environment set up please first
+follow the
+[Yocto Project Quick Build Guide](https://www.yoctoproject.org/docs/3.1.1/brief-yoctoprojectqs/brief-yoctoprojectqs.html)
+to ensure that your Linux system has the correct packages installed and that
+a simple build succeeds. Once you know that your Linux system is set up
+correctly you can download the appropriate Yocto Project version and build an
+image for the BBE using the following commands:
+
+    git clone -b dunfell git://git.yoctoproject.org/poky
+    cd poky
+    source oe-init-build-env
+    bitbake-layers layerindex-fetch meta-sancloud
+    echo 'MACHINE = "bbe"' >> conf/local.conf
+    bitbake core-image-base
+
 Getting Started with AGL
 ------------------------
 
@@ -40,21 +65,41 @@ Sancloud BBE:
     source meta-agl/scripts/aglsetup.sh -m bbe agl-demo agl-devel
     bitbake agl-demo-platform
 
-Getting started with Arago/Poky
--------------------------------
+Getting started with Arago/Poky using kas
+-----------------------------------------
 
-This BSP layer includes build configuration files for use with the kas build
-tool (https://github.com/siemens/kas). The kas tool can be installed by running
-`pip install kas` as long as you have a recent Python version.
+This BSP layer includes build configuration files for use with the
+[kas build tool](https://github.com/siemens/kas). This tool can fetch all
+layer dependencies (including bitbake) and set up a build directory with
+appropriate configuration for the BBE and the chosen distro. It can be
+installed by running `pip install kas` as long as you have a recent Python
+version.
 
-To use kas to build the Poky distro for the BBE, run the following commands in
+### Poky
+
+To use kas to build the Poky distro for the BBE, run the following command in
 the top directory of this repository:
 
     kas build kas/bbe-poky.yml
 
-Similarly, to build the Arago distro for the BBE:
+### Arago
+
+To build the Arago distro for the BBE the appropriate ARM toolchain first
+needs to be installed. This typically requires commands to be ran as root or
+via sudo. For the dunfell branch, download
+[gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz](https://bit.ly/arm-none-linux-gnueabihf-2019-12)
+and unpack into /opt. This can be done at the command line using the
+following commands:
+
+    wget 'https://bit.ly/arm-none-linux-gnueabihf-2019-12' -O gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz
+    sudo tar xf gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz -C /opt
+
+Once the toolchain is installed in the correct location, run the following
+command in the top level of this repository:
 
     kas build kas/bbe-arago.yml
+
+### Customisation
 
 The build configuration files in the kas directory can be used as the basis of
 further customisation and integration work. It's recommended to copy the build
