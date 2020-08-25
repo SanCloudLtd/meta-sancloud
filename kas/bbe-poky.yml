@@ -5,12 +5,12 @@ header:
 
 repos:
   poky:
-    refspec: febbe2944c0c4a04b85fa98fdc261186115954d8
+    refspec: 569b1f5d67c57de957e243997c53ec2f81dc8dfe
   meta-openembedded:
-    refspec: e413c1ef621688e69bb7830bb3151ed23b30b73e
+    refspec: 654ad8bea49f142d20b2b96c0dd44810a6be233a
   meta-arm:
-    refspec: 0bd9c740267c0926e89bcfdb489790b7bf1fbd4b
+    refspec: 00fa6ce4e80a1153088044a634d571677a442f1b
   meta-ti:
     refspec: f2b2b2095f1a9d3ef705f7518d9db1e3141da2fb
   meta-rtlwifi:
-    refspec: 91dd94630dad98389bfe4e15207e771754bde75c
+    refspec: 7b556aa2265cfc41e6e5fda7085619436fe9a385
