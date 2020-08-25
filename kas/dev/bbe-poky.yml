@@ -62,7 +62,3 @@ local_conf_header:
     CONF_VERSION = "1"
     TCLIBCAPPEND = ""
     require conf/include/sancloud-mirrors.inc
-  sstate: |
-    require conf/include/sancloud-sstate-poky.inc
-  archiver: |
-    require conf/include/sancloud-enable-archiver.inc
