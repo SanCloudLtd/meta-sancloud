@@ -28,6 +28,7 @@ repos:
     refspec: dunfell
     layers:
       meta-arm:
+      meta-arm-toolchain:
   meta-ti:
     url: https://git.yoctoproject.org/git/meta-ti
     path: layers/meta-ti
