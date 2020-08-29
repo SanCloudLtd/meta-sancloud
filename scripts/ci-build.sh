@@ -4,6 +4,6 @@ set -e
 
 CONF=$1
 
-kas build --update --force-checkout kas/dev/${CONF}.yml | sed -e '/^NOTE: .*Started$/d' -e '/^NOTE: Running /d'
+kas build --update --force-checkout kas/dev/${CONF}.yml
 
 mv build/tmp/deploy/images .
