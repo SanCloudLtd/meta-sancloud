@@ -1,0 +1,6 @@
+header:
+  version: 8
+
+local_conf_header:
+  ci_conf: |
+    INHERIT += "rm_work"
