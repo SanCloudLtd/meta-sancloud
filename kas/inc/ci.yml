@@ -4,3 +4,4 @@ header:
 local_conf_header:
   ci_conf: |
     INHERIT += "rm_work"
+    require conf/include/sancloud-enable-archiver.inc
