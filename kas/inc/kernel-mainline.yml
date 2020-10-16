@@ -1,7 +1,5 @@
 header:
   version: 8
-  includes:
-    - bbe-poky.yml
 
 repos:
   meta-kernel:
@@ -11,4 +9,4 @@ repos:
 
 local_conf_header:
   linux_kernel: |
-    BBE_KERNEL_PROVIDER = "stable"
+    BBE_KERNEL_PROVIDER = "mainline"

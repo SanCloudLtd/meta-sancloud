@@ -1,8 +1,8 @@
 header:
   version: 8
   includes:
-    - bbe-poky-kernel-stable.yml
+    - kernel-mainline.yml
 
 local_conf_header:
   linux_kernel: |
-    BBE_KERNEL_PROVIDER = "lts"
+    BBE_KERNEL_PROVIDER = "stable"
