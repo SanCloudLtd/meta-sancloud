@@ -6,37 +6,36 @@ distro: poky
 target:
   - core-image-base
 
+defaults:
+  repos:
+    refspec: dunfell
+
 repos:
   meta-sancloud:
   poky:
     url: https://git.yoctoproject.org/git/poky
     path: layers/poky
-    refspec: dunfell
     layers:
       meta:
       meta-poky:
   meta-openembedded:
     url: https://github.com/openembedded/meta-openembedded.git
     path: layers/meta-openembedded
-    refspec: dunfell
     layers:
       meta-oe:
       meta-python:
   meta-arm:
     url: https://git.yoctoproject.org/git/meta-arm
     path: layers/meta-arm
-    refspec: dunfell
     layers:
       meta-arm:
       meta-arm-toolchain:
   meta-ti:
     url: https://git.yoctoproject.org/git/meta-ti
     path: layers/meta-ti
-    refspec: dunfell
   meta-rtlwifi:
     url: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
     path: layers/meta-rtlwifi
-    refspec: master
 
 bblayers_conf_header:
   base: |
