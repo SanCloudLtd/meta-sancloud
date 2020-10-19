@@ -18,8 +18,6 @@ repos:
     patches:
       skip-packagegroup-sysvinit-boot:
         path: kas/patches/meta-arago/0001-packagegroup-arago-sysvinit-boot-Skip-recipe-if-sysv.patch
-      fix-do-create-srcipk:
-        path: kas/patches/meta-arago/0001-linux-copy-defconfig-Only-move-do_create_srcipk-task.patch
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
