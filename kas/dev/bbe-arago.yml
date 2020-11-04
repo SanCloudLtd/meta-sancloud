@@ -15,9 +15,6 @@ repos:
     layers:
       meta-arago-distro:
       meta-arago-extras:
-    patches:
-      skip-packagegroup-sysvinit-boot:
-        path: kas/patches/meta-arago/0001-packagegroup-arago-sysvinit-boot-Skip-recipe-if-sysv.patch
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
