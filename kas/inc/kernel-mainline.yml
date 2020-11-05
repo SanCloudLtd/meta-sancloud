@@ -5,7 +5,6 @@ repos:
   meta-kernel:
     url: https://gitlab.com/openembedded/community/meta-kernel.git
     path: layers/meta-kernel
-    refspec: master
 
 local_conf_header:
   linux_kernel: |
