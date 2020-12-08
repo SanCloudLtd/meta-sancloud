@@ -1,0 +1,9 @@
+header:
+  version: 9
+  includes:
+    - bbe-poky.yml
+
+target:
+  - core-image-base
+
+task: populate_sdk

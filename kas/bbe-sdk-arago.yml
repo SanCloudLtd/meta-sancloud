@@ -1,0 +1,7 @@
+header:
+  version: 9
+  includes:
+    - bbe-arago.yml
+
+target:
+  - meta-toolchain-arago-tisdk
