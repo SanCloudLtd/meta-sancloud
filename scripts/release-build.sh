@@ -15,15 +15,13 @@ mkdir -p release release/sources
 git archive --prefix=meta-sancloud-${VERSION}/ -o release/meta-sancloud-${VERSION}.tar.gz ${VERSION}
 
 # Create pre-built images
-kas build kas/bbe-poky.yml
-mv build/tmp/deploy/images release/poky-images
+./scripts/ci-build.sh -Rs
+mv images release/poky-images
 mv build/tmp/deploy/sources/mirror/* release/sources/
-rm -rf build/tmp
 
-kas build kas/bbe-arago.yml
-mv build/tmp/deploy/images release/arago-images
+./scripts/ci-build.sh -ARs
+mv images release/arago-images
 mv build/tmp/deploy/sources/mirror/* release/sources/
-rm -rf build/tmp
 
 # Automatically generate release notes from tag message
 cat > release/ReleaseNotes.txt << EOF
