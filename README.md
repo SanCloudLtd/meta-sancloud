@@ -2,11 +2,11 @@
 
 ## Quick links
 
-[<img align=right src="https://www.sancloud.co.uk/wp-content/uploads/2016/09/sancloud_and_address_web.png">](https://www.sancloud.co.uk/)
+[<img align=right src="https://www.sancloud.com/wp-content/uploads/2016/09/sancloud_and_address_web.png">](https://www.sancloud.com/)
 
-* [SanCloud website](https://www.sancloud.co.uk/)
+* [SanCloud website](https://www.sancloud.com/)
 
-* [BeagleBone Enhanced Description](https://www.sancloud.co.uk/beaglebone-enhanced-bbe)
+* [BeagleBone Enhanced Description](https://www.sancloud.com/beaglebone-enhanced-bbe)
 
 * [Sancloud repositories on GitHub](https://github.com/SanCloudLtd)
 
@@ -137,5 +137,4 @@ separately from future BSP updates in this repository.
 Issues and Pull Requests for this BSP layer may be opened on our primary
 GitHub repository at https://github.com/SanCloudLtd/meta-sancloud.
 
-For further support enquiries please contact us via email to
-yocto@sancloud.co.uk.
+For further support enquiries please contact us via email to yocto@sancloud.com.
