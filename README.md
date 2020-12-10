@@ -24,6 +24,23 @@ This BSP is layer supports the following configurations:
 * Arago Distribution
 * Poky Reference Distribution
 
+## Host OS preparation
+
+If you are running Ubuntu 20.04, we've provided a script to automate the
+process of setting up your host system to build images with Yocto Project and
+this SanCloud BSP layer. To use this script, run the following command:
+
+    curl https://raw.githubusercontent.com/SanCloudLtd/meta-sancloud/dunfell-r2/scripts/prepare-host.sh | bash
+
+If you are running any other Linux distribution please see
+[Required Packages for the Build Host](https://www.yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#required-packages-for-the-build-host)
+in the Yocto Project Reference Manual.
+
+In addition to the packages listed in the documentation, 32-bit (aka
+multilib) C++ libraries may also need to be installed when building the Arago
+distribution. This is done automatically if you're using the
+`prepare-host.sh` script.
+
 ## Getting started with Poky
 
 This BSP layer is listed in the
@@ -85,8 +102,10 @@ top directory of this repository:
 ### Arago
 
 To build the Arago distro for the BBE the appropriate ARM toolchain first
-needs to be installed. This typically requires commands to be ran as root or
-via sudo. For the dunfell branch, download
+needs to be installed. This is handled automatically if you're using the
+`prepare-host.sh` script [described above](#host-os-preparation).
+
+To install the ARM toolchain manually, download
 [gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz](https://bit.ly/arm-none-linux-gnueabihf-2019-12)
 and unpack into /opt. This can be done at the command line using the
 following commands:
