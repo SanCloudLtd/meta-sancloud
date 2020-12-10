@@ -1,8 +1,6 @@
-Yocto BSP layer for the SanCloud boards
-=======================================
+# Yocto BSP layer for the SanCloud boards
 
-Quick links
------------
+## Quick links
 
 [<img align=right src="https://www.sancloud.co.uk/wp-content/uploads/2016/09/sancloud_and_address_web.png">](https://www.sancloud.co.uk/)
 
@@ -12,8 +10,7 @@ Quick links
 
 * [Sancloud repositories on GitHub](https://github.com/SanCloudLtd)
 
-Description
------------
+## Description
 
 This is the Yocto Project Board Support Package (BSP) layer for SanCloud devices.
 
@@ -27,8 +24,7 @@ This BSP is layer supports the following configurations:
 * Arago Distribution
 * Poky Reference Distribution
 
-Getting started with Poky
--------------------------
+## Getting started with Poky
 
 This BSP layer is listed in the
 [OpenEmbedded Layer Index](http://layers.openembedded.org/)
@@ -52,8 +48,7 @@ image for the BBE using the following commands:
     echo 'MACHINE = "bbe"' >> conf/local.conf
     bitbake core-image-base
 
-Getting Started with AGL
-------------------------
+## Getting Started with AGL
 
 This BSP layer is included in recent releases of AGL. AGL sources can be
 downloaded by following the
@@ -65,8 +60,7 @@ Sancloud BBE:
     source meta-agl/scripts/aglsetup.sh -m bbe agl-demo agl-devel
     bitbake agl-demo-platform
 
-Getting started with Arago/Poky using kas
------------------------------------------
+## Getting started with Arago/Poky using kas
 
 This BSP layer includes build configuration files for use with the
 [kas build tool](https://github.com/siemens/kas). This tool can fetch all
@@ -81,6 +75,12 @@ To use kas to build the Poky distro for the BBE, run the following command in
 the top directory of this repository:
 
     kas build kas/bbe-poky.yml
+
+This BSP also supports building a Software Development Kit (SDK) for the Poky
+distribution. To use kas to build the SDK, run the following command in the
+top directory of this repository:
+
+    kas build kas/bbe-sdk-poky.yml
 
 ### Arago
 
@@ -99,6 +99,12 @@ command in the top level of this repository:
 
     kas build kas/bbe-arago.yml
 
+This BSP also supports building a Software Development Kit (SDK) for the Arago
+distribution. To use kas to build the SDK, run the following command in the
+top directory of this repository:
+
+    kas build kas/bbe-sdk-arago.yml
+
 ### Customisation
 
 The build configuration files in the kas directory can be used as the basis of
@@ -107,8 +113,7 @@ configuration files into your own repository (adding a `url:` entry for the
 meta-sancloud layer) and work there so that your changes can be tracked
 separately from future BSP updates in this repository.
 
-Support
--------
+## Support
 
 Issues and Pull Requests for this BSP layer may be opened on our primary
 GitHub repository at https://github.com/SanCloudLtd/meta-sancloud.
