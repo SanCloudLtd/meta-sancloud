@@ -22,6 +22,7 @@ repos:
     layers:
       meta-networking:
   meta-arm:
+    refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
     layers:
       meta-arm-toolchain:
 
