@@ -3,4 +3,4 @@ header:
 
 local_conf_header:
   linux_kernel: |
-    BBE_KERNEL_PROVIDER = "ti-rt"
+    BBE_KERNEL_PROVIDER = "rt"
