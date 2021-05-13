@@ -5,16 +5,16 @@ header:
 
 repos:
   poky:
-    refspec: e32d854e33bc86c2a616df8708e021a098afcf73   # yocto-3.1.5
+    refspec: 13f4ddf50eccaeed96a40a5f1a1d4173e677e98a   # yocto-3.1.7
   meta-openembedded:
-    refspec: 02b04a20d46ca2d7fe813dbf2ec377553fc41bac
+    refspec: c1a50683225b0bf10f8d7a18280acefa7469ecc2
   meta-arm:
     refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
   meta-ti:
-    refspec: 542456ca082de7133a61be21222d13974a87e41d   # 07.02.00.004
+    refspec: 02a53f48b9bdb242185204610610f2209bc92ca6   # 07.03.00.005
   meta-rtlwifi:
     refspec: b8327c556e9f03708bb8ef6d1678e520cecc98e7
   meta-arago:
-    refspec: 3d81e5add1f7173e34a4fbc189bf56872969fc98   # 07.02.00.004
+    refspec: ee6ff44d90945429051c8d9573c8b60705104149   # 07.03.00.005
   meta-qt5:
     refspec: b4d24d70aca75791902df5cd59a4f4a54aa4a125
