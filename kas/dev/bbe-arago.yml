@@ -11,7 +11,7 @@ target:
 repos:
   meta-arago:
     url: http://arago-project.org/git/meta-arago.git
-    refspec: 3d81e5add1f7173e34a4fbc189bf56872969fc98   # 07.02.00.004
+    refspec: ee6ff44d90945429051c8d9573c8b60705104149   # 07.03.00.005
     path: layers/meta-arago
     layers:
       meta-arago-distro:
