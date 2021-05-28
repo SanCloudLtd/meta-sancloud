@@ -88,13 +88,12 @@ cp  build/tmp/deploy/images/bbe/MLO \
     build/tmp/deploy/images/bbe/zImage \
     images
 
-if [[ -e "build/tmp/deploy/images/bbe/am335x-sancloud-bbe-icu4.dtb" ]]; then
-    cp build/tmp/deploy/images/bbe/am335x-sancloud-bbe-icu4.dtb images
-fi
-
-if [[ -e "build/tmp/deploy/images/bbe/am335x-sancloud-bbei-wifi.dtb" ]]; then
-    cp build/tmp/deploy/images/bbe/am335x-sancloud-bbei-wifi.dtb images
-fi
+for dtb in am335x-sancloud-bbe-icu4.dtb am335x-sancloud-bbei-wifi.dtb am335x-sancloud-bbe-lite.dtb; do
+    srcpath="build/tmp/deploy/images/bbe/${dtb}"
+    if [[ -e "${srcpath}" ]]; then
+        cp "${srcpath}" images
+    fi
+done
 
 if [[ "$BUILD_DISTRO" == "poky" ]]; then
     cp  build/tmp/deploy/images/bbe/core-image-base-bbe.wic.bmap \
