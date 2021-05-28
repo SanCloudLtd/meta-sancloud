@@ -24,3 +24,6 @@ B = "${WORKDIR}/build"
 do_configure[cleandirs] = "${B}"
 
 PROVIDES += "u-boot"
+
+# Prevent '-bbe' being inserted into to the u-boot-initial-env filename
+UBOOT_INITIAL_ENV = "u-boot-initial-env"
