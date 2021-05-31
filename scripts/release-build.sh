@@ -28,4 +28,4 @@ cat > release/ReleaseNotes.txt << EOF
 Release Notes
 =============
 EOF
-git tag -l --format='%(contents)' ${VERSION} | sed 1d >> release/ReleaseNotes.txt
+git tag -l --format='%(contents)' ${VERSION} | sed '1d; /-----BEGIN PGP SIGNATURE-----/,$d' >> release/ReleaseNotes.txt
