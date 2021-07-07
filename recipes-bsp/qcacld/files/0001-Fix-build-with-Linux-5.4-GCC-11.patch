@@ -1,0 +1,449 @@
+From c58412458613c81f15cbaa5da55d3b192c833337 Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul.barker@sancloud.com>
+Date: Mon, 5 Jul 2021 13:55:23 +0100
+Subject: [PATCH] Fix build with Linux 5.4 & GCC 11
+
+Signed-off-by: Paul Barker <paul.barker@sancloud.com>
+---
+ CORE/CLD_TXRX/HTT/htt_rx.c                     |  2 ++
+ CORE/CLD_TXRX/TXRX/ol_rx_defrag.c              |  2 +-
+ CORE/CLD_TXRX/TXRX/ol_rx_reorder.c             |  2 +-
+ CORE/CLD_TXRX/TXRX/ol_tx_send.c                |  2 +-
+ CORE/CLD_TXRX/TXRX/ol_txrx_internal.h          |  2 +-
+ CORE/HDD/inc/wlan_hdd_ftm.h                    |  2 +-
+ CORE/HDD/src/wlan_hdd_assoc.c                  |  1 +
+ CORE/HDD/src/wlan_hdd_wext.c                   |  1 +
+ CORE/HDD/src/wlan_hdd_wmm.c                    |  1 +
+ CORE/MAC/src/include/parserApi.h               |  2 +-
+ CORE/MAC/src/pe/lim/limProcessCfgUpdates.c     |  1 +
+ CORE/MAC/src/pe/lim/limProcessSmeReqMessages.c |  2 ++
+ CORE/SAP/src/sapFsm.c                          |  2 +-
+ CORE/SAP/src/sapModule.c                       |  3 +++
+ CORE/SERVICES/BMI/ol_fw.c                      |  1 +
+ CORE/SME/inc/sme_Api.h                         |  2 +-
+ CORE/SME/src/QoS/sme_Qos.c                     |  3 +++
+ CORE/SME/src/csr/csrApiRoam.c                  |  6 ++++--
+ CORE/SME/src/csr/csrNeighborRoam.c             |  4 +++-
+ CORE/SME/src/pmc/pmc.c                         |  1 +
+ CORE/SVC/src/logging/wlan_logging_sock_svc.c   | 16 ++++++++--------
+ CORE/VOSS/inc/vos_types.h                      |  2 +-
+ CORE/VOSS/src/vos_sched.c                      |  2 ++
+ CORE/VOSS/src/vos_utils.c                      |  2 +-
+ 24 files changed, 43 insertions(+), 21 deletions(-)
+
+diff --git a/CORE/CLD_TXRX/HTT/htt_rx.c b/CORE/CLD_TXRX/HTT/htt_rx.c
+index 4ffc6bf..35ad9a6 100644
+--- a/CORE/CLD_TXRX/HTT/htt_rx.c
++++ b/CORE/CLD_TXRX/HTT/htt_rx.c
+@@ -564,11 +564,13 @@ htt_rx_mpdu_desc_pn_hl(
+                 *(word_ptr + 3) = rx_desc->pn_127_96;
+                 /* bits 63:0 */
+                 *(word_ptr + 2) = rx_desc->pn_95_64;
++                /* fallthrough */
+             case 48:
+                 /* bits 48:0
+                  * copy 64 bits
+                  */
+                 *(word_ptr + 1) = rx_desc->u0.pn_63_32;
++                /* fallthrough */
+             case 24:
+                 /* bits 23:0
+                  * copy 32 bits
+diff --git a/CORE/CLD_TXRX/TXRX/ol_rx_defrag.c b/CORE/CLD_TXRX/TXRX/ol_rx_defrag.c
+index 29fc139..bb4ffa3 100644
+--- a/CORE/CLD_TXRX/TXRX/ol_rx_defrag.c
++++ b/CORE/CLD_TXRX/TXRX/ol_rx_defrag.c
+@@ -62,7 +62,7 @@
+ #include <ol_ctrl_txrx_api.h>
+ #include <ol_txrx_peer_find.h>
+ #include <adf_nbuf.h>
+-#include <ieee80211.h>
++#include <linux/ieee80211.h>
+ #include <adf_os_util.h>
+ #include <athdefs.h>
+ #include <adf_os_mem.h>
+diff --git a/CORE/CLD_TXRX/TXRX/ol_rx_reorder.c b/CORE/CLD_TXRX/TXRX/ol_rx_reorder.c
+index 1fc62d3..fe6ef80 100644
+--- a/CORE/CLD_TXRX/TXRX/ol_rx_reorder.c
++++ b/CORE/CLD_TXRX/TXRX/ol_rx_reorder.c
+@@ -30,7 +30,7 @@
+ #include <adf_nbuf.h>          /* adf_nbuf_t, etc. */
+ #include <adf_os_mem.h>        /* adf_os_mem_alloc */
+ 
+-#include <ieee80211.h>         /* IEEE80211_SEQ_MAX */
++#include <linux/ieee80211.h>         /* IEEE80211_SEQ_MAX */
+ 
+ /* external interfaces */
+ #include <ol_txrx_api.h>       /* ol_txrx_pdev_handle */
+diff --git a/CORE/CLD_TXRX/TXRX/ol_tx_send.c b/CORE/CLD_TXRX/TXRX/ol_tx_send.c
+index 007dfd4..8cc4544 100644
+--- a/CORE/CLD_TXRX/TXRX/ol_tx_send.c
++++ b/CORE/CLD_TXRX/TXRX/ol_tx_send.c
+@@ -34,7 +34,7 @@
+ 
+ #include <queue.h>            /* TAILQ */
+ #ifdef QCA_COMPUTE_TX_DELAY
+-#include <ieee80211.h>        /* ieee80211_frame, etc. */
++#include <linux/ieee80211.h>        /* ieee80211_frame, etc. */
+ #include <enet.h>             /* ethernet_hdr_t, etc. */
+ #include <ipv6_defs.h>        /* IPV6_TRAFFIC_CLASS */
+ #endif
+diff --git a/CORE/CLD_TXRX/TXRX/ol_txrx_internal.h b/CORE/CLD_TXRX/TXRX/ol_txrx_internal.h
+index 16f9186..16e7aae 100644
+--- a/CORE/CLD_TXRX/TXRX/ol_txrx_internal.h
++++ b/CORE/CLD_TXRX/TXRX/ol_txrx_internal.h
+@@ -39,7 +39,7 @@
+ #include <ol_txrx_dbg.h>
+ #include <enet.h>          /* ETHERNET_HDR_LEN, etc. */
+ #include <ipv4.h>          /* IPV4_HDR_LEN, etc. */
+-#include <ipv6.h>          /* IPV6_HDR_LEN, etc. */
++#include <linux/ipv6.h>    /* IPV6_HDR_LEN, etc. */
+ #include <ip_prot.h>       /* IP_PROTOCOL_TCP, etc. */
+ 
+ #ifdef ATH_11AC_TXCOMPACT
+diff --git a/CORE/HDD/inc/wlan_hdd_ftm.h b/CORE/HDD/inc/wlan_hdd_ftm.h
+index ef16756..1cd0dea 100644
+--- a/CORE/HDD/inc/wlan_hdd_ftm.h
++++ b/CORE/HDD/inc/wlan_hdd_ftm.h
+@@ -30,7 +30,7 @@
+ #include "vos_status.h"
+ #include "vos_mq.h"
+ #include "vos_api.h"
+-#include "msg.h"
++#include "linux/msg.h"
+ #include "halTypes.h"
+ #include "vos_types.h"
+ #include <wlan_ptt_sock_svc.h>
+diff --git a/CORE/HDD/src/wlan_hdd_assoc.c b/CORE/HDD/src/wlan_hdd_assoc.c
+index 30aaf8f..2c35e92 100644
+--- a/CORE/HDD/src/wlan_hdd_assoc.c
++++ b/CORE/HDD/src/wlan_hdd_assoc.c
+@@ -4788,6 +4788,7 @@ hdd_smeRoamCallback(void *pContext, tCsrRoamInfo *pRoamInfo, tANI_U32 roamId,
+                     WLAN_CONTROL_PATH);
+                 break;
+             }
++            /* fallthrough */
+         case eCSR_ROAM_DISASSOCIATED:
+             {
+                 VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+diff --git a/CORE/HDD/src/wlan_hdd_wext.c b/CORE/HDD/src/wlan_hdd_wext.c
+index 8693b69..4a8ba63 100644
+--- a/CORE/HDD/src/wlan_hdd_wext.c
++++ b/CORE/HDD/src/wlan_hdd_wext.c
+@@ -10143,6 +10143,7 @@ static int __iw_set_host_offload(struct net_device *dev,
+                     break;
+                 case WLAN_OFFLOAD_ARP_AND_BC_FILTER_ENABLE:
+                     hddLog(VOS_TRACE_LEVEL_WARN, "   BC Filtering enable");
++                    /* fallthrough */
+                 case WLAN_OFFLOAD_ENABLE:
+                     hddLog(VOS_TRACE_LEVEL_WARN, "   ARP offload enable");
+                     hddLog(VOS_TRACE_LEVEL_WARN, "   IP address: %d.%d.%d.%d",
+diff --git a/CORE/HDD/src/wlan_hdd_wmm.c b/CORE/HDD/src/wlan_hdd_wmm.c
+index 023b628..aac6455 100644
+--- a/CORE/HDD/src/wlan_hdd_wmm.c
++++ b/CORE/HDD/src/wlan_hdd_wmm.c
+@@ -1441,6 +1441,7 @@ static void __hdd_wmm_do_implicit_qos(struct work_struct *work)
+       hdd_wmm_free_context(pQosContext);
+ 
+       // fall through and start packets flowing
++      /* fallthrough */
+    case SME_QOS_STATUS_SETUP_SUCCESS_NO_ACM_NO_APSD_RSP:
+       // no ACM in effect, no need to setup U-APSD
+    case SME_QOS_STATUS_SETUP_SUCCESS_APSD_SET_ALREADY:
+diff --git a/CORE/MAC/src/include/parserApi.h b/CORE/MAC/src/include/parserApi.h
+index 158ed57..f68951b 100644
+--- a/CORE/MAC/src/include/parserApi.h
++++ b/CORE/MAC/src/include/parserApi.h
+@@ -1083,7 +1083,7 @@ tSirRetStatus PopulateDot11fRRMIe( tpAniSirGlobal pMac,
+ 
+ #if defined WLAN_FEATURE_VOWIFI_11R
+ void PopulateMDIE( tpAniSirGlobal        pMac,
+-                   tDot11fIEMobilityDomain *pDot11f, tANI_U8 mdie[] );
++                   tDot11fIEMobilityDomain *pDot11f, tANI_U8 mdie[SIR_MDIE_SIZE] );
+ void PopulateFTInfo( tpAniSirGlobal      pMac,
+                      tDot11fIEFTInfo     *pDot11f );
+ #endif
+diff --git a/CORE/MAC/src/pe/lim/limProcessCfgUpdates.c b/CORE/MAC/src/pe/lim/limProcessCfgUpdates.c
+index 9639d21..d0321cc 100644
+--- a/CORE/MAC/src/pe/lim/limProcessCfgUpdates.c
++++ b/CORE/MAC/src/pe/lim/limProcessCfgUpdates.c
+@@ -490,6 +490,7 @@ limHandleCFGparamUpdate(tpAniSirGlobal pMac, tANI_U32 cfgId)
+                 }
+             }
+         }
++        /* fallthrough */
+     case WNI_CFG_MAX_PS_POLL:
+     case WNI_CFG_NUM_BEACON_PER_RSSI_AVERAGE:
+     case WNI_CFG_MIN_RSSI_THRESHOLD:
+diff --git a/CORE/MAC/src/pe/lim/limProcessSmeReqMessages.c b/CORE/MAC/src/pe/lim/limProcessSmeReqMessages.c
+index 8a3acd4..59f12e8 100644
+--- a/CORE/MAC/src/pe/lim/limProcessSmeReqMessages.c
++++ b/CORE/MAC/src/pe/lim/limProcessSmeReqMessages.c
+@@ -6268,8 +6268,10 @@ limProcessSmeReqMessages(tpAniSirGlobal pMac, tpSirMsgQ pMsg)
+              * Do not add BREAK here
+              */
+ #ifdef FEATURE_OEM_DATA_SUPPORT
++            /* fallthrough */
+         case eWNI_SME_OEM_DATA_REQ:
+ #endif
++            /* fallthrough */
+         case eWNI_SME_JOIN_REQ:
+             /* If we have an existing P2P GO session we need to insert NOA before actually process this SME Req */
+             if (!pMac->fScanOffload && (limIsNOAInsertReqd(pMac) == TRUE) &&
+diff --git a/CORE/SAP/src/sapFsm.c b/CORE/SAP/src/sapFsm.c
+index d18f620..27996c1 100644
+--- a/CORE/SAP/src/sapFsm.c
++++ b/CORE/SAP/src/sapFsm.c
+@@ -3133,7 +3133,7 @@ sapGotoStarting
+     if (eHAL_STATUS_SUCCESS != halStatus)
+         VOS_TRACE(VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
+         "%s: Failed to issue sme_RoamConnect", __func__);
+-        return halStatus;
++    return halStatus;
+ 
+ }// sapGotoStarting
+ 
+diff --git a/CORE/SAP/src/sapModule.c b/CORE/SAP/src/sapModule.c
+index 97b779c..766d060 100644
+--- a/CORE/SAP/src/sapModule.c
++++ b/CORE/SAP/src/sapModule.c
+@@ -3833,18 +3833,21 @@ WLANSAP_ResetSapConfigAddIE(tsap_Config_t *pConfig,
+         pConfig->pProbeRespIEsBuffer = NULL;
+         if(eUPDATE_IE_ALL != updateType)  break;
+ 
++        /* fallthrough */
+     case eUPDATE_IE_ASSOC_RESP:
+         vos_mem_free( pConfig->pAssocRespIEsBuffer);
+         pConfig->assocRespIEsLen = 0;
+         pConfig->pAssocRespIEsBuffer = NULL;
+         if(eUPDATE_IE_ALL != updateType)  break;
+ 
++        /* fallthrough */
+     case eUPDATE_IE_PROBE_BCN:
+         vos_mem_free(pConfig->pProbeRespBcnIEsBuffer );
+         pConfig->probeRespBcnIEsLen = 0;
+         pConfig->pProbeRespBcnIEsBuffer = NULL;
+         if(eUPDATE_IE_ALL != updateType)  break;
+ 
++        /* fallthrough */
+     default:
+         if(eUPDATE_IE_ALL != updateType)
+             VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
+diff --git a/CORE/SERVICES/BMI/ol_fw.c b/CORE/SERVICES/BMI/ol_fw.c
+index d7bcf7b..e4d2555 100644
+--- a/CORE/SERVICES/BMI/ol_fw.c
++++ b/CORE/SERVICES/BMI/ol_fw.c
+@@ -2341,6 +2341,7 @@ A_STATUS ol_fw_populate_clk_settings(A_refclk_speed_t refclk,
+ 		clock_s->wlan_pll.outdiv = 0;
+ 		clock_s->pll_settling_time = 1024;
+ 		clock_s->refclk_hz = 0;
++		/* fallthrough */
+ 	default:
+ 		return A_ERROR;
+ 	}
+diff --git a/CORE/SME/inc/sme_Api.h b/CORE/SME/inc/sme_Api.h
+index df4d87e..0edaaac 100644
+--- a/CORE/SME/inc/sme_Api.h
++++ b/CORE/SME/inc/sme_Api.h
+@@ -4741,7 +4741,7 @@ eHalStatus sme_set_bpf_instructions(tHalHandle hal,
+  *
+  * Return: eHAL_STATUS_SUCCESS on success, non-zero error code on failure.
+  */
+-eHalStatus sme_create_mon_session(tHalHandle hal_handle, uint8_t *bssid);
++eHalStatus sme_create_mon_session(tHalHandle hal_handle, tSirMacAddr bssid);
+ eHalStatus sme_get_mib_stats(tHalHandle hal,
+ 				csr_mib_stats_callback callback,
+ 				void *context, void *vos_context,
+diff --git a/CORE/SME/src/QoS/sme_Qos.c b/CORE/SME/src/QoS/sme_Qos.c
+index 0b567bf..281c37f 100644
+--- a/CORE/SME/src/QoS/sme_Qos.c
++++ b/CORE/SME/src/QoS/sme_Qos.c
+@@ -4967,6 +4967,7 @@ eHalStatus sme_QosProcessHandoffAssocReqEv(tpAniSirGlobal pMac, v_U8_t sessionId
+             }
+ #endif
+ 
++            /* fallthrough */
+          case SME_QOS_CLOSED:
+          case SME_QOS_INIT:
+          default:
+@@ -7249,6 +7250,7 @@ eHalStatus sme_QosAddTsFailureFnp(tpAniSirGlobal pMac, tListElem *pEntry)
+       break;
+    case SME_QOS_REASON_MODIFY:
+       flow_info->reason = SME_QOS_REASON_REQ_SUCCESS;
++      /* fallthrough */
+    case SME_QOS_REASON_REQ_SUCCESS:
+    default:
+       inform_hdd = VOS_FALSE;
+@@ -7472,6 +7474,7 @@ eHalStatus sme_QosAddTsSuccessFnp(tpAniSirGlobal pMac, tListElem *pEntry)
+    case SME_QOS_REASON_REQ_SUCCESS:
+       hdd_status = SME_QOS_STATUS_SETUP_MODIFIED_IND;
+       inform_hdd = VOS_TRUE;
++      /* fallthrough */
+    default:
+       delete_entry = VOS_FALSE;
+       break;
+diff --git a/CORE/SME/src/csr/csrApiRoam.c b/CORE/SME/src/csr/csrApiRoam.c
+index 8efa321..c1759fa 100644
+--- a/CORE/SME/src/csr/csrApiRoam.c
++++ b/CORE/SME/src/csr/csrApiRoam.c
+@@ -9823,7 +9823,7 @@ void csrRoamJoinedStateMsgProcessor( tpAniSirGlobal pMac, void *pMsgBuf )
+             tCsrRoamSession  *pSession;
+             tSirSmeAssocIndToUpperLayerCnf *pUpperLayerAssocCnf;
+             tCsrRoamInfo *roam_info;
+-            tANI_U32 sessionId;
++            tANI_U32 sessionId = 0;
+             eHalStatus status;
+             smsLog( pMac, LOG1, FL("ASSOCIATION confirmation can be given to upper layer "));
+             pUpperLayerAssocCnf = (tSirSmeAssocIndToUpperLayerCnf *)pMsgBuf;
+@@ -13592,6 +13592,7 @@ static void csrRoamGetBssStartParms(tpAniSirGlobal pMac,
+ 	default:
+ 		smsLog(pMac, LOGE, FL("sees an unknown pSirNwType (%d)"),
+ 				nwType);
++        /* fallthrough */
+ 	case eSIR_11A_NW_TYPE:
+ 		csr_populate_default_rates(opr_rates, true, true);
+ 		if (eCSR_OPERATING_CHANNEL_ANY != operation_channel) {
+@@ -17920,7 +17921,7 @@ eHalStatus csrGetSnr(tpAniSirGlobal pMac,
+ 
+    pMsg->msgType = pal_cpu_to_be16((tANI_U16)eWNI_SME_GET_SNR_REQ);
+    pMsg->msgLen = (tANI_U16)sizeof(tAniGetSnrReq);
+-   pMsg->sessionId = sessionId;
++   pMsg->sessionId = sessionId = 0;
+    pMsg->staId = staId;
+    pMsg->snrCallback = callback;
+    pMsg->pDevContext = pContext;
+@@ -19819,6 +19820,7 @@ eHalStatus csrPsOffloadIsFullPowerNeeded(tpAniSirGlobal pMac,
+                     case eCsrForcedDisassoc:
+                     case eCsrForcedDisassocMICFailure:
+                         reason = eSME_LINK_DISCONNECTED_BY_HDD;
++                        /* fallthrough */
+                     case eCsrSmeIssuedDisassocForHandoff:
+                     case eCsrForcedDeauth:
+                     case eCsrHddIssuedReassocToSameAP:
+diff --git a/CORE/SME/src/csr/csrNeighborRoam.c b/CORE/SME/src/csr/csrNeighborRoam.c
+index c284ff2..f604f6e 100644
+--- a/CORE/SME/src/csr/csrNeighborRoam.c
++++ b/CORE/SME/src/csr/csrNeighborRoam.c
+@@ -5098,6 +5098,7 @@ eHalStatus csrNeighborRoamIndicateDisconnect(tpAniSirGlobal pMac,
+         case eCSR_NEIGHBOR_ROAM_STATE_PREAUTH_DONE:
+             /* Stop pre-auth to reassoc interval timer */
+             vos_timer_stop(&pSession->ftSmeContext.preAuthReassocIntvlTimer);
++            /* fallthrough */
+         case eCSR_NEIGHBOR_ROAM_STATE_REPORT_SCAN:
+         case eCSR_NEIGHBOR_ROAM_STATE_PREAUTHENTICATING:
+             csr_neighbor_roam_state_transition(pMac,
+@@ -5271,6 +5272,7 @@ eHalStatus csrNeighborRoamIndicateConnect(tpAniSirGlobal pMac,
+                 break;
+             }
+             /* Fall through if the status is SUCCESS */
++            /* fallthrough */
+         case eCSR_NEIGHBOR_ROAM_STATE_INIT:
+             /* Reset all the data structures here */
+             csrNeighborRoamResetInitStateControlInfo(pMac, sessionId);
+@@ -6139,7 +6141,7 @@ eHalStatus csrNeighborRoamCandidateFoundIndHdlr(tpAniSirGlobal pMac, void* pMsg)
+          * purge non-P2P results from the past */
+         csrScanFlushSelectiveResult(pMac, VOS_FALSE);
+         /* Once it gets the candidates found indication from PE, will issue
+-         * a scan req to PE with “freshScan” in scanreq structure set
++         * a scan req to PE with ï¿½freshScanï¿½ in scanreq structure set
+          * as follows: 0x42 - Return & purge LFR scan results
+          */
+         status = csrScanRequestLfrResult(pMac, sessionId,
+diff --git a/CORE/SME/src/pmc/pmc.c b/CORE/SME/src/pmc/pmc.c
+index 838f9e6..85b56d6 100644
+--- a/CORE/SME/src/pmc/pmc.c
++++ b/CORE/SME/src/pmc/pmc.c
+@@ -3127,6 +3127,7 @@ eHalStatus pmcOffloadEnableStaPsHandler(tpAniSirGlobal pMac,
+              */
+              smsLog(pMac, LOGE, FL("Fail to issue eSmeCommandEnterBmps"));
+          }
++         /* fallthrough */
+        case eHAL_STATUS_PMC_NOT_NOW:
+          /*
+           * Some module voted against Power Save.
+diff --git a/CORE/SVC/src/logging/wlan_logging_sock_svc.c b/CORE/SVC/src/logging/wlan_logging_sock_svc.c
+index 2667c27..148d610 100644
+--- a/CORE/SVC/src/logging/wlan_logging_sock_svc.c
++++ b/CORE/SVC/src/logging/wlan_logging_sock_svc.c
+@@ -31,7 +31,7 @@
+  ******************************************************************************/
+ 
+ #ifdef WLAN_LOGGING_SOCK_SVC_ENABLE
+-#include <vmalloc.h>
++#include <linux/vmalloc.h>
+ #include <wlan_nlink_srv.h>
+ #include <vos_status.h>
+ #include <vos_trace.h>
+@@ -39,7 +39,7 @@
+ #include <wlan_logging_sock_svc.h>
+ #include <vos_types.h>
+ #include <vos_trace.h>
+-#include <kthread.h>
++#include <linux/kthread.h>
+ #include <adf_os_time.h>
+ #include "pktlog_ac.h"
+ #include <linux/rtc.h>
+@@ -543,12 +543,12 @@ int pktlog_send_per_pkt_stats_to_user(void)
+ 			ret = 0;
+ 		}
+ err:
+-	/*
+-	 * Free old skb in case or error before assigning new skb
+-	 * to the free list.
+-	 */
+-	if (free_old_skb)
+-		dev_kfree_skb(pstats_msg->skb);
++		/*
++		* Free old skb in case or error before assigning new skb
++		* to the free list.
++		*/
++		if (free_old_skb)
++			dev_kfree_skb(pstats_msg->skb);
+ 
+ 		adf_os_spin_lock_irqsave(&gwlan_logging.pkt_stats_lock);
+ 		pstats_msg->skb = skb_new;
+diff --git a/CORE/VOSS/inc/vos_types.h b/CORE/VOSS/inc/vos_types.h
+index 623b373..19b8d1d 100644
+--- a/CORE/VOSS/inc/vos_types.h
++++ b/CORE/VOSS/inc/vos_types.h
+@@ -41,7 +41,7 @@
+   Include Files
+   ------------------------------------------------------------------------*/
+ #include "i_vos_types.h"
+-#include <string.h>
++#include <linux/string.h>
+ 
+ /*--------------------------------------------------------------------------
+   Preprocessor definitions and constants
+diff --git a/CORE/VOSS/src/vos_sched.c b/CORE/VOSS/src/vos_sched.c
+index dc89f52..540808a 100644
+--- a/CORE/VOSS/src/vos_sched.c
++++ b/CORE/VOSS/src/vos_sched.c
+@@ -503,9 +503,11 @@ vos_sched_open
+ )
+ {
+   VOS_STATUS  vStatus = VOS_STATUS_SUCCESS;
++#ifdef QCA_CONFIG_SMP
+ #ifdef CONFIG_PERF_NON_QC_PLATFORM
+   struct sched_param param = {.sched_priority = 99};
+ #endif
++#endif
+ /*-------------------------------------------------------------------------*/
+   VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO_HIGH,
+              "%s: Opening the VOSS Scheduler",__func__);
+diff --git a/CORE/VOSS/src/vos_utils.c b/CORE/VOSS/src/vos_utils.c
+index d6c4e7e..06e40c1 100644
+--- a/CORE/VOSS/src/vos_utils.c
++++ b/CORE/VOSS/src/vos_utils.c
+@@ -76,7 +76,7 @@
+ #ifdef CONFIG_CNSS
+ #include <linux/qcomwlan_secif.h>
+ #endif
+-#include <errno.h>
++#include <linux/errno.h>
+ 
+ #include "ieee80211_common.h"
+ /*----------------------------------------------------------------------------
+-- 
+2.26.2
+
