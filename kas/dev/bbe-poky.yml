@@ -25,6 +25,7 @@ repos:
     refspec: f81318a4f87dbb9c9f9e0e24e68163fb797930bb
     path: layers/meta-openembedded
     layers:
+      meta-networking:
       meta-oe:
       meta-python:
   meta-arm:
