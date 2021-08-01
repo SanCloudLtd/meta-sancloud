@@ -20,8 +20,7 @@ repos:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
   meta-openembedded:
-    layers:
-      meta-networking:
+    refspec: f81318a4f87dbb9c9f9e0e24e68163fb797930bb
   meta-arm:
     refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
     layers:
