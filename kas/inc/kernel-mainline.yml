@@ -2,9 +2,10 @@ header:
   version: 9
 
 repos:
-  meta-kernel:
-    url: https://gitlab.com/openembedded/community/meta-kernel.git
-    path: layers/meta-kernel
+  meta-linux-mainline:
+    url: https://git.sr.ht/~pbarker/meta-linux-mainline
+    refspec: master
+    path: layers/meta-linux-mainline
 
 local_conf_header:
   linux_kernel: |

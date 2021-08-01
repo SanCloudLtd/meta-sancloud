@@ -1,3 +1,4 @@
 PREFERRED_PROVIDER_virtual/kernel_bbe = "linux-mainline"
-KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} CC="${KERNEL_CC}" LD="${KERNEL_LD}" O=${B} multi_v7_defconfig"
+KBUILD_DEFCONFIG = "multi_v7_defconfig"
+KCONFIG_MODE = "alldefconfig"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "kernel-devicetree"
