@@ -31,5 +31,5 @@ UBOOT_EXTLINUX_ROOT = "root=/dev/mmcblk0p1"
 UBOOT_EXTLINUX_CONSOLE = "console=ttyS0,115200n8"
 
 PACKAGES =+ "${PN}-extlinux"
-FILES_${PN}-extlinux = "${UBOOT_EXTLINUX_INSTALL_DIR}/${UBOOT_EXTLINUX_CONF_NAME}"
-RDEPENDS_${PN} += "${PN}-extlinux"
+FILES:${PN}-extlinux = "${UBOOT_EXTLINUX_INSTALL_DIR}/${UBOOT_EXTLINUX_CONF_NAME}"
+RDEPENDS:${PN} += "${PN}-extlinux"

@@ -18,4 +18,4 @@ do_install() {
                modules_install
 }
 
-RDEPENDS_${PN} += "${PN}-firmware"
+RDEPENDS:${PN} += "${PN}-firmware"

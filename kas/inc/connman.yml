@@ -4,4 +4,4 @@ header:
 local_conf_header:
   connman: |
     CORE_IMAGE_EXTRA_INSTALL += "connman connman-client"
-    PACKAGECONFIG_remove_pn-systemd = "networkd"
+    PACKAGECONFIG:remove:pn-systemd = "networkd"

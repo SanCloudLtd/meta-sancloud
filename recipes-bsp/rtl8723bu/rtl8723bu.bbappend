@@ -1,1 +1,1 @@
-RDEPENDS_${PN} += "linux-firmware-rtl8723"
+RDEPENDS:${PN} += "linux-firmware-rtl8723"

@@ -10,7 +10,7 @@ require recipes-kernel/linux/cmem.inc
 require recipes-kernel/linux/ti-uio.inc
 
 # Look in the generic major.minor directory for files
-FILESEXTRAPATHS_prepend = "${THISDIR}/linux-bbe-5.10:"
+FILESEXTRAPATHS:prepend = "${THISDIR}/linux-bbe-5.10:"
 
 BRANCH ?= "linux-sancloud-5.10.y"
 SRC_URI = "git://github.com/SanCloudLtd/linux.git;protocol=https;branch=${BRANCH}"
@@ -22,7 +22,7 @@ KCONFIG_MODE ?= "alldefconfig"
 
 # Pull in the devicetree files into the rootfs & add run-time dependency for PM
 # and prueth firmware to the rootfs
-RDEPENDS_${KERNEL_PACKAGE_NAME}-base += " \
+RDEPENDS:${KERNEL_PACKAGE_NAME}-base += " \
     ${KERNEL_PACKAGE_NAME}-devicetree \
     amx3-cm3 \
     prueth-fw \
