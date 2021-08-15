@@ -6,7 +6,7 @@
 
 * [SanCloud website](https://www.sancloud.com/)
 
-* [BeagleBone Enhanced Description](https://www.sancloud.com/beaglebone-enhanced-bbe)
+* [BeagleBone Enhanced Description](https://sancloud.co.uk/beaglebone-enhanced-bbe/)
 
 * [Sancloud repositories on GitHub](https://github.com/SanCloudLtd)
 
