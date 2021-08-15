@@ -16,6 +16,9 @@ repos:
     layers:
       meta-arago-distro:
       meta-arago-extras:
+    patches:
+      backport-linuxptp-fix:
+        path: kas/patches/meta-arago-c0584ec188166c2ad5b4e9a733977241319cfccb.patch
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
