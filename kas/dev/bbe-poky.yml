@@ -5,6 +5,7 @@ machine: bbe
 distro: poky
 target:
   - core-image-base
+  - sancloud-ramdisk-image
 
 defaults:
   repos:
