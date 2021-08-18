@@ -96,7 +96,7 @@ cp  "$BUILD_PATH/tmp/deploy/images/bbe/MLO" \
     "$BUILD_PATH/tmp/deploy/images/bbe/zImage" \
     images
 
-for dtb in am335x-sancloud-bbe-icu4.dtb am335x-sancloud-bbei-wifi.dtb am335x-sancloud-bbe-lite.dtb; do
+for dtb in am335x-sancloud-bbe-icu4.dtb am335x-sancloud-bbe-extended-wifi.dtb am335x-sancloud-bbe-lite.dtb; do
     srcpath="$BUILD_PATH/tmp/deploy/images/bbe/${dtb}"
     if [[ -e "${srcpath}" ]]; then
         cp "${srcpath}" images
