@@ -106,6 +106,10 @@ done
 if [[ "$BUILD_DISTRO" == "poky" ]]; then
     cp  "$BUILD_PATH/tmp/deploy/images/bbe/core-image-base-bbe.wic.bmap" \
         "$BUILD_PATH/tmp/deploy/images/bbe/core-image-base-bbe.wic.xz" \
+        "$BUILD_PATH/tmp/deploy/images/bbe/core-image-base-bbe.ext4.bmap" \
+        "$BUILD_PATH/tmp/deploy/images/bbe/core-image-base-bbe.ext4.xz" \
+        "$BUILD_PATH/tmp/deploy/images/bbe/sancloud-ramdisk-image-bbe.ext2.xz" \
+        "$BUILD_PATH/tmp/deploy/images/bbe/sancloud-ramdisk-image-bbe.squashfs-lz4" \
         "$BUILD_PATH/tmp/deploy/images/bbe/core-image-base.env" \
         images
 elif [[ "$BUILD_DISTRO" == "arago" ]]; then
