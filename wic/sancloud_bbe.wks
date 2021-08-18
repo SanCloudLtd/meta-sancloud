@@ -4,4 +4,4 @@
 
 part mlo --source rawcopy --sourceparams="file=MLO" --ondisk mmcblk --no-table --align 128
 part uboot --source rawcopy --sourceparams="file=u-boot.img" --ondisk mmcblk --no-table --align 384
-part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 1024
+part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 1024 --overhead-factor ${IMAGE_OVERHEAD_FACTOR}
