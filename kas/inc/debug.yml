@@ -8,3 +8,6 @@ local_conf_header:
         htop iotop iftop \
         openssh rsync iperf3 tcpdump netcat \
         "
+    IMAGE_ROOTFS_SIZE = "4000000"
+    IMAGE_ROOTFS_EXTRA_SIZE = "0"
+    IMAGE_OVERHEAD_FACTOR = "1.0"
