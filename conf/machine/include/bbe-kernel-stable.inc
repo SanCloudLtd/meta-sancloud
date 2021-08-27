@@ -1,2 +1,6 @@
-require conf/machine/include/bbe-kernel-mainline.inc
-PREFERRED_PROVIDER_virtual/kernel_bbe = "linux-stable"
+require conf/linux-mainline/stable.inc
+
+KBUILD_DEFCONFIG = "multi_v7_defconfig"
+KCONFIG_MODE = "alldefconfig"
+BBE_WIFI_DRIVERS = ""
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base += "${KERNEL_PACKAGE_NAME}-devicetree"

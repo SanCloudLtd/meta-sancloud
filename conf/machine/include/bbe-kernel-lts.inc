@@ -1,2 +1,6 @@
-require conf/machine/include/bbe-kernel-stable.inc
-PREFERRED_VERSION_linux-stable = "5.4%"
+require conf/linux-mainline/lts.inc
+
+KBUILD_DEFCONFIG = "multi_v7_defconfig"
+KCONFIG_MODE = "alldefconfig"
+BBE_WIFI_DRIVERS = ""
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base += "${KERNEL_PACKAGE_NAME}-devicetree"

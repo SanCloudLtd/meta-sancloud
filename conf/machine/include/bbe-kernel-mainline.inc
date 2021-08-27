@@ -1,4 +1,6 @@
-PREFERRED_PROVIDER_virtual/kernel_bbe = "linux-mainline"
+require conf/linux-mainline/mainline.inc
+
 KBUILD_DEFCONFIG = "multi_v7_defconfig"
 KCONFIG_MODE = "alldefconfig"
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "kernel-devicetree"
+BBE_WIFI_DRIVERS = ""
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base += "${KERNEL_PACKAGE_NAME}-devicetree"
