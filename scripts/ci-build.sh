@@ -4,7 +4,7 @@ set -euo pipefail
 
 BUILD_DISTRO=poky
 BUILD_SDK=no
-BUILD_PATH=build
+BUILD_PATH="$(realpath build)"
 KERNEL_PROVIDER=
 SITE_CONF=
 KAS_PREFIX=kas/dev
@@ -47,7 +47,7 @@ while getopts ":RAsk:i:p:h" opt; do
             KERNEL_PROVIDER=$OPTARG
             ;;
         i)
-            SITE_CONF=`realpath $OPTARG`
+            SITE_CONF="$(realpath "$OPTARG")"
             ;;
         p)
             BUILD_PATH="$(realpath "$OPTARG")"
