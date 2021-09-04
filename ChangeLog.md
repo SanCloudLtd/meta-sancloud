@@ -1,5 +1,13 @@
 # ChangeLog for meta-sancloud
 
+## dunfell-r4.1
+
+This is a hotfix release for the Yocto Project 3.1 "dunfell" release series.
+
+Changes from dunfell-r4:
+
+* Fixed Arago image booting.
+
 ## dunfell-r4
 
 This is a maintenance release for the Yocto Project 3.1 "dunfell" release
