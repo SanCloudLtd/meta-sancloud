@@ -11,3 +11,4 @@ local_conf_header:
     IMAGE_ROOTFS_SIZE = "4000000"
     IMAGE_ROOTFS_EXTRA_SIZE = "0"
     IMAGE_OVERHEAD_FACTOR = "1.0"
+    INHERIT += "image-buildinfo"
