@@ -7,8 +7,8 @@ repos:
   poky:
     refspec: 74b22db6879b388d700f61e08cb3f239cf940d18   # yocto-3.1.11
   meta-openembedded:
-    refspec: 85f8047c71047d93cf79a954142157f85079968d
+    refspec: 3cf22d15885cf0e3e16078705e9a20f3d21f12db
   meta-arm:
     refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
   meta-rtlwifi:
-    refspec: 934fa3afddcbf1beb35417b915daac22701736e9
+    refspec: 98b2b2c34f186050e6092bc4f17ecb69aef6148a
