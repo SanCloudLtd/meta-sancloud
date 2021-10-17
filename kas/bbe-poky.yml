@@ -5,7 +5,7 @@ header:
 
 repos:
   poky:
-    refspec: 2a848e95074318f3a243df7b3f40513a13173a82   # yocto-3.1.10
+    refspec: 74b22db6879b388d700f61e08cb3f239cf940d18   # yocto-3.1.11
   meta-openembedded:
     refspec: 85f8047c71047d93cf79a954142157f85079968d
   meta-arm:
