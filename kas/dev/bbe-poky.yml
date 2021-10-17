@@ -36,7 +36,7 @@ repos:
       meta-arm-toolchain:
   meta-ti:
     url: https://git.yoctoproject.org/git/meta-ti
-    refspec: 02a53f48b9bdb242185204610610f2209bc92ca6   # 07.03.00.005
+    refspec: 15f3d4a3c3773294f1cdb66a88744930941a892e   # 08.00.00.004
     path: layers/meta-ti
   meta-rtlwifi:
     url: https://github.com/EmbeddedAndroid/meta-rtlwifi.git

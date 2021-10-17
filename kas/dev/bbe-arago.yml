@@ -11,14 +11,11 @@ target:
 repos:
   meta-arago:
     url: https://git.yoctoproject.org/git/meta-arago
-    refspec: ee6ff44d90945429051c8d9573c8b60705104149   # 07.03.00.005
+    refspec: ae47bd7fbea2776a4f8792f20c493d7959ee2f54   # 08.00.00.004
     path: layers/meta-arago
     layers:
       meta-arago-distro:
       meta-arago-extras:
-    patches:
-      backport-linuxptp-fix:
-        path: kas/patches/meta-arago-c0584ec188166c2ad5b4e9a733977241319cfccb.patch
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
