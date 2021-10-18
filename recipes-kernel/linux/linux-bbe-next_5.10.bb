@@ -5,6 +5,4 @@ python () {
 
 BRANCH = "linux-sancloud-next"
 SRCREV = "${AUTOREV}"
-PV = "5.4"
-
-require linux-bbe-5.4.inc
+require linux-bbe-5.10.inc

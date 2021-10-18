@@ -1,6 +1,5 @@
 PREFERRED_PROVIDER_virtual/kernel_bbe = "linux-bbe-next"
 KERNEL_DEVICETREE += " \
     am335x-sancloud-bbe-extended-wifi.dtb \
-    am335x-sancloud-bbe-icu4.dtb \
     am335x-sancloud-bbe-lite.dtb \
     "
