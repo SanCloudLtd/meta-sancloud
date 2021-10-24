@@ -40,6 +40,7 @@ repos:
     path: layers/meta-ti
   meta-rtlwifi:
     url: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
+    refspec: master
     path: layers/meta-rtlwifi
 
 bblayers_conf_header:
