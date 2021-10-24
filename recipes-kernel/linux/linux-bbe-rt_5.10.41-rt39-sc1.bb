@@ -1,3 +1,3 @@
 BRANCH = "linux-sancloud-rt-5.10.y"
-SRCREV = "c777fe19a43c3ae09fdea37ff1127a76a01aa34a"
+SRCREV = "859ee6556711694262751de2a91acca7800231ff"
 require linux-bbe-5.10.inc
