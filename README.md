@@ -30,10 +30,10 @@ If you are running Ubuntu 20.04, we've provided a script to automate the
 process of setting up your host system to build images with Yocto Project and
 this SanCloud BSP layer. To use this script, run the following command:
 
-    curl https://raw.githubusercontent.com/SanCloudLtd/meta-sancloud/dunfell-r2/scripts/prepare-host.sh | bash
+    curl https://raw.githubusercontent.com/SanCloudLtd/meta-sancloud/dunfell-r4.1/scripts/prepare-host.sh | bash
 
 If you are running any other Linux distribution please see
-[Required Packages for the Build Host](https://www.yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#required-packages-for-the-build-host)
+[Required Packages for the Build Host](https://docs.yoctoproject.org/3.1.11/ref-manual/ref-system-requirements.html#required-packages-for-the-build-host)
 in the Yocto Project Reference Manual.
 
 In addition to the packages listed in the documentation, 32-bit (aka
@@ -52,7 +52,7 @@ to your bblayers.conf file automatically.
 
 If you do not have a Yocto Project build environment set up please first
 follow the
-[Yocto Project Quick Build Guide](https://www.yoctoproject.org/docs/3.1.1/brief-yoctoprojectqs/brief-yoctoprojectqs.html)
+[Yocto Project Quick Build Guide](https://docs.yoctoproject.org/3.1.11/brief-yoctoprojectqs/brief-yoctoprojectqs.html)
 to ensure that your Linux system has the correct packages installed and that
 a simple build succeeds. Once you know that your Linux system is set up
 correctly you can download the appropriate Yocto Project version and build an
