@@ -4,7 +4,7 @@ header:
 local_conf_header:
   debug_tools: |
     CORE_IMAGE_EXTRA_INSTALL += " \
-        lsof pstree util-linux vim strace python3 bash devmem2 \
+        lsof pstree util-linux vim strace python3 bash devmem2 flashrom \
         htop iotop iftop \
         openssh rsync iperf3 tcpdump netcat \
         "
