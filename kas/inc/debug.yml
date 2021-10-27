@@ -6,7 +6,8 @@ local_conf_header:
     CORE_IMAGE_EXTRA_INSTALL += " \
         lsof pstree util-linux vim strace python3 bash devmem2 flashrom \
         htop iotop iftop \
-        openssh rsync iperf3 tcpdump netcat \
+        rsync iperf3 tcpdump netcat \
+        ${@bb.utils.contains('DISTRO', 'arago', '', 'openssh', d)} \
         "
     IMAGE_ROOTFS_SIZE = "4000000"
     IMAGE_ROOTFS_EXTRA_SIZE = "0"
