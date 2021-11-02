@@ -1,7 +1,8 @@
 SUMMARY = "Minimal ramdisk image for tftp boot"
 LICENSE = "MIT"
 
-IMAGE_INSTALL = "packagegroup-core-boot bmap-tools xz"
+SANCLOUD_RAMDISK_PACKAGES ?= "bmap-tools xz"
+IMAGE_INSTALL = "packagegroup-core-boot ${SANCLOUD_RAMDISK_PACKAGES}"
 IMAGE_LINGUAS = " "
 
 inherit core-image
