@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 inherit kernel
+inherit kernel-yocto
 
 require recipes-kernel/linux/cmem.inc
 require recipes-kernel/linux/ti-uio.inc
@@ -16,7 +17,8 @@ SRC_URI = "git://github.com/SanCloudLtd/linux.git;protocol=https;branch=${BRANCH
 
 S = "${WORKDIR}/git"
 
-KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} CC="${KERNEL_CC}" LD="${KERNEL_LD}" O=${B} sancloud_defconfig"
+KBUILD_DEFCONFIG ?= "sancloud_defconfig"
+KCONFIG_MODE ?= "alldefconfig"
 
 # Pull in the devicetree files into the rootfs & add run-time dependency for PM
 # and prueth firmware to the rootfs
