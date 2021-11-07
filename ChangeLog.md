@@ -1,5 +1,37 @@
 # ChangeLog for meta-sancloud
 
+## dunfell-r5
+
+This is a maintenance release for the Yocto Project 3.1 "dunfell" release
+series.
+
+Changes from dunfell-r4.1:
+
+* Poky 3.1.11 and updates to meta-openembedded & meta-rtlwifi layers.
+
+* meta-ti & meta-arago 08.00.00.004 release.
+  * Patch PowerVR drivers to build with 5.10 kernel.
+
+* linux-bbe v5.10.41-sc1 & linux-bbe-rt v5.10.41-rt39-sc1.
+  * Use kernel-yocto bbclass for easier customization.
+  * Includes patches to better support qcacld drivers.
+  * Includes spidev patch for Micron Authenta SPI flash.
+    (backported from Linux v5.13-rc1)
+  * Includes device trees & defconfig based on previous v5.4.xx kernels.
+
+* u-boot-bbe v2021.10-sc1.
+  * Use new sancloud_defconfig.
+
+* qcacld v4.5.25.53 with patches to support 5.10 kernel series.
+
+* Add SANCLOUD_BSP_VERSION variable so BSP version can be easily captured.
+  * Automatically included in IMAGE_BUILDINFO_VARS.
+
+* Add SANCLOUD_RAMDISK_PACKAGES variable so that packages installed in
+  sancloud-ramdisk-image can be easily customized.
+
+* Minor improvements to kas build configs.
+
 ## dunfell-r4.1
 
 This is a hotfix release for the Yocto Project 3.1 "dunfell" release series.
