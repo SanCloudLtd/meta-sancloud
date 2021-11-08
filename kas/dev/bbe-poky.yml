@@ -9,7 +9,7 @@ target:
 
 defaults:
   repos:
-    refspec: dunfell
+    refspec: honister
     patches:
       repo: meta-sancloud
 
@@ -36,7 +36,7 @@ repos:
       meta-arm-toolchain:
   meta-ti:
     url: https://git.yoctoproject.org/git/meta-ti
-    refspec: 15f3d4a3c3773294f1cdb66a88744930941a892e   # 08.00.00.004
+    refspec: 88f48e7cfa3162dffc131444d586ad3c991ab6a7
     path: layers/meta-ti
   meta-rtlwifi:
     url: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
