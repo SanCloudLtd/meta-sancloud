@@ -21,6 +21,7 @@ Changes from dunfell-r4.1:
 
 * u-boot-bbe v2021.10-sc1.
   * Use new sancloud_defconfig.
+  * Switch back to u-boot script instead of extlinux.conf for flexibility.
 
 * qcacld v4.5.25.53 with patches to support 5.10 kernel series.
 
