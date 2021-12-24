@@ -12,7 +12,7 @@ VERSION=$1
 mkdir -p release release/sources
 
 # Create layer tarball
-git archive --prefix=meta-sancloud-${VERSION}/ -o release/meta-sancloud-${VERSION}.tar.gz ${VERSION}
+git archive --prefix="meta-sancloud-${VERSION}/" -o "release/meta-sancloud-${VERSION}.tar.gz" "${VERSION}"
 
 # Create pre-built images
 ./scripts/ci-build.sh -Rs
@@ -28,4 +28,4 @@ cat > release/ReleaseNotes.txt << EOF
 Release Notes
 =============
 EOF
-git tag -l --format='%(contents)' ${VERSION} | sed '1d; /-----BEGIN PGP SIGNATURE-----/,$d' >> release/ReleaseNotes.txt
+git tag -l --format='%(contents)' "${VERSION}" | sed '1d; /-----BEGIN PGP SIGNATURE-----/,$d' >> release/ReleaseNotes.txt
