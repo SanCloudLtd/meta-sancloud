@@ -7,7 +7,7 @@ if [[ ! -e /etc/os-release ]]; then
     exit 1
 fi
 
-DISTRO=`grep '^ID=' /etc/os-release | cut -d= -f2`
+DISTRO="$(grep '^ID=' /etc/os-release | cut -d= -f2)"
 
 if [[ "$DISTRO" != "ubuntu" ]]; then
     echo "ERROR: This script only supports Ubuntu for now." >&2
@@ -22,7 +22,7 @@ sudo apt install gawk wget diffstat unzip texinfo gcc-multilib g++-multilib \
 
 sudo pip3 install kas
 
-if [[ `readlink /bin/sh` == "dash" ]]; then
+if [[ "$(readlink /bin/sh)" == "dash" ]]; then
     echo 'dash dash/sh boolean false' | sudo debconf-set-selections
     sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 fi

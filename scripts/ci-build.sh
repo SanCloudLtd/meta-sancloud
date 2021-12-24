@@ -87,7 +87,7 @@ if [[ -n "$SITE_CONF" ]]; then
 fi
 
 echo ">>> Building images"
-kas build --update --force-checkout ${KAS_PREFIX}/bbe-${BUILD_DISTRO}.yml:$KAS_INCLUDES
+kas build --update --force-checkout "${KAS_PREFIX}/bbe-${BUILD_DISTRO}.yml:$KAS_INCLUDES"
 cp  "$BUILD_PATH/tmp/deploy/images/bbe/MLO" \
     "$BUILD_PATH/tmp/deploy/images/bbe/am335x-sancloud-bbe.dtb" \
     "$BUILD_PATH/tmp/deploy/images/bbe/modules-bbe.tgz" \
@@ -124,6 +124,6 @@ fi
 
 if [[ "$BUILD_SDK" == "yes" ]]; then
     echo ">>> Building SDK"
-    kas build ${KAS_PREFIX}/bbe-sdk-${BUILD_DISTRO}.yml:$KAS_INCLUDES
+    kas build "${KAS_PREFIX}/bbe-sdk-${BUILD_DISTRO}.yml:$KAS_INCLUDES"
     cp "$BUILD_PATH/tmp/deploy/sdk/${BUILD_DISTRO}-"*.sh images
 fi
