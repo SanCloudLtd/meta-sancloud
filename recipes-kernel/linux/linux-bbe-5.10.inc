@@ -6,9 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 inherit kernel
 inherit kernel-yocto
 
-require recipes-kernel/linux/cmem.inc
-require recipes-kernel/linux/ti-uio.inc
-
 # Look in the generic major.minor directory for files
 FILESEXTRAPATHS_prepend = "${THISDIR}/linux-bbe-5.10:"
 
