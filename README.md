@@ -1,3 +1,8 @@
+<!--
+Copyright (c) 2018-2022 SanCloud Ltd
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Yocto BSP layer for the SanCloud boards
 
 ## Quick links

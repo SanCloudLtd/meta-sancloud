@@ -1,3 +1,8 @@
+<!--
+Copyright (c) 2020-2022 SanCloud Ltd
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # ChangeLog for meta-sancloud
 
 ## dunfell-r5

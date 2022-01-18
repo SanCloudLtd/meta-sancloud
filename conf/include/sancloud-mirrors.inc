@@ -1,3 +1,6 @@
+# Copyright (C) 2020-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 PREMIRRORS ??= "\
 bzr://.*/.*   https://cdn.sancloud.info/file/sc-yocto/mirror/ \n \
 cvs://.*/.*   https://cdn.sancloud.info/file/sc-yocto/mirror/ \n \

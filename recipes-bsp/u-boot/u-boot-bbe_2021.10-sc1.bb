@@ -1,3 +1,6 @@
+# Copyright (C) 2018-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
 DESCRIPTION = "U-Boot, a boot loader for Embedded boards based on PowerPC, \
 ARM, MIPS and several other processors, which can be installed in a boot \

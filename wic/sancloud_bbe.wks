@@ -1,3 +1,6 @@
+# Copyright (C) 2018-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 # short-description: Create SD card image for Beaglebone
 # long-description: Creates a partitioned SD card image for Beaglebone.
 # Boot files are placed in unpartitioned space before the first ext4 partition.

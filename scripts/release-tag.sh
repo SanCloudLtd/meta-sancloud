@@ -1,4 +1,6 @@
 #! /bin/bash
+# Copyright (C) 2020-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
 
 set -euo pipefail
 

@@ -1,3 +1,6 @@
+# Copyright (C) 2021-2022 SanCloud Ltd
+# SPDX-License-Identifier: ISC
+
 diff -Naur a/CORE/HDD/src/wlan_hdd_cfg80211.c b/CORE/HDD/src/wlan_hdd_cfg80211.c
 --- a/CORE/HDD/src/wlan_hdd_cfg80211.c	2020-09-02 08:49:07.000000000 +0100
 +++ b/CORE/HDD/src/wlan_hdd_cfg80211.c	2021-03-26 16:56:18.308093022 +0000

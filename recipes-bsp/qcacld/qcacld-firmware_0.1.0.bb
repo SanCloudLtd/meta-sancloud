@@ -1,3 +1,6 @@
+# Copyright (C) 2021-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 SUMMARY = "Firmware for BBE Extended+WiFi boards"
 LICENSE = "CLOSED"
 

@@ -1,3 +1,6 @@
+# Copyright (C) 2020-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 # Select MMC partition containing this script
 setenv devtype mmc
 setenv bootpart ${devnum}:${distro_bootpart}

@@ -1,3 +1,6 @@
+# Copyright (C) 2021-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 SUMMARY = "Qualcomm Atheros drivers"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://CORE/HDD/src/wlan_hdd_main.c;beginline=1;endline=26;md5=f4f17debc2f9aba53097b3fc521d8953"

@@ -1,3 +1,6 @@
+# Copyright (C) 2018-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 SECTION = "kernel"
 DESCRIPTION = "Linux kernel for SanCloud BeagleBone devices"
 LICENSE = "GPLv2"
