@@ -38,6 +38,7 @@ jobs:
       - name: Check layer compatibility
         run: |
           source layers/poky/oe-init-build-env build-checklayer
+          cat ../conf/include/sancloud-check-layer-exclusions.inc >> conf/local.conf
           yocto-check-layer .. \
               --machines qemux86-64 bbe \
               --dependency ../layers/{meta-arm/meta-arm,meta-arm/meta-arm-toolchain,meta-ti,meta-rtlwifi} \
