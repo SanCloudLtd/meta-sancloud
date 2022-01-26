@@ -14,7 +14,9 @@ target:
 repos:
   meta-arago:
     url: https://git.yoctoproject.org/git/meta-arago
-    refspec: ae47bd7fbea2776a4f8792f20c493d7959ee2f54   # 08.00.00.004
+    refspec: 338386aa91b09eb51923ff655be6cbdfc04ae395   # 08.01.00.006
+                                                        # + docker support
+                                                        # + build fix for dma-heap-tests
     path: layers/meta-arago
     layers:
       meta-arago-distro:
@@ -26,6 +28,13 @@ repos:
     refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
     layers:
       meta-arm-toolchain:
+  meta-virtualization:
+    url: https://git.yoctoproject.org/git/meta-virtualization
+    refspec: c4f156fa93b37b2428e09ae22dbd7f5875606f4d
+    path: layers/meta-virtualization
+  meta-openembedded:
+    layers:
+      meta-filesystems:
 
 local_conf_header:
   arago: |
