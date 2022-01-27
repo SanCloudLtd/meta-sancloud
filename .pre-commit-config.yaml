@@ -18,10 +18,14 @@ repos:
     -   id: mixed-line-ending
     -   id: trailing-whitespace
 -   repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.8.0.2
+    rev: v0.8.0.3
     hooks:
     -   id: shellcheck
 -   repo: https://github.com/markdownlint/markdownlint
     rev: v0.11.0
     hooks:
     -   id: markdownlint
+-   repo: https://github.com/fsfe/reuse-tool
+    rev: v0.14.0
+    hooks:
+    -   id: reuse

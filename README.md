@@ -1,3 +1,8 @@
+<!--
+Copyright (c) 2018-2022 SanCloud Ltd
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Yocto BSP layer for the SanCloud boards
 
 ## Quick links
@@ -23,6 +28,18 @@ This BSP is layer supports the following configurations:
 * Automotive Grade Linux (AGL)
 * Arago Distribution
 * Poky Reference Distribution
+
+The metadata and scripts in this repository
+are distributed under the
+[MIT License](https://tldrlegal.com/license/mit-license)
+to provide license compatibility with other Yocto Project layers.
+Patches for third-party software
+are distributed under the license conditions
+of the software being patched.
+Additionally, documentation files are distributed under the
+[CC BY 4.0 License](https://tldrlegal.com/license/creative-commons-attribution-4.0-international-(cc-by-4))
+and trivial data files are distributed under the
+[CC0 1.0 License](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal).
 
 ## Host OS preparation
 

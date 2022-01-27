@@ -1,4 +1,36 @@
+<!--
+Copyright (c) 2020-2022 SanCloud Ltd
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # ChangeLog for meta-sancloud
+
+## dunfell-r6
+
+This is a maintenance release for the Yocto Project 3.1 "dunfell" release
+series.
+
+Changes from dunfell-r5:
+
+* Poky 3.1.13 and updates to the meta-openembedded layer.
+
+* meta-ti & meta-arago 08.01.00.006 release.
+  * Included post-release changes to meta-arago to add docker support and fix
+    building dma-heap-tests with Poky 3.1.13.
+
+* linux-bbe v5.10.65-sc1 & linux-bbe-rt v5.10.65-rt53-sc1.
+  * Merged TI kernel releases 08.01.00.006 & 08.01.00.006-rt respectively.
+  * Drop unused cmem & ti-uio features.
+
+* qcacld v4.5.25.55 with additional build fixes.
+
+* Follow the [REUSE spec](https://reuse.software/) by clarifying license
+  metadata for all files.
+
+* Follow best practices so we pass the `yocto-check-layer` tests.
+
+* Add automated checks using the [pre-commit framework](https://pre-commit.com/)
+  and [GitHub Actions](https://github.com/SanCloudLtd/meta-sancloud/actions).
 
 ## dunfell-r5
 

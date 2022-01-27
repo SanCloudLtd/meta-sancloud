@@ -1,3 +1,6 @@
+# Copyright (C) 2020-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 header:
   version: 8
   includes:
@@ -5,9 +8,9 @@ header:
 
 repos:
   poky:
-    refspec: 74b22db6879b388d700f61e08cb3f239cf940d18   # yocto-3.1.11
+    refspec: 795339092f87672e4f68e4d3bc4cfd0e252d1831   # yocto-3.1.13
   meta-openembedded:
-    refspec: 3cf22d15885cf0e3e16078705e9a20f3d21f12db
+    refspec: ab9fca485e13f6f2f9761e1d2810f87c2e4f060a
   meta-arm:
     refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
   meta-rtlwifi:

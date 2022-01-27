@@ -1,3 +1,6 @@
+# Copyright (C) 2018-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 SUMMARY = "Minimal ramdisk image for tftp boot"
 LICENSE = "MIT"
 

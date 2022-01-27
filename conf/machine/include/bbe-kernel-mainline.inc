@@ -1,3 +1,6 @@
+# Copyright (C) 2020-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
 require conf/linux-mainline/mainline.inc
 
 KBUILD_DEFCONFIG = "multi_v7_defconfig"
