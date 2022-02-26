@@ -5,52 +5,41 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Yocto BSP layer for the SanCloud boards
 
-## Quick links
-
 [<img align=right src="https://www.sancloud.co.uk/wp-content/uploads/2016/09/sancloud_and_address_web.png">](https://www.sancloud.com/)
 
-* [SanCloud website](https://www.sancloud.com/)
+[![CI](https://github.com/SanCloudLtd/meta-sancloud/actions/workflows/ci.yml/badge.svg)](https://github.com/SanCloudLtd/meta-sancloud/actions/workflows/ci.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/SanCloudLtd/meta-sancloud/dunfell.svg)](https://results.pre-commit.ci/latest/github/SanCloudLtd/meta-sancloud/dunfell)
 
-* [BeagleBone Enhanced Description](https://sancloud.co.uk/beaglebone-enhanced-bbe/)
+This is the [Yocto Project](https://www.yoctoproject.org/)
+Board Support Package (BSP) layer for [SanCloud](https://sancloud.co.uk/)
+devices.
 
-* [Sancloud repositories on GitHub](https://github.com/SanCloudLtd)
+For further support enquiries please contact us via email to
+<yocto@sancloud.com>.
 
-## Description
-
-This is the Yocto Project Board Support Package (BSP) layer for SanCloud devices.
+## Compatibility
 
 Currently supported hardware with corresponding Yocto Project MACHINE names:
 
-* `bbe`: Sancloud BeagleBone Enhanced (BBE)
+* `bbe`: [Sancloud BeagleBone Enhanced (BBE)](https://sancloud.co.uk/beaglebone-enhanced-bbe/)
 
 This BSP is layer supports the following configurations:
 
-* Automotive Grade Linux (AGL)
-* Arago Distribution
-* Poky Reference Distribution
-
-The metadata and scripts in this repository
-are distributed under the
-[MIT License](https://tldrlegal.com/license/mit-license)
-to provide license compatibility with other Yocto Project layers.
-Patches for third-party software
-are distributed under the license conditions
-of the software being patched.
-Additionally, documentation files are distributed under the
-[CC BY 4.0 License](https://tldrlegal.com/license/creative-commons-attribution-4.0-international-(cc-by-4))
-and trivial data files are distributed under the
-[CC0 1.0 License](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal).
+* [Automotive Grade Linux (AGL)](https://www.automotivelinux.org/)
+* [Arago Distribution](http://arago-project.org/wiki/index.php/Main_Page)
+* [Poky Reference Distribution](https://www.yoctoproject.org/software-item/poky/)
 
 ## Host OS preparation
 
-If you are running Ubuntu 20.04, we've provided a script to automate the
+If you are running [Ubuntu 20.04](https://releases.ubuntu.com/20.04/),
+we've provided a script to automate the
 process of setting up your host system to build images with Yocto Project and
 this SanCloud BSP layer. To use this script, run the following command:
 
-    curl https://raw.githubusercontent.com/SanCloudLtd/meta-sancloud/dunfell-r4.1/scripts/prepare-host.sh | bash
+    curl https://raw.githubusercontent.com/SanCloudLtd/meta-sancloud/dunfell-r6/scripts/prepare-host.sh | bash
 
 If you are running any other Linux distribution please see
-[Required Packages for the Build Host](https://docs.yoctoproject.org/3.1.11/ref-manual/ref-system-requirements.html#required-packages-for-the-build-host)
+[Required Packages for the Build Host](https://docs.yoctoproject.org/3.1.14/ref-manual/ref-system-requirements.html#required-packages-for-the-build-host)
 in the Yocto Project Reference Manual.
 
 In addition to the packages listed in the documentation, 32-bit (aka
@@ -69,7 +58,7 @@ to your bblayers.conf file automatically.
 
 If you do not have a Yocto Project build environment set up please first
 follow the
-[Yocto Project Quick Build Guide](https://docs.yoctoproject.org/3.1.11/brief-yoctoprojectqs/brief-yoctoprojectqs.html)
+[Yocto Project Quick Build Guide](https://docs.yoctoproject.org/3.1.14/brief-yoctoprojectqs/brief-yoctoprojectqs.html)
 to ensure that your Linux system has the correct packages installed and that
 a simple build succeeds. Once you know that your Linux system is set up
 correctly you can download the appropriate Yocto Project version and build an
@@ -82,7 +71,7 @@ image for the BBE using the following commands:
     echo 'MACHINE = "bbe"' >> conf/local.conf
     bitbake core-image-base
 
-## Getting Started with AGL
+## Getting started with Automotive Grade Linux (AGL)
 
 This BSP layer is included in recent releases of AGL. AGL sources can be
 downloaded by following the
@@ -149,9 +138,24 @@ configuration files into your own repository (adding a `url:` entry for the
 meta-sancloud layer) and work there so that your changes can be tracked
 separately from future BSP updates in this repository.
 
-## Support
+## Contributing
 
 Issues and Pull Requests for this BSP layer may be opened on our primary
-GitHub repository at https://github.com/SanCloudLtd/meta-sancloud.
+GitHub repository at <https://github.com/SanCloudLtd/meta-sancloud>.
 
-For further support enquiries please contact us via email to yocto@sancloud.com.
+## License
+
+* The metadata and scripts in this repository
+  are distributed under the
+  [MIT License](https://tldrlegal.com/license/mit-license)
+  to provide license compatibility with other Yocto Project layers.
+
+* Patches for third-party software
+  are distributed under the license conditions
+  of the software being patched.
+
+* Documentation files are distributed under the
+  [CC BY 4.0 License](https://tldrlegal.com/license/creative-commons-attribution-4.0-international-(cc-by-4)).
+
+* Trivial data files are distributed under the
+  [CC0 1.0 License](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal).
