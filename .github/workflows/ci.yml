@@ -5,19 +5,8 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
-
-      - name: Run pre-commit checks
-        uses: pre-commit/action@v2.0.3
-
   yocto-check-layer:
+    name: Check layer compatibility
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/sancloudltd/poky-build:dev
@@ -35,7 +24,7 @@ jobs:
       - name: Checkout layer dependencies
         run: kas checkout --update --force-checkout kas/dev/bbe-poky.yml
 
-      - name: Check layer compatibility
+      - name: Run yocto-check-layer
         run: |
           source layers/poky/oe-init-build-env build-checklayer
           cat ../conf/include/sancloud-check-layer-exclusions.inc >> conf/local.conf
