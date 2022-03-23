@@ -25,7 +25,6 @@ repos:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
   meta-arm:
-    refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
     layers:
       meta-arm-toolchain:
   meta-virtualization:

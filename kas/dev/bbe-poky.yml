@@ -33,6 +33,7 @@ repos:
       meta-python:
   meta-arm:
     url: https://git.yoctoproject.org/git/meta-arm
+    refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
     path: layers/meta-arm
     layers:
       meta-arm:
