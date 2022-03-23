@@ -7,10 +7,11 @@ set -euo pipefail
 BUILD_DISTRO=poky
 BUILD_SDK=no
 BUILD_PATH="$(realpath build)"
+SRC_PATH="$(dirname "$(dirname "$0")")"
 KERNEL_PROVIDER=
 SITE_CONF=
-KAS_PREFIX=kas/dev
-KAS_INCLUDES="kas/inc/ci.yml"
+KAS_PREFIX="${SRC_PATH}/kas/dev"
+KAS_INCLUDES="${SRC_PATH}/kas/inc/ci.yml"
 
 usage() {
     echo "meta-sancloud CI build script"
@@ -37,7 +38,7 @@ usage() {
 while getopts ":RAsk:i:p:h" opt; do
     case $opt in
         R)
-            KAS_PREFIX=kas
+            KAS_PREFIX="${SRC_PATH}/kas"
             ;;
         A)
             BUILD_DISTRO=arago
@@ -75,7 +76,7 @@ echo ">>> Preparing for build"
 
 if [[ -n "$KERNEL_PROVIDER" ]]; then
     echo ">>> Enabling kernel provider '$KERNEL_PROVIDER'"
-    KAS_INCLUDES="kas/inc/kernel-${KERNEL_PROVIDER}.yml:${KAS_INCLUDES}"
+    KAS_INCLUDES="${SRC_PATH}/kas/inc/kernel-${KERNEL_PROVIDER}.yml:${KAS_INCLUDES}"
 fi
 
 rm -rf images "$BUILD_PATH"
