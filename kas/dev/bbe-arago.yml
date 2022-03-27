@@ -14,9 +14,7 @@ target:
 repos:
   meta-arago:
     url: https://git.yoctoproject.org/git/meta-arago
-    refspec: 338386aa91b09eb51923ff655be6cbdfc04ae395   # 08.01.00.006
-                                                        # + docker support
-                                                        # + build fix for dma-heap-tests
+    refspec: 382ca36beb21a524de726bfd1c57e3d26f10cf82   # 08.02.00.006
     path: layers/meta-arago
     layers:
       meta-arago-distro:
