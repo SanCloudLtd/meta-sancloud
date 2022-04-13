@@ -9,6 +9,11 @@ header:
 repos:
   poky:
     refspec: b41d4e46d30ed32e11d68466721a0f4056bad700   # yocto-3.1.15
+    patches:
+      backport-0001:
+        path: kas/patches/poky-0001-mobile-broadband-provider-info-upgrade-20201225-2021.patch
+      backport-0002:
+        path: kas/patches/poky-0002-mobile-broadband-provider-info-upgrade-20210805-2022.patch
   meta-openembedded:
     refspec: 0722ff6f021df91542b5efa1ff5b5f6269f66add
   meta-rtlwifi:

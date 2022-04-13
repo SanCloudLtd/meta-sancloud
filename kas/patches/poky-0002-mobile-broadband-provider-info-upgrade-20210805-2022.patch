@@ -1,0 +1,40 @@
+From 911b256c053d8ee9e9f1b1ac15d6bedb70dec9a2 Mon Sep 17 00:00:00 2001
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Tue, 15 Mar 2022 23:16:08 +0000
+Subject: [PATCH 2/2] mobile-broadband-provider-info: upgrade 20210805 ->
+ 20220315
+
+(From OE-Core rev: 9e3758114cbc74d820c5904b81b011e5c4a1715b)
+
+Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+(cherry picked from commit ed02ee8f20094f598448d58875cb7be8a24a019f)
+Signed-off-by: Steve Sakoman <steve@sakoman.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+---
+ .../mobile-broadband-provider-info_git.bb                  | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/meta/recipes-connectivity/mobile-broadband-provider-info/mobile-broadband-provider-info_git.bb b/meta/recipes-connectivity/mobile-broadband-provider-info/mobile-broadband-provider-info_git.bb
+index 4246f4dcbd32..781b9216c56e 100644
+--- a/meta/recipes-connectivity/mobile-broadband-provider-info/mobile-broadband-provider-info_git.bb
++++ b/meta/recipes-connectivity/mobile-broadband-provider-info/mobile-broadband-provider-info_git.bb
+@@ -4,11 +4,12 @@ DESCRIPTION = "Mobile Broadband Service Provider Database stores service provide
+ SECTION = "network"
+ LICENSE = "PD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=87964579b2a8ece4bc6744d2dc9a8b04"
+-SRCREV = "11f2247eccd3c161b8fd9b41143862e9fb81193c"
+-PV = "20210805"
++
++SRCREV = "4cbb44a9fe26aa6f0b28beb79f9488b37c097b5e"
++PV = "20220315"
+ PE = "1"
+ 
+-SRC_URI = "git://gitlab.gnome.org/GNOME/mobile-broadband-provider-info.git;protocol=https;branch=master"
++SRC_URI = "git://gitlab.gnome.org/GNOME/mobile-broadband-provider-info.git;protocol=https;branch=main"
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools
+-- 
+2.25.1
+
