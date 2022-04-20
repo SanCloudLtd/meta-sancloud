@@ -2,5 +2,5 @@
 # SPDX-License-Identifier: MIT
 
 BRANCH = "linux-sancloud-rt-5.10.y"
-SRCREV = "6399d0b5951dbc59332f9f70d3eeb022ca3b386d"
+SRCREV = "59a9e348624dcd0592354d397506b57f329087f4"
 require linux-bbe-5.10.inc
