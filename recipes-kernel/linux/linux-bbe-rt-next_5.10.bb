@@ -9,4 +9,5 @@ python () {
 KERNEL_VERSION_SANITY_SKIP="1"
 BRANCH = "linux-sancloud-rt-next"
 SRCREV = "${AUTOREV}"
+KBUILD_DEFCONFIG = "sancloud_rt_defconfig"
 require linux-bbe-5.10.inc
