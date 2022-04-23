@@ -3,11 +3,11 @@
 
 SUMMARY = "Qualcomm Atheros drivers"
 LICENSE = "ISC"
-LIC_FILES_CHKSUM = "file://CORE/HDD/src/wlan_hdd_main.c;beginline=1;endline=26;md5=f4f17debc2f9aba53097b3fc521d8953"
+LIC_FILES_CHKSUM = "file://CORE/HDD/src/wlan_hdd_main.c;beginline=1;endline=27;md5=9efdd522865bb2e5aeec57e2869ed396"
 
 SRC_URI = "git://github.com/SanCloudLtd/qcacld-2.0.git;protocol=https;branch=dev"
 
-SRCREV = "224286c92175071a44af5d81899c69f53319122c"
+SRCREV = "4605c580d052af98df7717ed6a7aede3481a5c1b"
 S = "${WORKDIR}/git"
 
 inherit module

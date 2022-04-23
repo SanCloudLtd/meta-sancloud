@@ -7,7 +7,7 @@ LICENSE = "CLOSED"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "git://github.com/SanCloudLtd/firmware.git;protocol=git;branch=main"
-SRCREV = "72283874d550a14bb1a063a0f2172960998e0d90"
+SRCREV = "c30917b92138942a4d06c1efb4d01b1c892b6829"
 S = "${WORKDIR}/git"
 
 inherit bin_package
