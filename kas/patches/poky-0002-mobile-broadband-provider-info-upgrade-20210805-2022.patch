@@ -3,6 +3,8 @@ From: Changhyeok Bae <changhyeok.bae@gmail.com>
 Date: Tue, 15 Mar 2022 23:16:08 +0000
 Subject: [PATCH 2/2] mobile-broadband-provider-info: upgrade 20210805 ->
  20220315
+SPDX-FileCopyrightText: poky contributors
+SPDX-License-Identifier: MIT
 
 (From OE-Core rev: 9e3758114cbc74d820c5904b81b011e5c4a1715b)
 

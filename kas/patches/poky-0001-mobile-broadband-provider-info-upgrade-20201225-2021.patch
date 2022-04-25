@@ -3,6 +3,8 @@ From: Alexander Kanavin <alex.kanavin@gmail.com>
 Date: Sun, 22 Aug 2021 14:50:26 +0200
 Subject: [PATCH 1/2] mobile-broadband-provider-info: upgrade 20201225 ->
  20210805
+SPDX-FileCopyrightText: poky contributors
+SPDX-License-Identifier: MIT
 
 (From OE-Core rev: b60558f44d0145c0d68a78b3eabe483cb016700f)
 
