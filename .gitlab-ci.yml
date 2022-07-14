@@ -1,0 +1,24 @@
+# Copyright (c) 2022 SanCloud Ltd
+# All Rights Reserved
+
+stages:
+  - build
+
+.bsp_build:
+  image: gitlab-registry.sancloud.co.uk/bsp/build-containers/poky-build:latest
+  stage: build
+  cache:
+    key: layers
+    paths:
+      - layers
+  script:
+    - ./scripts/maintainer.py build -i /mnt/cache/yocto/site.conf ${BSP_CI_BUILD_ARGS}
+
+bbe-poky:
+  extends: .bsp_build
+
+bbe-arago:
+  extends: .bsp_build
+  image: gitlab-registry.sancloud.co.uk/bsp/build-containers/arago-build:latest
+  variables:
+    BSP_CI_BUILD_ARGS: -d arago -t tisdk-default-image
