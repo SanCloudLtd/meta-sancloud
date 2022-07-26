@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import argparse
+import glob
 import os
 import re
 import shutil
 import subprocess
 import tarfile
-from types import SimpleNamespace
 from git_acquire.acquire import Acquisition
 
 
@@ -79,6 +79,9 @@ def do_setup_build_dir(args):
         if args.distro == "arago":
             f.write('PACKAGE_CLASSES = "package_ipk"\n')
         f.write("\n")
+        f.write('BB_NUMBER_THREADS = "8"\n')
+        f.write('PARALLEL_MAKE = "-j8"\n')
+        f.write("\n")
         f.write("require conf/include/sancloud-enable-archiver.inc\n")
         f.write("require conf/include/sancloud-mirrors.inc\n")
 
@@ -95,8 +98,8 @@ def do_build(args):
 
 
 def do_clean(args):
-    if os.path.exists("build"):
-        shutil.rmtree("build")
+    for d in glob.glob("build*"):
+        shutil.rmtree(d)
 
 
 def do_set_version(args):
@@ -109,25 +112,16 @@ def do_set_version(args):
 
 
 def do_release_build(args):
-    os.makedirs("release", exist_ok=True)
-    build_args = SimpleNamespace()
-    build_args.distro = "poky"
-    build_args.site_conf = None
-    build_args.build_path = "build-poky"
-    build_args.kernel_provider = None
-    build_args.target = "core-image-base"
-    build_args.skip_setup = False
-    build_args.command = None
-    do_build(build_args)
+    run('docker run -it --rm -v "$(pwd):/workdir" '
+        'gitlab-registry.sancloud.co.uk/bsp/build-containers/poky-build:latest '
+        '--workdir=/workdir ./scripts/maintainer.py build -p build-poky')
     with tarfile.open(f"release/bbe-base-image-v{args.version}.tar", mode="w", dereference=True) as tf:
         tf.add("build-poky/tmp/deploy/images/bbe/core-image-base-bbe.wic.xz", "bbe-base-image.wic.xz")
         tf.add("build-poky/tmp/deploy/images/bbe/core-image-base-bbe.wic.bmap", "bbe-base-image.wic.bmap")
 
-    build_args.distro = "arago"
-    build_args.build_path = "build-arago"
-    build_args.target = "tisdk-default-image"
-    build_args.command = None
-    do_build(build_args)
+    run('docker run -it --rm -v "$(pwd):/workdir" '
+        'gitlab-registry.sancloud.co.uk/bsp/build-containers/arago-build:latest '
+        '--workdir=/workdir ./scripts/maintainer.py build -p build-arago -d arago -t tisdk-default-image')
     with tarfile.open(f"release/bbe-tisdk-image-v{args.version}.tar", mode="w", dereference=True) as tf:
         tf.add("build-arago/tmp-external-arm-glibc/deploy/images/bbe/tisdk-default-image-bbe.wic.xz", "bbe-tisdk-image.wic.xz")
         tf.add("build-arago/tmp-external-arm-glibc/deploy/images/bbe/tisdk-default-image-bbe.wic.bmap", "bbe-tisdk-image.wic.bmap")
@@ -135,6 +129,13 @@ def do_release_build(args):
 
 def do_release(args):
     do_clean(args)
+
+    os.makedirs("release", exist_ok=True)
+    with open("release/RELEASE_NOTES.txt", "w") as f:
+        f.write(f"SanCloud BSP {args.version}\n")
+        text = capture(f"markdown-extract -n ^{args.version} ChangeLog.md")
+        f.write(text)
+
     with open("conf/layer.conf", "r+") as f:
         text = re.sub(r"(SANCLOUD_BSP_VERSION =).*\n", rf'\1 "{args.version}"\n', f.read())
         f.seek(0)
@@ -142,27 +143,26 @@ def do_release(args):
         f.truncate()
     run(f'git commit -asm "Release {args.version}"')
     release_commit = capture("git rev-parse HEAD").strip()
-    #run(f"git push origin {release_commit}:refs/heads/release")
-    #run(f"git push gh {release_commit}:refs/heads/release")
     do_release_build(args)
-    with open("release/RELEASE_NOTES.txt", "w") as f:
-        f.write(f"SanCloud BSP {args.version}\n")
-        text = capture(f"markdown-extract -n ^{args.version} ChangeLog.md")
-        f.write(text)
-    run(f"git tag -a -F dist/RELEASE_NOTES.txt v{args.version} HEAD")
-    #run(f"git push origin v{args.version}")
-    #run(f"git push gh v{args.version}")
+
+    run(f"git tag -a -F release/RELEASE_NOTES.txt v{args.version} {release_commit}")
     with open("release/SHA256SUMS", "w") as f:
         text = capture(
-            "sha256sum RELEASE_NOTES.txt ",
+            "sha256sum RELEASE_NOTES.txt *.tar",
             cwd="release",
         )
         f.write(text)
     if args.sign:
         run("gpg --detach-sign -a release/SHA256SUMS")
-    #if not args.no_gitlab:
-    #    run(f"glab release create {args.version} -F release/RELEASE_NOTES.txt release/*")
-    #run(f"gh release create {args.version} -F release/RELEASE_NOTES.txt release/*")
+
+    if not args.no_gitlab:
+        run(f"git push origin v{args.version}")
+        run(f"git push origin {release_commit}:refs/heads/release")
+        run(f"glab release create v{args.version} -n v{args.version} -F release/RELEASE_NOTES.txt release/*")
+    if not args.no_github:
+        run(f"git push gh v{args.version}")
+        run(f"git push gh {release_commit}:refs/heads/release")
+        run(f"gh release create v{args.version} -t v{args.version} -F release/RELEASE_NOTES.txt release/*")
 
 
 def do_no_command(args):
@@ -242,6 +242,11 @@ def parse_args():
         "--no-gitlab",
         action="store_true",
         help="Disable push to SanCloud gitlab instance",
+    )
+    release_cmd.add_argument(
+        "--no-github",
+        action="store_true",
+        help="Disable push to public github repositories",
     )
 
     set_version_cmd = subparsers.add_parser(
