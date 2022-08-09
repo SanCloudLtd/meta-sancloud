@@ -1,5 +1,5 @@
 # Copyright (c) 2022 SanCloud Ltd
-# All Rights Reserved
+# SPDX-License-Identifier: MIT
 
 stages:
   - build

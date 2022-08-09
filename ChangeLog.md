@@ -5,6 +5,30 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # ChangeLog for meta-sancloud
 
+## 6.1.0
+
+This release supports the Yocto Project 3.1 "dunfell" series.
+
+Changes from dunfell-r6:
+
+* Poky 3.1.17
+
+* meta-ti & meta-arago 08.02.00.006 release
+
+* linux-bbe v5.10.100-sc1 & linux-bbe-rt v5.10.100-rt62-sc1
+  * Merge TI kernel releases 08.02.00.006 & 08.02.00.006-rt respectively
+  * Reduce kernel footprint and tidy up defconfig
+
+* u-boot-bbe v2022.04-sc1
+
+* qcacld v4.5.25.57
+
+* Other minor changes:
+  * Switch to CODEOWNERS file instead of MAINTAINERS
+  * Fix linux-bbe-next & linux-bbe-rt-next recipes
+  * Fix REUSE spec compliance
+  * Add a consolidated maintainer script
+
 ## dunfell-r6
 
 This is a maintenance release for the Yocto Project 3.1 "dunfell" release
