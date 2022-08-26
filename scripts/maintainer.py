@@ -26,17 +26,21 @@ def capture(cmd, **kwargs):
 
 def do_acquire_layers(args):
     layers = (
-        Acquisition("https://git.yoctoproject.org/poky", "yocto-3.1.17", "layers/poky"),
-        Acquisition("https://git.openembedded.org/meta-openembedded", "0722ff6f021df91542b5efa1ff5b5f6269f66add", "layers/meta-openembedded"),
-        Acquisition("https://git.yoctoproject.org/git/meta-arm", "c4f04f3fb66f8f4365b08b553af8206372e90a63", "layers/meta-arm"),
-        Acquisition("https://git.yoctoproject.org/git/meta-ti", "08.02.00.006", "layers/meta-ti"),
+        Acquisition("https://git.yoctoproject.org/poky", "yocto-3.1.18", "layers/poky"),
+        Acquisition("https://git.openembedded.org/meta-openembedded", "f22bf6efaae61a8fd9272be64e7d75223c58922e", "layers/meta-openembedded"),
+        Acquisition("https://git.yoctoproject.org/git/meta-ti", "08.03.00.005", "layers/meta-ti"),
         Acquisition("https://github.com/EmbeddedAndroid/meta-rtlwifi.git", "98b2b2c34f186050e6092bc4f17ecb69aef6148a", "layers/meta-rtlwifi")
     )
-    if args.distro == "arago":
+    if args.distro == "poky":
         layers += (
-            Acquisition("https://git.yoctoproject.org/git/meta-arago", "08.02.00.006", "layers/meta-arago"),
-            Acquisition("https://github.com/meta-qt5/meta-qt5.git", "b4d24d70aca75791902df5cd59a4f4a54aa4a125", "layers/meta-qt5"),
-            Acquisition("https://git.yoctoproject.org/git/meta-virtualization", "c4f156fa93b37b2428e09ae22dbd7f5875606f4d", "layers/meta-virtualization")
+            Acquisition("https://git.yoctoproject.org/git/meta-arm", "69547052727a461f33967e64630aa03b34a7eadd", "layers/meta-arm"),
+        )
+    elif args.distro == "arago":
+        layers += (
+            Acquisition("https://git.yoctoproject.org/git/meta-arm", "c4f04f3fb66f8f4365b08b553af8206372e90a63", "layers/meta-arm"),
+            Acquisition("https://git.yoctoproject.org/git/meta-arago", "08.03.00.005", "layers/meta-arago"),
+            Acquisition("https://github.com/meta-qt5/meta-qt5.git", "5ef3a0ffd3324937252790266e2b2e64d33ef34f", "layers/meta-qt5"),
+            Acquisition("https://git.yoctoproject.org/git/meta-virtualization", "a63a54df3170fed387f810f23cdc2f483ad587df", "layers/meta-virtualization")
         )
     for layer in layers:
         print(f"Acquiring {layer.local_path}")
