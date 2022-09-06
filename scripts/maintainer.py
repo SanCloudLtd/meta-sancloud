@@ -118,6 +118,8 @@ def do_setup_build_dir(args):
         f.write("\n")
         f.write("require conf/include/sancloud-enable-archiver.inc\n")
         f.write("require conf/include/sancloud-mirrors.inc\n")
+        if args.series == "kirkstone":
+            f.write('INHERIT += "create-spdx"\n')
 
 
 def do_build(args):
