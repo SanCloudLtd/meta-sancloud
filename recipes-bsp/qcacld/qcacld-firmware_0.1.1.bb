@@ -6,7 +6,7 @@ LICENSE = "CLOSED"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "git://github.com/SanCloudLtd/firmware.git;protocol=git;branch=main"
+SRC_URI = "git://github.com/SanCloudLtd/firmware.git;protocol=https;branch=main"
 SRCREV = "c30917b92138942a4d06c1efb4d01b1c892b6829"
 S = "${WORKDIR}/git"
 

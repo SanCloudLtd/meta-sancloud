@@ -6,7 +6,7 @@ python () {
         raise bb.parse.SkipRecipe("Set PREFERRED_PROVIDER_virtual/kernel to %s to enable it" % (d.getVar("PN")))
 }
 
-KERNEL_VERSION_SANITY_SKIP="1"
+KERNEL_VERSION_SANITY_SKIP = "1"
 BRANCH = "linux-sancloud-next"
 SRCREV = "${AUTOREV}"
 require linux-bbe-5.10.inc

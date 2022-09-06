@@ -25,23 +25,43 @@ def capture(cmd, **kwargs):
 
 
 def do_acquire_layers(args):
-    layers = (
-        Acquisition("https://git.yoctoproject.org/poky", "yocto-3.1.18", "layers/poky"),
-        Acquisition("https://git.openembedded.org/meta-openembedded", "f22bf6efaae61a8fd9272be64e7d75223c58922e", "layers/meta-openembedded"),
-        Acquisition("https://git.yoctoproject.org/git/meta-ti", "08.03.00.005", "layers/meta-ti"),
-        Acquisition("https://github.com/EmbeddedAndroid/meta-rtlwifi.git", "98b2b2c34f186050e6092bc4f17ecb69aef6148a", "layers/meta-rtlwifi")
-    )
-    if args.distro == "poky":
-        layers += (
-            Acquisition("https://git.yoctoproject.org/git/meta-arm", "69547052727a461f33967e64630aa03b34a7eadd", "layers/meta-arm"),
+    if args.series == "dunfell":
+        layers = (
+            Acquisition("https://git.yoctoproject.org/poky", "yocto-3.1.18", "layers/poky",
+                        patches=["patches/poky/0001-licenses-Handle-newer-SPDX-license-names.patch"]),
+            Acquisition("https://git.openembedded.org/meta-openembedded", "f22bf6efaae61a8fd9272be64e7d75223c58922e", "layers/meta-openembedded"),
+            Acquisition("https://git.yoctoproject.org/git/meta-ti", "08.03.00.005", "layers/meta-ti"),
+            Acquisition("https://github.com/EmbeddedAndroid/meta-rtlwifi.git", "98b2b2c34f186050e6092bc4f17ecb69aef6148a", "layers/meta-rtlwifi"),
         )
-    elif args.distro == "arago":
-        layers += (
-            Acquisition("https://git.yoctoproject.org/git/meta-arm", "c4f04f3fb66f8f4365b08b553af8206372e90a63", "layers/meta-arm"),
-            Acquisition("https://git.yoctoproject.org/git/meta-arago", "08.03.00.005", "layers/meta-arago"),
-            Acquisition("https://github.com/meta-qt5/meta-qt5.git", "5ef3a0ffd3324937252790266e2b2e64d33ef34f", "layers/meta-qt5"),
-            Acquisition("https://git.yoctoproject.org/git/meta-virtualization", "a63a54df3170fed387f810f23cdc2f483ad587df", "layers/meta-virtualization")
+        if args.distro == "poky":
+            layers += (
+                Acquisition("https://git.yoctoproject.org/git/meta-arm", "69547052727a461f33967e64630aa03b34a7eadd", "layers/meta-arm"),
+            )
+        elif args.distro == "arago":
+            layers += (
+                Acquisition("https://git.yoctoproject.org/git/meta-arm", "c4f04f3fb66f8f4365b08b553af8206372e90a63", "layers/meta-arm"),
+                Acquisition("https://git.yoctoproject.org/git/meta-arago", "08.03.00.005", "layers/meta-arago"),
+                Acquisition("https://github.com/meta-qt5/meta-qt5.git", "5ef3a0ffd3324937252790266e2b2e64d33ef34f", "layers/meta-qt5"),
+                Acquisition("https://git.yoctoproject.org/git/meta-virtualization", "a63a54df3170fed387f810f23cdc2f483ad587df", "layers/meta-virtualization")
+            )
+    elif args.series == "kirkstone":
+        layers = (
+            Acquisition("https://git.yoctoproject.org/poky", "yocto-4.0.3", "layers/poky"),
+            Acquisition("https://git.openembedded.org/meta-openembedded", "8f96c05f6d82fde052f2cb1652c13922814accb0", "layers/meta-openembedded"),
+            Acquisition("https://git.yoctoproject.org/git/meta-ti", "2124e7ecd88d1aded320e86da62785c3ab171b27", "layers/meta-ti"),
+            Acquisition("https://github.com/EmbeddedAndroid/meta-rtlwifi.git", "98b2b2c34f186050e6092bc4f17ecb69aef6148a", "layers/meta-rtlwifi",
+                        patches=[
+                            "patches/meta-rtlwifi/0001-rtl8723bu-Fixes-for-kirkstone-support.patch",
+                            "patches/meta-rtlwifi/0002-layer.conf-Mark-layer-as-compatible-with-kirkstone.patch",
+                        ]),
+            Acquisition("https://git.yoctoproject.org/git/meta-arm", "8c97ddc4233d658c6c74a14e501cb2b0022c9097", "layers/meta-arm"),
         )
+        if args.distro == "arago":
+            layers += (
+                Acquisition("https://git.yoctoproject.org/git/meta-arago", "8b34c5edde16d291ec0b3388fe6f03244f89327c", "layers/meta-arago"),
+                Acquisition("https://github.com/meta-qt5/meta-qt5.git", "5b71df60e523423b9df6793de9387f87a149ac42", "layers/meta-qt5"),
+                Acquisition("https://git.yoctoproject.org/git/meta-virtualization", "e11d5b630e6b5626b58b742b80f5bdf277a44168", "layers/meta-virtualization")
+            )
     for layer in layers:
         print(f"Acquiring {layer.local_path}")
         layer.acquire()
@@ -59,7 +79,6 @@ def do_setup_build_dir(args):
         f'"{project_root}/layers/meta-openembedded/meta-networking" '
         f'"{project_root}/layers/meta-arm/meta-arm-toolchain" '
         f'"{project_root}/layers/meta-arm/meta-arm" '
-        f'"{project_root}/layers/meta-ti" '
         f'"{project_root}/layers/meta-rtlwifi" '
     )
     if args.distro == "arago":
@@ -69,6 +88,13 @@ def do_setup_build_dir(args):
             f'"{project_root}/layers/meta-virtualization" '
             f'"{project_root}/layers/meta-arago/meta-arago-extras" '
             f'"{project_root}/layers/meta-arago/meta-arago-distro" '
+        )
+    if args.series == "dunfell":
+        cmd += f'"{project_root}/layers/meta-ti" '
+    elif args.series == "kirkstone":
+        cmd += (
+            f'"{project_root}/layers/meta-ti/meta-ti-bsp" '
+            #f'"{project_root}/layers/meta-ti/meta-ti-extras" '
         )
     cmd += f'"{project_root}"'
     run(cmd)
@@ -232,6 +258,9 @@ def parse_args():
     build_cmd.set_defaults(cmd_fn=do_build)
     build_cmd.add_argument(
         "-d", "--distro", default="poky", help="Distribution to build (poky or arago)"
+    )
+    build_cmd.add_argument(
+        "-s", "--series", default="dunfell", help="Yocto release series to build for (dunfell or kirkstone)"
     )
     build_cmd.add_argument(
         "-i", "--site-conf", help="Site-specific configuration file"

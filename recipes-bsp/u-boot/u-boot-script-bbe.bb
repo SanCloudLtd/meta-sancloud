@@ -20,4 +20,4 @@ do_install() {
     install -m 0644 boot.scr ${D}/boot
 }
 
-FILES_${PN} = "/boot"
+FILES:${PN} = "/boot"
