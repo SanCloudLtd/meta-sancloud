@@ -120,6 +120,7 @@ def do_setup_build_dir(args):
         f.write("require conf/include/sancloud-mirrors.inc\n")
         if args.series == "kirkstone":
             f.write('INHERIT += "create-spdx"\n')
+            f.write('DISTRO_FEATURES:remove = "opengl"\n')
 
 
 def do_build(args):
