@@ -1,0 +1,28 @@
+From 15237d55bcd1a2e7833403d6e37a936e6829b4a0 Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul.barker@sancloud.com>
+Date: Tue, 27 Sep 2022 16:51:54 +0100
+Subject: [PATCH 2/2] layer.conf: Mark layer as compatible with kirkstone
+SPDX-FileCopyrightText: Paul Barker <paul.barker@sancloud.com>
+SPDX-License-Identifier: MIT
+
+Signed-off-by: Paul Barker <paul.barker@sancloud.com>
+---
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/conf/layer.conf b/conf/layer.conf
+index c79d461b0f61..a2cea54c97c7 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -4,7 +4,7 @@ BBPATH .= ":${LAYERDIR}"
+ # Append recipe dir to BBFILES
+ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ 
+-LAYERSERIES_COMPAT_rtlwifi = "dunfell gatesgarth hardknott honister"
++LAYERSERIES_COMPAT_rtlwifi = "dunfell gatesgarth hardknott honister kirkstone"
+ 
+ BBFILE_COLLECTIONS += "rtlwifi"
+ BBFILE_PRIORITY_rtlwifi = "1"
+-- 
+2.25.1
+

@@ -1,0 +1,57 @@
+From 31cdf795dccd06f80c57dbf00ce9437424b2e63e Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul.barker@sancloud.com>
+Date: Fri, 30 Sep 2022 11:17:52 +0100
+Subject: [dunfell PATCH] licenses: Handle newer SPDX license names
+SPDX-FileCopyrightText: Paul Barker <paul.barker@sancloud.com>
+SPDX-License-Identifier: MIT
+
+License names were updated in commit 2456f523cfbb (after the dunfell
+release) to match the current SPDX license list. We don't want to do any
+wholesale renaming on the dunfell stable branch but we should add
+mappings for the newer '*-only' names to allow for layers which support
+both dunfell and newer releases.
+
+Signed-off-by: Paul Barker <paul.barker@sancloud.com>
+---
+ meta/conf/licenses.conf | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/meta/conf/licenses.conf b/meta/conf/licenses.conf
+index 5b309eb3851f..0149b1dc4445 100644
+--- a/meta/conf/licenses.conf
++++ b/meta/conf/licenses.conf
+@@ -13,24 +13,31 @@
+ SPDXLICENSEMAP[AGPL-3] = "AGPL-3.0"
+ SPDXLICENSEMAP[AGPLv3] = "AGPL-3.0"
+ SPDXLICENSEMAP[AGPLv3.0] = "AGPL-3.0"
++SPDXLICENSEMAP[AGPL-3.0-only] = "AGPL-3.0"
+ 
+ # GPL variations
+ SPDXLICENSEMAP[GPL-1] = "GPL-1.0"
+ SPDXLICENSEMAP[GPLv1] = "GPL-1.0"
+ SPDXLICENSEMAP[GPLv1.0] = "GPL-1.0"
++SPDXLICENSEMAP[GPL-1.0-only] = "GPL-1.0"
+ SPDXLICENSEMAP[GPL-2] = "GPL-2.0"
+ SPDXLICENSEMAP[GPLv2] = "GPL-2.0"
+ SPDXLICENSEMAP[GPLv2.0] = "GPL-2.0"
++SPDXLICENSEMAP[GPL-2.0-only] = "GPL-2.0"
+ SPDXLICENSEMAP[GPL-3] = "GPL-3.0"
+ SPDXLICENSEMAP[GPLv3] = "GPL-3.0"
+ SPDXLICENSEMAP[GPLv3.0] = "GPL-3.0"
++SPDXLICENSEMAP[GPL-3.0-only] = "GPL-3.0"
+ 
+ #LGPL variations
+ SPDXLICENSEMAP[LGPLv2] = "LGPL-2.0"
+ SPDXLICENSEMAP[LGPLv2.0] = "LGPL-2.0"
++SPDXLICENSEMAP[LGPL-2.0-only] = "LGPL-2.0"
+ SPDXLICENSEMAP[LGPL2.1] = "LGPL-2.1"
+ SPDXLICENSEMAP[LGPLv2.1] = "LGPL-2.1"
++SPDXLICENSEMAP[LGPL-2.1-only] = "LGPL-2.1"
+ SPDXLICENSEMAP[LGPLv3] = "LGPL-3.0"
++SPDXLICENSEMAP[LGPL-3.0-only] = "LGPL-3.0"
+ 
+ #MPL variations
+ SPDXLICENSEMAP[MPL-1] = "MPL-1.0"
+-- 
+2.25.1
+

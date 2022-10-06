@@ -1,0 +1,37 @@
+From b7ec33464b3919b142ab75896b3f85bcbf104a8a Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul.barker@sancloud.com>
+Date: Tue, 27 Sep 2022 16:49:56 +0100
+Subject: [PATCH 1/2] rtl8723bu: Fixes for kirkstone support
+SPDX-FileCopyrightText: Paul Barker <paul.barker@sancloud.com>
+SPDX-License-Identifier: MIT
+
+* License identifier 'GPLv2' is obsolete, we should use 'GPL-2.0-only'.
+
+* We must specify a branch for git repositories in SRC_URI.
+
+Signed-off-by: Paul Barker <paul.barker@sancloud.com>
+---
+ recipes-bsp/drivers/rtl8723bu.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/drivers/rtl8723bu.bb b/recipes-bsp/drivers/rtl8723bu.bb
+index 338b04a20cbc..4277ac993a3b 100644
+--- a/recipes-bsp/drivers/rtl8723bu.bb
++++ b/recipes-bsp/drivers/rtl8723bu.bb
+@@ -1,11 +1,11 @@
+ SUMMARY = "RTL8723 kernel driver (wifi + bluetooth)"
+ DESCRIPTION = "RTL8723 kernel driver"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://Kconfig;md5=ce4c7adf40ddcf6cfca7ee2b333165f0"
+ 
+ PV = "1.0-git"
+ SRCREV = "ce4490b1e0dcedec30659dc20b945b90d9c3d83c"
+-SRC_URI = "git://github.com/lwfinger/rtl8723bu.git;protocol=https \
++SRC_URI = "git://github.com/lwfinger/rtl8723bu.git;protocol=https;branch=master \
+            file://0002-realtek-Disable-IPS-mode.patch "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.25.1
+
