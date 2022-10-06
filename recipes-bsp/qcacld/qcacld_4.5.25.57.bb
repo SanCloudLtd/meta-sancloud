@@ -17,7 +17,7 @@ do_install() {
     # the host system. It's easier to just invoke the kernel build system
     # directly than to try patching up that Makefile.
     oe_runmake -C "${STAGING_KERNEL_DIR}" M="${S}" \
-               DEPMOD=echo INSTALL_MOD_PATH="${D}" \
+               DEPMOD=echo INSTALL_MOD_PATH="${D}${root_prefix}" \
                modules_install
 }
 
