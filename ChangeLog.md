@@ -5,6 +5,35 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # ChangeLog for meta-sancloud
 
+## 6.2.0
+
+This release supports the Yocto Project 3.1 "dunfell" series and
+includes provisional support for the Yocto Project 4.0 "kirkstone"
+series.
+
+Changes from v6.1.0:
+
+* Poky 3.1.18
+
+* meta-ti & meta-arago 08.03.00.005 release
+
+* linux-bbe v5.10.109-sc1 & linux-bbe-rt v5.10.109-rt65-sc1
+  * Merge TI kernel releases 08.03.00.005 & 08.03.00.005-rt respectively
+
+* u-boot v2022.10-sc1
+  * Includes additional patches to support SPI boot on am335x.
+
+* Initial, provisional support for the Yocto Project 4.0 "kirkstone"
+  release series. Currently, kirkstone builds only support headless
+  or non-GUI images using the Poky distribution. It is expected that
+  more comprehensive kirkstone support will be included in a future
+  release of this BSP.
+
+  * A Software Bill of Materials (SBOM) in SPDX format is generated for
+    kirkstone builds.
+
+* Fix installation paths for qcacld module.
+
 ## 6.1.0
 
 This release supports the Yocto Project 3.1 "dunfell" series.
