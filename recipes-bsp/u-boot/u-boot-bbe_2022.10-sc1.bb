@@ -10,7 +10,7 @@ SECTION = "bootloaders"
 DEPENDS += "flex-native bison-native"
 
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 PE = "1"
 
 DEPENDS += "flex-native bison-native bc-native dtc-native python3-setuptools-native"
@@ -18,8 +18,8 @@ DEPENDS += "flex-native bison-native bc-native dtc-native python3-setuptools-nat
 require recipes-bsp/u-boot/u-boot.inc
 
 SRC_URI = "git://github.com/SanCloudLtd/u-boot.git;protocol=https;branch=${BRANCH}"
-BRANCH = "uboot-bbe-2022.04"
-SRCREV = "e9cce4682f3479f13055f38f16ef92ce84b3c7cb"
+BRANCH = "uboot-bbe-2022.10"
+SRCREV = "396132d69a4ac8c1c8e118eb0985e22d6023ec77"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
