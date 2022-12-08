@@ -112,6 +112,8 @@ def do_setup_build_dir(args):
             f.write(f'BBE_KERNEL_PROVIDER = "{args.kernel_provider}"\n')
         if args.distro == "arago":
             f.write('PACKAGE_CLASSES = "package_ipk"\n')
+        if args.spiboot:
+            f.write('BBE_SPIBOOT = "1"\n')
         f.write("\n")
         f.write('BB_NUMBER_THREADS = "8"\n')
         f.write('PARALLEL_MAKE = "-j8"\n')
@@ -275,6 +277,9 @@ def parse_args():
         "-k", "--kernel-provider", help="Alternative kernel provider for build (e.g. mainline, stable, rt)"
     )
     build_cmd.add_argument(
+        "-y", "--spiboot", action="store_true", help="Enable SPI boot image generation"
+    )
+    build_cmd.add_argument(
         "-t", "--target", default="core-image-base", help="Recipe to build"
     )
     build_cmd.add_argument(
@@ -302,6 +307,9 @@ def parse_args():
     )
     setup_build_dir_cmd.add_argument(
         "-k", "--kernel-provider", help="Alternative kernel provider for build (e.g. mainline, stable, rt)"
+    )
+    setup_build_dir_cmd.add_argument(
+        "-y", "--spiboot", action="store_true", help="Enable SPI boot image generation"
     )
 
     acquire_layers_cmd = subparsers.add_parser(name="acquire-layers", help="Fetch and checkout Yocto layers")
