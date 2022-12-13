@@ -2,6 +2,6 @@
 # SPDX-License-Identifier: MIT
 
 BRANCH = "linux-sancloud-rt-5.10.y"
-SRCREV = "32412cccd3595ce635bfe961b6876b9c70ad6918"
+SRCREV = "a25447769f178ef05f25ab1292537efb382c590f"
 KBUILD_DEFCONFIG = "sancloud_rt_defconfig"
 require linux-bbe-5.10.inc
