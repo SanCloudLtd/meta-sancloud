@@ -7,6 +7,8 @@ stages:
 .bsp_build:
   image: gitlab-registry.sancloud.co.uk/bsp/build-containers/poky-build:latest
   stage: build
+  tags:
+    - yocto
   cache:
     key: layers
     paths:
