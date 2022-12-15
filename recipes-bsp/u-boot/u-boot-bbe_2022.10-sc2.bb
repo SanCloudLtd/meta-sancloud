@@ -19,7 +19,7 @@ require recipes-bsp/u-boot/u-boot.inc
 
 SRC_URI = "git://github.com/SanCloudLtd/u-boot.git;protocol=https;branch=${BRANCH}"
 BRANCH = "uboot-bbe-2022.10"
-SRCREV = "396132d69a4ac8c1c8e118eb0985e22d6023ec77"
+SRCREV = "83eb0968cb2f008adebf853584c4ed274956c6f0"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"

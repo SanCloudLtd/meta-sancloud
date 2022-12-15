@@ -35,3 +35,10 @@ module_conf_ti_k3_dsp_remoteproc = "softdep ti_k3_dsp_remoteproc pre: virtio_rpm
 KERNEL_MODULE_PROBECONF += "rpmsg_client_sample ti_k3_r5_remoteproc ti_k3_dsp_remoteproc"
 
 KERNEL_EXTRA_ARGS += "DTC_FLAGS=-@"
+
+do_kernel_metadata:prepend() {
+    # Always use the defconfig file specified in KBUILD_DEFCONFIG.
+    # This line prevents warnings such as:
+    #     defconfig detected in WORKDIR. ${KBUILD_DEFCONFIG} skipped
+    rm -f "${WORKDIR}/defconfig"
+}
