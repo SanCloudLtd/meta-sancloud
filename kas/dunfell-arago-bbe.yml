@@ -4,17 +4,16 @@
 header:
   version: 9
   includes:
-    - bbe-poky.yml
+    - dunfell-poky-bbe.yml
 
 distro: arago
 target:
   - tisdk-default-image
-  - tisdk-base-image
 
 repos:
   meta-arago:
     url: https://git.yoctoproject.org/git/meta-arago
-    refspec: 382ca36beb21a524de726bfd1c57e3d26f10cf82   # 08.02.00.006
+    refspec: aa5fd0df1e0392703f7929c407ee1caf0f40b5aa   # 08.03.00.005
     path: layers/meta-arago
     layers:
       meta-arago-distro:
@@ -22,7 +21,9 @@ repos:
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
+    refspec: b4d24d70aca75791902df5cd59a4f4a54aa4a125
   meta-arm:
+    refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
     layers:
       meta-arm-toolchain:
   meta-virtualization:
