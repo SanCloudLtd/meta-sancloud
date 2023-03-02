@@ -14,13 +14,23 @@ stages:
     paths:
       - layers
   script:
-    - ./scripts/maintainer.py build -i /mnt/cache/yocto/site.conf ${BSP_CI_BUILD_ARGS}
+    - ./scripts/maintainer.py build -i /mnt/cache/yocto/site.conf -s ${SERIES} -d ${DISTRO} -x ci
 
-bbe-poky:
+dunfell-poky-bbe:
   extends: .bsp_build
+  variables:
+    SERIES: dunfell
+    DISTRO: poky
 
-bbe-arago:
+dunfell-arago-bbe:
   extends: .bsp_build
   image: gitlab-registry.sancloud.co.uk/bsp/build-containers/arago-build:latest
   variables:
-    BSP_CI_BUILD_ARGS: -d arago -t tisdk-default-image
+    SERIES: dunfell
+    DISTRO: arago
+
+kirkstone-poky-bbe:
+  extends: .bsp_build
+  variables:
+    SERIES: kirkstone
+    DISTRO: poky
