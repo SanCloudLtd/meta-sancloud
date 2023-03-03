@@ -1,0 +1,11 @@
+diff --git a/meta-arago-distro/recipes-kernel/cryptodev/cryptodev-module_%.bbappend b/meta-arago-distro/recipes-kernel/cryptodev/cryptodev-module_%.bbappend
+index c210cc4e2613..92140bcb7ff7 100644
+--- a/meta-arago-distro/recipes-kernel/cryptodev/cryptodev-module_%.bbappend
++++ b/meta-arago-distro/recipes-kernel/cryptodev/cryptodev-module_%.bbappend
+@@ -2,6 +2,4 @@ PR_append = ".arago1"
+ 
+ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+ 
+-SRC_URI += "file://0001-Fix-build-for-Linux-5.11-rc1.patch"
+-
+ KERNEL_MODULE_AUTOLOAD += "cryptodev"

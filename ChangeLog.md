@@ -13,14 +13,16 @@ series.
 
 Changes from v6.1.0:
 
-* Poky 3.1.18
+* Poky 3.1.23
 
 * meta-ti & meta-arago 08.03.00.005 release
 
-* linux-bbe v5.10.109-sc1 & linux-bbe-rt v5.10.109-rt65-sc1
+* linux-bbe v5.10.109-sc2 & linux-bbe-rt v5.10.109-rt65-sc2
   * Merge TI kernel releases 08.03.00.005 & 08.03.00.005-rt respectively
+  * Includes new configuration sancloud_tiny_defconfig for deployments where
+    space is limited.
 
-* u-boot v2022.10-sc1
+* u-boot v2022.10-sc2
   * Includes additional patches to support SPI boot on am335x.
 
 * Initial, provisional support for the Yocto Project 4.0 "kirkstone"

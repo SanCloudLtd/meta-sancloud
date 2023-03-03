@@ -3,10 +3,7 @@
 
 header:
   version: 9
-  includes:
-    - bbe-poky.yml
 
-target:
-  - core-image-base
-
-task: populate_sdk
+local_conf_header:
+  spiboot: |
+    BBE_SPIBOOT = "1"

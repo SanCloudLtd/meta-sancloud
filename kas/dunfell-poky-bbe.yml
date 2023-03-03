@@ -8,11 +8,9 @@ machine: bbe
 distro: poky
 target:
   - core-image-base
-  - sancloud-ramdisk-image
 
 defaults:
   repos:
-    refspec: dunfell
     patches:
       repo: meta-sancloud
 
@@ -21,30 +19,32 @@ repos:
   poky:
     url: https://git.yoctoproject.org/git/poky
     path: layers/poky
+    refspec: aec83663aadc871354b441eef0a3a41eb3780b13   # yocto-3.1.23
     layers:
       meta:
       meta-poky:
   meta-openembedded:
     url: https://github.com/openembedded/meta-openembedded.git
     path: layers/meta-openembedded
+    refspec: 87571345059f82fb7599e3aa82e6fdcfbd361098
     layers:
       meta-networking:
       meta-oe:
       meta-python:
   meta-arm:
     url: https://git.yoctoproject.org/git/meta-arm
-    refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
+    refspec: b1fe8443a7a72c65fa0fc3371f607c6671b3a882
     path: layers/meta-arm
     layers:
       meta-arm:
       meta-arm-toolchain:
   meta-ti:
     url: https://git.yoctoproject.org/git/meta-ti
-    refspec: facd5397cdc5c35c69e7a8e8f908a98a5c23d270   # 08.02.00.006
+    refspec: e99d9aa3fc41fa3a91d68ad9e654d40bfb6e0967   # 08.03.00.005
     path: layers/meta-ti
   meta-rtlwifi:
     url: https://github.com/EmbeddedAndroid/meta-rtlwifi.git
-    refspec: master
+    refspec: 032a394e7569d1254cd17a0358475b986e64a5a4
     path: layers/meta-rtlwifi
 
 bblayers_conf_header:

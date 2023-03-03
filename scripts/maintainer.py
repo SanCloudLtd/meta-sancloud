@@ -1,19 +1,12 @@
 #! /usr/bin/env python3
-# Copyright (c) 2021-2022 SanCloud Ltd
+# Copyright (c) 2021-2023 SanCloud Ltd
 # SPDX-License-Identifier: MIT
 
 import argparse
 import os
 import re
 import subprocess
-import sys
 import tarfile
-
-try:
-    from git_acquire.acquire import Acquisition
-except ModuleNotFoundError:
-    print("Please install git-acquire before using this script")
-    sys.exit(1)
 
 
 def run(cmd, **kwargs):
@@ -24,116 +17,27 @@ def capture(cmd, **kwargs):
     return run(cmd, capture_output=True, **kwargs).stdout.decode("utf-8")
 
 
-def do_acquire_layers(args):
-    if args.series == "dunfell":
-        layers = (
-            Acquisition("https://git.yoctoproject.org/poky", "yocto-3.1.18", "layers/poky",
-                        patches=["patches/poky/0001-licenses-Handle-newer-SPDX-license-names.patch"]),
-            Acquisition("https://git.openembedded.org/meta-openembedded", "f22bf6efaae61a8fd9272be64e7d75223c58922e", "layers/meta-openembedded"),
-            Acquisition("https://git.yoctoproject.org/git/meta-ti", "08.03.00.005", "layers/meta-ti"),
-            Acquisition("https://github.com/EmbeddedAndroid/meta-rtlwifi.git", "98b2b2c34f186050e6092bc4f17ecb69aef6148a", "layers/meta-rtlwifi"),
-        )
-        if args.distro == "poky":
-            layers += (
-                Acquisition("https://git.yoctoproject.org/git/meta-arm", "69547052727a461f33967e64630aa03b34a7eadd", "layers/meta-arm"),
-            )
-        elif args.distro == "arago":
-            layers += (
-                Acquisition("https://git.yoctoproject.org/git/meta-arm", "c4f04f3fb66f8f4365b08b553af8206372e90a63", "layers/meta-arm"),
-                Acquisition("https://git.yoctoproject.org/git/meta-arago", "08.03.00.005", "layers/meta-arago"),
-                Acquisition("https://github.com/meta-qt5/meta-qt5.git", "5ef3a0ffd3324937252790266e2b2e64d33ef34f", "layers/meta-qt5"),
-                Acquisition("https://git.yoctoproject.org/git/meta-virtualization", "a63a54df3170fed387f810f23cdc2f483ad587df", "layers/meta-virtualization")
-            )
-    elif args.series == "kirkstone":
-        layers = (
-            Acquisition("https://git.yoctoproject.org/poky", "yocto-4.0.3", "layers/poky"),
-            Acquisition("https://git.openembedded.org/meta-openembedded", "8f96c05f6d82fde052f2cb1652c13922814accb0", "layers/meta-openembedded"),
-            Acquisition("https://git.yoctoproject.org/git/meta-ti", "2124e7ecd88d1aded320e86da62785c3ab171b27", "layers/meta-ti"),
-            Acquisition("https://github.com/EmbeddedAndroid/meta-rtlwifi.git", "98b2b2c34f186050e6092bc4f17ecb69aef6148a", "layers/meta-rtlwifi",
-                        patches=[
-                            "patches/meta-rtlwifi/0001-rtl8723bu-Fixes-for-kirkstone-support.patch",
-                            "patches/meta-rtlwifi/0002-layer.conf-Mark-layer-as-compatible-with-kirkstone.patch",
-                        ]),
-            Acquisition("https://git.yoctoproject.org/git/meta-arm", "8c97ddc4233d658c6c74a14e501cb2b0022c9097", "layers/meta-arm"),
-        )
-        if args.distro == "arago":
-            layers += (
-                Acquisition("https://git.yoctoproject.org/git/meta-arago", "8b34c5edde16d291ec0b3388fe6f03244f89327c", "layers/meta-arago"),
-                Acquisition("https://github.com/meta-qt5/meta-qt5.git", "5b71df60e523423b9df6793de9387f87a149ac42", "layers/meta-qt5"),
-                Acquisition("https://git.yoctoproject.org/git/meta-virtualization", "e11d5b630e6b5626b58b742b80f5bdf277a44168", "layers/meta-virtualization")
-            )
-    for layer in layers:
-        print(f"Acquiring {layer.local_path}")
-        layer.acquire()
-
-
-def do_setup_build_dir(args):
-    project_root = os.path.realpath(os.getcwd())
-    do_acquire_layers(args)
-    print("Setting up bblayers.conf")
-    cmd = (
-        f'source layers/poky/oe-init-build-env "{args.build_path}" && '
-        'bitbake-layers add-layer '
-        f'"{project_root}/layers/meta-openembedded/meta-oe" '
-        f'"{project_root}/layers/meta-openembedded/meta-python" '
-        f'"{project_root}/layers/meta-openembedded/meta-networking" '
-        f'"{project_root}/layers/meta-arm/meta-arm-toolchain" '
-        f'"{project_root}/layers/meta-arm/meta-arm" '
-        f'"{project_root}/layers/meta-rtlwifi" '
-    )
-    if args.distro == "arago":
-        cmd += (
-            f'"{project_root}/layers/meta-openembedded/meta-filesystems" '
-            f'"{project_root}/layers/meta-qt5" '
-            f'"{project_root}/layers/meta-virtualization" '
-            f'"{project_root}/layers/meta-arago/meta-arago-extras" '
-            f'"{project_root}/layers/meta-arago/meta-arago-distro" '
-        )
-    if args.series == "dunfell":
-        cmd += f'"{project_root}/layers/meta-ti" '
-    elif args.series == "kirkstone":
-        cmd += (
-            f'"{project_root}/layers/meta-ti/meta-ti-bsp" '
-            #f'"{project_root}/layers/meta-ti/meta-ti-extras" '
-        )
-    cmd += f'"{project_root}"'
-    run(cmd)
+def do_build(args):
+    machine = "bbe"         # This is all we support for now
+    kas_configs = f"kas/{args.series}-{args.distro}-{machine}.yml"
+    kas_args = "--update --force-checkout"
+    kas_env = os.environ.copy()
+    kas_env["KAS_BUILD_DIR"] = args.build_path
 
     if args.site_conf:
-        path = os.path.realpath(args.site_conf)
-        print(f"Setting up site.conf -> {path}")
-        run(f"ln -sfn {path} {args.build_path}/conf/site.conf")
-
-    print("Setting up auto.conf")
-    with open(f"{args.build_path}/conf/auto.conf", "w") as f:
-        f.write(f'DISTRO = "{args.distro}"\n')
-        f.write(f'MACHINE = "bbe"\n')
-        if args.kernel_provider:
-            f.write(f'BBE_KERNEL_PROVIDER = "{args.kernel_provider}"\n')
-        if args.distro == "arago":
-            f.write('PACKAGE_CLASSES = "package_ipk"\n')
-        if args.spiboot:
-            f.write('BBE_SPIBOOT = "1"\n')
-        f.write("\n")
-        f.write('BB_NUMBER_THREADS = "8"\n')
-        f.write('PARALLEL_MAKE = "-j8"\n')
-        f.write("\n")
-        f.write("require conf/include/sancloud-enable-archiver.inc\n")
-        f.write("require conf/include/sancloud-mirrors.inc\n")
-        if args.series == "kirkstone":
-            f.write('INHERIT += "create-spdx"\n')
-            f.write('DISTRO_FEATURES:remove = "opengl"\n')
-
-
-def do_build(args):
-    if not args.skip_setup:
-        do_setup_build_dir(args)
-    print(f"Building {args.target}")
+        conf_path = os.path.join(args.build_path, "conf")
+        site_dest = os.path.join(conf_path, "site.conf")
+        if os.path.exists(site_dest):
+            os.remove(site_dest)
+        os.makedirs(conf_path, exist_ok=True)
+        os.symlink(os.path.realpath(args.site_conf), site_dest)
+    if args.target:
+        kas_args += f" --target {args.target}"
     if args.command:
-        maybe_cmd = f"-c {args.command}"
-    else:
-        maybe_cmd = ""
-    run(f'source layers/poky/oe-init-build-env "{args.build_path}" && bitbake {args.target} {maybe_cmd}')
+        kas_args += f" --cmd {args.command}"
+    for cfg in args.extra_cfg:
+        kas_configs += f":kas/inc/{cfg}.yml"
+    run(f"kas build {kas_args} {kas_configs}", env=kas_env)
 
 
 def do_clean(args):
@@ -274,49 +178,19 @@ def parse_args():
         "-p", "--build-path", default="build", help="Directory in which to perform build"
     )
     build_cmd.add_argument(
-        "-k", "--kernel-provider", help="Alternative kernel provider for build (e.g. mainline, stable, rt)"
-    )
-    build_cmd.add_argument(
-        "-y", "--spiboot", action="store_true", help="Enable SPI boot image generation"
-    )
-    build_cmd.add_argument(
         "-t", "--target", default="core-image-base", help="Recipe to build"
     )
     build_cmd.add_argument(
-        "-S", "--skip-setup", action="store_true", help="Skip build directory setup"
+        "-c", "--command", help="Recipe command to run (e.g. fetch, populate_sdk)"
     )
     build_cmd.add_argument(
-        "-c", "--command", help="Recipe command to run (e.g. fetch, populate_sdk)"
+        "-x", "--extra-cfg", default=[], action="append", help="Additional kas config fragments (may be passed more than once)"
     )
 
     clean_cmd = subparsers.add_parser(
         name="clean", help="Remove build output from the source tree"
     )
     clean_cmd.set_defaults(cmd_fn=do_clean)
-
-    setup_build_dir_cmd = subparsers.add_parser(name="setup-build-dir", help="Setup a build directory")
-    setup_build_dir_cmd.set_defaults(cmd_fn=do_setup_build_dir)
-    setup_build_dir_cmd.add_argument(
-        "-d", "--distro", default="poky", help="Distribution to build (poky or arago)"
-    )
-    setup_build_dir_cmd.add_argument(
-        "-i", "--site-conf", help="Site-specific configuration file"
-    )
-    setup_build_dir_cmd.add_argument(
-        "-p", "--build-path", default="build", help="Directory in which to perform build"
-    )
-    setup_build_dir_cmd.add_argument(
-        "-k", "--kernel-provider", help="Alternative kernel provider for build (e.g. mainline, stable, rt)"
-    )
-    setup_build_dir_cmd.add_argument(
-        "-y", "--spiboot", action="store_true", help="Enable SPI boot image generation"
-    )
-
-    acquire_layers_cmd = subparsers.add_parser(name="acquire-layers", help="Fetch and checkout Yocto layers")
-    acquire_layers_cmd.set_defaults(cmd_fn=do_acquire_layers)
-    acquire_layers_cmd.add_argument(
-        "-d", "--distro", default="poky", help="Distribution to build (poky or arago)"
-    )
 
     set_version_cmd = subparsers.add_parser(
         name="set-version", help="Set version string & commit"
