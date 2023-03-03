@@ -15,6 +15,9 @@ repos:
     url: https://git.yoctoproject.org/git/meta-arago
     refspec: aa5fd0df1e0392703f7929c407ee1caf0f40b5aa   # 08.03.00.005
     path: layers/meta-arago
+    patches:
+      cryptodev-already-backported:
+        path: kas/patches/meta-arago/cryptodev-already-backported.patch
     layers:
       meta-arago-distro:
       meta-arago-extras:
