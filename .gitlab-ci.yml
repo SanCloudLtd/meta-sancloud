@@ -42,5 +42,5 @@ update-tracking-branches:
   stage: finalize
   image: gitlab-registry.sancloud.co.uk/bsp/build-containers/dev23-base:latest
   script:
-    - git push --force origin HEAD:dunfell
-    - git push --force origin HEAD:kirkstone
+    - git push --force https://ci-push:${CI_PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git HEAD:dunfell
+    - git push --force https://ci-push:${CI_PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git HEAD:kirkstone
