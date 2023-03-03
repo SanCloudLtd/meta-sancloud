@@ -3,6 +3,7 @@
 
 stages:
   - build
+  - finalize
 
 .bsp_build:
   image: gitlab-registry.sancloud.co.uk/bsp/build-containers/poky-build:latest
@@ -34,3 +35,12 @@ kirkstone-poky-bbe:
   variables:
     SERIES: kirkstone
     DISTRO: poky
+
+update-tracking-branches:
+  only:
+    - main
+  stage: finalize
+  image: gitlab-registry.sancloud.co.uk/bsp/build-containers/dev23-base:latest
+  script:
+    - git push --force origin HEAD:dunfell
+    - git push --force origin HEAD:kirkstone
