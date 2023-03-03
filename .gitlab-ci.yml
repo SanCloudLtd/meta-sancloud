@@ -6,7 +6,7 @@ stages:
   - finalize
 
 .bsp_build:
-  image: gitlab-registry.sancloud.co.uk/bsp/build-containers/poky-build:latest
+  image: quay.io/sancloudltd/poky-build:latest
   stage: build
   tags:
     - yocto
@@ -25,7 +25,7 @@ dunfell-poky-bbe:
 
 dunfell-arago-bbe:
   extends: .bsp_build
-  image: gitlab-registry.sancloud.co.uk/bsp/build-containers/arago-build:latest
+  image: quay.io/sancloudltd/arago-build:latest
   variables:
     SERIES: dunfell
     DISTRO: arago
@@ -40,7 +40,7 @@ update-tracking-branches:
   only:
     - main
   stage: finalize
-  image: gitlab-registry.sancloud.co.uk/bsp/build-containers/dev23-base:latest
+  image: quay.io/sancloudltd/dev23-base:latest
   script:
     - git push --force https://ci-push:${CI_PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git HEAD:dunfell
     - git push --force https://ci-push:${CI_PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git HEAD:kirkstone
