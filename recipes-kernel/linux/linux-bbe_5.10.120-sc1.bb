@@ -1,5 +1,5 @@
 # Copyright (C) 2018-2022 SanCloud Ltd
 # SPDX-License-Identifier: MIT
 
-SRCREV = "43ba8ad1df9df3dc4b75676a94d2efb3ee9bc7a1"
+SRCREV = "b91a0549c93fcfed83dbd942880559e169e59206"
 require linux-bbe-5.10.inc
