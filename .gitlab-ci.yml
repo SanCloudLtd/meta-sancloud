@@ -17,20 +17,20 @@ stages:
   script:
     - ./scripts/maintainer.py build -i /mnt/cache/yocto/site.conf -s ${SERIES} -d ${DISTRO} -x ci
 
-dunfell-poky-bbe:
+poky-dunfell-bbe:
   extends: .bsp_build
   variables:
     SERIES: dunfell
     DISTRO: poky
 
-dunfell-arago-bbe:
+arago-dunfell-bbe:
   extends: .bsp_build
   image: quay.io/sancloudltd/arago-build:latest
   variables:
     SERIES: dunfell
     DISTRO: arago
 
-kirkstone-poky-bbe:
+poky-kirkstone-bbe:
   extends: .bsp_build
   variables:
     SERIES: kirkstone
