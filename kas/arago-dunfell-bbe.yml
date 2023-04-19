@@ -13,11 +13,8 @@ target:
 repos:
   meta-arago:
     url: https://git.yoctoproject.org/git/meta-arago
-    refspec: 28ab4e60678f0d54f552c3c7606ad76244dd0b5c   # 08.04.00.005
+    refspec: 4061de845fc950ddaa983ba3bdfed60a7e602e92   # 08.04.01.005
     path: layers/meta-arago
-    patches:
-      cryptodev-already-backported:
-        path: kas/patches/meta-arago/cryptodev-already-backported.patch
     layers:
       meta-arago-distro:
       meta-arago-extras:
