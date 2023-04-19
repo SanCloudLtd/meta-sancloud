@@ -13,7 +13,7 @@ target:
 repos:
   meta-arago:
     url: https://git.yoctoproject.org/git/meta-arago
-    refspec: dc749e9898eb1594c1289406e908ca62b3b7b077   # 08.05.00.007
+    refspec: e4fcc247b2fadc457efaff8edabdf12a6b4fa4d1   # 08.06.00.007
     path: layers/meta-arago
     layers:
       meta-arago-distro:
