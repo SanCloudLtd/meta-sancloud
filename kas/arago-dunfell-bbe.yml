@@ -4,7 +4,7 @@
 header:
   version: 9
   includes:
-    - dunfell-poky-bbe.yml
+    - poky-dunfell-bbe.yml
 
 distro: arago
 target:

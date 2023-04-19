@@ -19,7 +19,7 @@ def capture(cmd, **kwargs):
 
 def do_build(args):
     machine = "bbe"         # This is all we support for now
-    kas_configs = f"kas/{args.series}-{args.distro}-{machine}.yml"
+    kas_configs = f"kas/{args.distro}-{args.series}-{machine}.yml"
     kas_args = "--update --force-checkout"
     kas_env = os.environ.copy()
     kas_env["KAS_BUILD_DIR"] = args.build_path
