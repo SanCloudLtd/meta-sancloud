@@ -13,6 +13,9 @@ series.
 
 Changes from v6.1.0:
 
+* Updated readme & build instructions. kas configurations have been renamed to
+  the form `{distro}-{version}-{machine}.yml` (e.g. `poky-dunfell-bbe.yml`).
+
 * Poky 3.1.23
 
 * meta-ti & meta-arago 08.03.00.005 release
