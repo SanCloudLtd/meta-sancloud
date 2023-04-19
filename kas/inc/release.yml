@@ -1,0 +1,9 @@
+# Copyright (C) 2020-2023 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
+header:
+  version: 9
+
+local_conf_header:
+  release_conf: |
+    require conf/include/sancloud-enable-archiver.inc
