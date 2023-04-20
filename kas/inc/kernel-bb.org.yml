@@ -1,0 +1,9 @@
+# Copyright (C) 2020-2022 SanCloud Ltd
+# SPDX-License-Identifier: MIT
+
+header:
+  version: 9
+
+local_conf_header:
+  linux_kernel: |
+    BBE_KERNEL_PROVIDER = "bb.org"
