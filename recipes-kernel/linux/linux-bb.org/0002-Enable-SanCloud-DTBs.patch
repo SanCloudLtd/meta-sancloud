@@ -1,0 +1,26 @@
+From 881486e91570d9ee3417db8d246daa0f4edfc6fd Mon Sep 17 00:00:00 2001
+From: Paul Barker <paul.barker@sancloud.com>
+Date: Thu, 20 Apr 2023 14:52:52 +0100
+Subject: [PATCH] Enable SanCloud DTBs
+
+Signed-off-by: Paul Barker <paul.barker@sancloud.com>
+---
+ arch/arm/boot/dts/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index 267c93b55566..e60bdd42e2a0 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -840,6 +840,8 @@ dtb-$(CONFIG_SOC_AM33XX) += \
+ 	am335x-pocketbeagle.dtb \
+ 	am335x-regor-rdk.dtb \
+ 	am335x-sancloud-bbe.dtb \
++	am335x-sancloud-bbe-lite.dtb \
++	am335x-sancloud-bbe-extended-wifi.dtb \
+ 	am335x-shc.dtb \
+ 	am335x-sbc-t335.dtb \
+ 	am335x-sl50.dtb \
+-- 
+2.34.1
+
