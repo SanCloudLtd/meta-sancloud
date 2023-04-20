@@ -108,7 +108,7 @@ def do_release_tag(args):
 
 
 def do_release_push(args):
-    commit = capture(f"git rev-parse v{args.version}~0")
+    commit = capture(f"git rev-parse v{args.version}~0").strip()
     file_list = (
         f"RELEASE_NOTES.txt meta-sancloud-v{args.version}.tar.gz "
         f"bbe-base-image-v{args.version}.tar bbe-tisdk-image-v{args.version}.tar "
