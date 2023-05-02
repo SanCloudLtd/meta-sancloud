@@ -22,10 +22,12 @@ PV = "5.10.162+git${SRCPV}"
 BRANCH = "v5.10.162-ti-r59"
 
 SRC_URI = " \
-	git://github.com/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
-	file://0001-defconfig-switch-default-kernel-compression-to-LZMA.patch \
-	file://0002-Enable-SanCloud-DTBs.patch \
-	"
+    git://github.com/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
+    file://0001-Enable-SanCloud-DTBs.patch \
+    file://kernel-lzma.cfg \
+    file://kernel-boot.cfg \
+    file://kernel-modules-gzip.cfg \
+    "
 
 # Pull in the devicetree files into the rootfs & add run-time dependency for PM
 # and prueth firmware to the rootfs
