@@ -23,7 +23,6 @@ BRANCH = "v5.10.162-ti-r59"
 
 SRC_URI = " \
     git://github.com/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
-    file://0001-Enable-SanCloud-DTBs.patch \
     file://kernel-lzma.cfg \
     file://kernel-boot.cfg \
     file://kernel-modules-gzip.cfg \
