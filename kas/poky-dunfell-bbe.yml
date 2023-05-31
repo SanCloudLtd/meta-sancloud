@@ -31,6 +31,7 @@ repos:
       meta-networking:
       meta-oe:
       meta-python:
+      meta-filesystems:
   meta-arm:
     url: https://git.yoctoproject.org/git/meta-arm
     refspec: b1fe8443a7a72c65fa0fc3371f607c6671b3a882

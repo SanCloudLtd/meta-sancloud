@@ -4,7 +4,7 @@
 header:
   version: 9
   includes:
-    - poky-dunfell-bbe.yml
+    - kas/poky-dunfell-bbe.yml
 
 distro: arago
 target:
@@ -30,9 +30,6 @@ repos:
     url: https://git.yoctoproject.org/git/meta-virtualization
     refspec: c4f156fa93b37b2428e09ae22dbd7f5875606f4d
     path: layers/meta-virtualization
-  meta-openembedded:
-    layers:
-      meta-filesystems:
 
 local_conf_header:
   arago: |

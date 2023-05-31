@@ -4,7 +4,7 @@
 header:
   version: 9
   includes:
-    - kernel-mainline.yml
+    - kas/inc/kernel-mainline.yml
 
 local_conf_header:
   linux_kernel: |

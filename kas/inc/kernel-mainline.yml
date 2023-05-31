@@ -6,8 +6,8 @@ header:
 
 repos:
   meta-linux-mainline:
-    url: https://git.sr.ht/~pbarker/meta-linux-mainline
-    refspec: master
+    url: https://github.com/unnecessary-abstraction/meta-linux-mainline.git
+    refspec: main
     path: layers/meta-linux-mainline
 
 local_conf_header:
