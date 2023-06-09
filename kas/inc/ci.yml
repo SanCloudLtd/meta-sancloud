@@ -1,6 +1,9 @@
 # Copyright (C) 2020-2022 SanCloud Ltd
 # SPDX-License-Identifier: MIT
 
+# This configuration fragment is used by SanCloud for Continuous Integration
+# (CI) builds.
+
 header:
   version: 9
 

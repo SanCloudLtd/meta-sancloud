@@ -91,6 +91,68 @@ kas build kas/arago-dunfell-bbe.yml
 Following a successful build, the resulting SD card image can be found at
 `build/tmp/deploy/images/bbe/tisdk-default-image-bbe.wic.xz`.
 
+#### Configuration fragments
+
+Additional kas configuration fragments are provided in the `kas/inc` directory
+and can be used to simplify the process of making minor configuration changes.
+These configuration fragments are also used to support CI builds and internal
+testing of this layer. Multiple configuration fragments can be combined in one
+build, but beware that some combinations may not make sense and will give
+unpredictable results (such as selecting multiple kernel providers).
+
+To use one or more configuration fragments, append the relevant paths to the
+base configuration path with `:` separators on the kas command line.  For
+example, to build the Poky distribution with both systemd and the Real Time
+kernel enabled, run the following command:
+
+```
+kas build kas/poky-dunfell-bbe.yml:kas/inc/systemd.yml:kas/inc/kernel-rt.yml
+```
+
+The following configuration fragments are available and are suitable for general
+use:
+
+* `kas/inc/spiboot.yml`: enables support for booting from SPI flash.
+
+* `kas/inc/systemd.yml`: switches the init system to systemd.
+
+* `kas/inc/connman.yml`: enables the connman network connection manager.
+
+* `kas/inc/kernel-bb.org.yml`: switches the Linux kernel source to the
+  [BeagleBoard.org tree](https://github.com/beagleboard/linux).
+
+* `kas/inc/kernel-rt.yml`: enables Real Time support in the Linux kernel
+  (via the RT patch series and PREEMPT_RT configuration).
+
+* `kas/inc/kernel-mainline.yml`: switches the Linux kernel source to Linus'
+  mainline branch using the [meta-linux-mainline Yocto Project layer][1], with
+  no downstream patches applied.
+
+* `kas/inc/kernel-stable.yml`: switches the Linux kernel source to the latest
+  upstream stable branch using the [meta-linux-mainline Yocto Project layer][1],
+  with no downstream patches applied.
+
+* `kas/inc/kernel-lts.yml`: switches the Linux kernel source to the latest
+  upstream LTS branch using the [meta-linux-mainline Yocto Project layer][1],
+  with no downstream patches applied.
+
+[1]: https://github.com/unnecessary-abstraction/meta-linux-mainline
+
+The following configuration fragments are used internally by SanCloud and should
+be used with caution:
+
+* `kas/inc/ci.yml`: used for Continuous Integration (CI) builds.
+
+* `kas/inc/debug.yml`: used to enable inclusion of debug tools and to provision
+  extra free space in the rootfs.
+
+* `kas/inc/release.yml`: used for release builds.
+
+* `kas/inc/kernel-next.yml`: used to test pending kernel changes.
+
+* `kas/inc/kernel-rt-next.yml`: used to test pending kernel changes with Real
+  Time support.
+
 #### Customisation
 
 The build configuration files in the kas directory can be used as the basis of
