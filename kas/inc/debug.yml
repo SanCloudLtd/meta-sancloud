@@ -4,6 +4,9 @@
 header:
   version: 9
 
+# This configuration fragment is used by SanCloud to enable inclusion of debug
+# tools and to provision extra free space in the rootfs.
+
 local_conf_header:
   debug_tools: |
     CORE_IMAGE_EXTRA_INSTALL += " \

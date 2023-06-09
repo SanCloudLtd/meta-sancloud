@@ -1,6 +1,9 @@
 # Copyright (C) 2020-2022 SanCloud Ltd
 # SPDX-License-Identifier: MIT
 
+# This configuration fragment switches the Linux kernel source to the
+# BeagleBoard.org tree (https://github.com/beagleboard/linux).
+
 header:
   version: 9
 

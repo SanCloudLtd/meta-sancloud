@@ -1,6 +1,9 @@
 # Copyright (C) 2020-2022 SanCloud Ltd
 # SPDX-License-Identifier: MIT
 
+# This configuration fragment enables Real Time support in the Linux kernel
+# (via the RT patch series and PREEMPT_RT configuration).
+
 header:
   version: 9
 

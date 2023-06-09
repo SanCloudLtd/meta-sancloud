@@ -4,7 +4,7 @@
 header:
   version: 9
   includes:
-    - kas/poky-dunfell-bbe.yml
+    - kas/poky-kirkstone-bbe.yml
 
 distro: arago
 target:
@@ -13,7 +13,7 @@ target:
 repos:
   meta-arago:
     url: https://git.yoctoproject.org/git/meta-arago
-    refspec: e4fcc247b2fadc457efaff8edabdf12a6b4fa4d1   # 08.06.00.007
+    refspec: 5c50d658bb3f797314d4a337904a04661f51c51c   # 09.00.00.001
     path: layers/meta-arago
     layers:
       meta-arago-distro:
@@ -21,17 +21,8 @@ repos:
   meta-qt5:
     url: https://github.com/meta-qt5/meta-qt5.git
     path: layers/meta-qt5
-    refspec: b4d24d70aca75791902df5cd59a4f4a54aa4a125
-  meta-arm:
-    refspec: c4f04f3fb66f8f4365b08b553af8206372e90a63
-    layers:
-      meta-arm-toolchain:
+    refspec: bff5bd937f0776166e81a63f3dd39ede348ef758   # 2023-04-28
   meta-virtualization:
     url: https://git.yoctoproject.org/git/meta-virtualization
-    refspec: c4f156fa93b37b2428e09ae22dbd7f5875606f4d
+    refspec: 9d056f957b42e31f1c2c5bad0af1ab6c84b53ee6   # 2023-05-17
     path: layers/meta-virtualization
-
-local_conf_header:
-  arago: |
-    PACKAGE_CLASSES = "package_ipk"
-    TCMODEAPPEND = ""

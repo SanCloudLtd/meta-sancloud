@@ -4,20 +4,21 @@
 header:
   version: 9
   includes:
-    - poky-dunfell-bbe.yml
+    - kas/poky-dunfell-bbe.yml
 
 repos:
   meta-sancloud:
   poky:
-    refspec: 65dafea22018052fe7b2e17e6e4d7eb754224d38   # yocto-4.0.7
+    refspec: f53ab3a2ff206a130cdc843839dd0ea5ec4ad02f   # yocto-4.0.10
   meta-openembedded:
-    refspec: 82c75b466e55d7dca7a2364986ecb704cf63d141
+    refspec: 5f120a926b0fcd55cfe7565bb7ddf23661cad498   # 2023-05-23
   meta-arm:
-    refspec: a0216a41bde3f191037332a9238648bedfbc61bd
+    refspec: 96aad3b29aa7a5ee4df5cf617a6336e5218fa9bd   # 4.0.2
   meta-ti:
-    refspec: b48f82cbe23fa59d815a56e0e3c9f2d410ad13ac
+    refspec: 579671a75efc690a4289ec1c3cf06f18d22300a1   # 09.00.00.001
     layers:
       meta-ti-bsp:
+      meta-ti-extras:
 
 local_conf_header:
   base: |

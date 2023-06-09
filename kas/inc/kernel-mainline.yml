@@ -1,13 +1,17 @@
 # Copyright (C) 2020-2022 SanCloud Ltd
 # SPDX-License-Identifier: MIT
 
+# This configuration fragment switches the Linux kernel source to Linus'
+# mainline branch using the meta-linux-mainline Yocto Project layer, with no
+# downstream patches applied.
+
 header:
   version: 9
 
 repos:
   meta-linux-mainline:
-    url: https://git.sr.ht/~pbarker/meta-linux-mainline
-    refspec: master
+    url: https://github.com/unnecessary-abstraction/meta-linux-mainline.git
+    refspec: main
     path: layers/meta-linux-mainline
 
 local_conf_header:
