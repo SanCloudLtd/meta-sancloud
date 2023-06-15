@@ -18,8 +18,8 @@ DEPENDS += "flex-native bison-native bc-native dtc-native python3-setuptools-nat
 require recipes-bsp/u-boot/u-boot.inc
 
 SRC_URI = "git://github.com/SanCloudLtd/u-boot.git;protocol=https;branch=${BRANCH}"
-BRANCH = "uboot-bbe-2022.10"
-SRCREV = "83eb0968cb2f008adebf853584c4ed274956c6f0"
+BRANCH = "uboot-bbe-2023.04"
+SRCREV = "4c6e3b2c6b10ad032f2d21ce920afaafe69773d0"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"

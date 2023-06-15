@@ -19,6 +19,8 @@ Changes from v6.2.0:
 
   * Merge TI kernel releases 08.06.00.007 & 08.06.00.007-rt respectively
 
+* Update to u-boot v2023.04-sc1
+
 * Add support for building with the BeagleBoard.org 5.10 series kernel. This
   can be used to align support between Yocto Project and Debian images for the
   BBE.
