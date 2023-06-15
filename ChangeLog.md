@@ -5,6 +5,34 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # ChangeLog for meta-sancloud
 
+## 6.3.0
+
+This release supports the Yocto Project 3.1 "dunfell" series and
+includes provisional support for the Yocto Project 4.0 "kirkstone"
+series.
+
+Changes from v6.2.0:
+
+* Update to TI BSP 08.06.00.007 (meta-ti & meta-arago layers)
+
+* linux-bbe v5.10.168-sc1 & linux-bbe-rt v5.10.168-rt83-sc1
+
+  * Merge TI kernel releases 08.06.00.007 & 08.06.00.007-rt respectively
+
+* Add support for building with the BeagleBoard.org 5.10 series kernel. This
+  can be used to align support between Yocto Project and Debian images for the
+  BBE.
+
+* Document kas configuration fragments.
+
+* Improved support for the Yocto Project kirkstone branch. This support is still
+  provisional.
+
+  * Based on TI BSP pre-release 09.00.00.001 while still using 5.10 series
+    kernel.
+
+  * Support building both Poky and Arago distros.
+
 ## 6.2.0
 
 This release supports the Yocto Project 3.1 "dunfell" series and
