@@ -15,9 +15,11 @@ Changes from v6.2.0:
 
 * Update to TI BSP 08.06.00.007 (meta-ti & meta-arago layers)
 
-* linux-bbe v5.10.168-sc1 & linux-bbe-rt v5.10.168-rt83-sc1
+* linux-bbe v5.10.168-sc2 & linux-bbe-rt v5.10.168-rt83-sc2
 
   * Merge TI kernel releases 08.06.00.007 & 08.06.00.007-rt respectively
+
+  * Backport patches required to build with GCC 13.
 
 * Update to u-boot v2023.04-sc1
 
