@@ -8,6 +8,8 @@ stages:
 .bsp_build:
   image: quay.io/sancloudltd/poky-build:latest
   stage: build
+  rules:
+    - if: $CI_COMMIT_TAG
   tags:
     - yocto
   cache:

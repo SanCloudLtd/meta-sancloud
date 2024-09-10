@@ -67,7 +67,7 @@ def do_release_build(args):
         'HEAD')
 
     run('docker run -it --rm -v "$(pwd):/workdir" '
-        'gitlab-registry.sancloud.co.uk/bsp/build-containers/poky-build:latest '
+        'quay.io/sancloudltd/poky-build:latest '
         '--workdir=/workdir ./scripts/maintainer.py build -p build-poky -x release')
     with tarfile.open(f"release/bbe-base-image-v{args.version}.tar", mode="w", dereference=True) as tf:
         tf.add("build-poky/tmp/deploy/images/bbe/core-image-base-bbe.wic.xz", "bbe-base-image.wic.xz")
@@ -75,7 +75,7 @@ def do_release_build(args):
     run("rsync -a build-poky/tmp/deploy/sources/mirror/ release/sources/")
 
     run('docker run -it --rm -v "$(pwd):/workdir" '
-        'gitlab-registry.sancloud.co.uk/bsp/build-containers/arago-build:latest '
+        'quay.io/sancloudltd/arago-build:latest '
         '--workdir=/workdir ./scripts/maintainer.py build -p build-arago -d arago -t tisdk-default-image -x release')
     with tarfile.open(f"release/bbe-tisdk-image-v{args.version}.tar", mode="w", dereference=True) as tf:
         tf.add("build-arago/tmp/deploy/images/bbe/tisdk-default-image-bbe.wic.xz", "bbe-tisdk-image.wic.xz")
